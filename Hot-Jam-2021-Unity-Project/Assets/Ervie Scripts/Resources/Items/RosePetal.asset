@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Rose Petals
   _description: 
-  _pickup: {fileID: 0}
+  _pickup: {fileID: 448586732651310945, guid: 9222637b2982a9845919213b7984744e, type: 3}

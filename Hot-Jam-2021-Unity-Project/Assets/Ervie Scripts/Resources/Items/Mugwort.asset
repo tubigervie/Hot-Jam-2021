@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Mugwort Herb
   _description: 
-  _pickup: {fileID: 0}
+  _pickup: {fileID: 448586732651310945, guid: 3fedbe1eb4dc9e74cb83b496c803c9aa, type: 3}

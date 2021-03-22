@@ -21,7 +21,8 @@ public class IngredientPickup : MonoBehaviour, IPickable
     {
         ShowPickup(false);
         yield return new WaitForSeconds(time);
-        ShowPickup(true);
+        //ShowPickup(true);
+        Destroy(this.gameObject);
     }
 
     public Ingredient PickUp()

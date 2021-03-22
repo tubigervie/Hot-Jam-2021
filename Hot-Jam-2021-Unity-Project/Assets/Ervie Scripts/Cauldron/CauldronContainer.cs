@@ -57,9 +57,11 @@ public class CauldronContainer : MonoBehaviour, IInteractable
 
     public void Interact(GameObject player)
     {
-        Ingredient currentItem = player.GetComponent<TestPickUpController>().currentPickedUpItem;
+        //Ingredient currentItem = player.GetComponent<TestPickUpController>().currentPickedUpItem;
+        Ingredient currentItem = player.GetComponent<InteractionController>().currentIngredient;
         if (currentItem == null) return;
         PlaceIngredient(currentItem);
-        player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
+        //player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
+        player.GetComponent<InteractionController>().SetCurrentItem(null);
     }
 }
