@@ -14,10 +14,13 @@ public class InteractionController : MonoBehaviour
 
     [SerializeField] Ingredient _currentIngredient = null;
 
+    [SerializeField] HelpText helpText;
+    [SerializeField] DebugPanelController debugPanel;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        helpText = GetComponent<HelpText>();
     }
 
     // Update is called once per frame
@@ -41,6 +44,36 @@ public class InteractionController : MonoBehaviour
             {
                 DropIngredient();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            debugPanel.TogglePanel();
+        }
+
+        // Debug Panel Updates
+        if (_currentIngredient != null)
+        {
+            debugPanel.UpdateHeldObj(_currentIngredient.displayName);
+        }
+        else
+        {
+            debugPanel.UpdateHeldObj("N/A");
+        }
+        if (pickup != null)
+        {
+            helpText.SetText("Press SPACE to pickup");
+            debugPanel.UpdateDetectedObj("pickup");
+        }
+        else if (interactable != null)
+        {
+            helpText.SetText("Press SPACE to interact");
+            debugPanel.UpdateDetectedObj("interactable");
+        }
+        else
+        {
+            helpText.SetText("");
+            debugPanel.UpdateDetectedObj("N/A");
         }
     }
 
