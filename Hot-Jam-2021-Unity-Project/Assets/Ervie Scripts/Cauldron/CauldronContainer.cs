@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CauldronContainer : MonoBehaviour
+public class CauldronContainer : MonoBehaviour, IInteractable
 {
     [SerializeField] List<Ingredient> storedIngredients = new List<Ingredient>(); //might change this
     [SerializeField] Recipe cauldronRecipe;
@@ -54,5 +54,12 @@ public class CauldronContainer : MonoBehaviour
             }
         }
     }
-    
+
+    public void Interact(GameObject player)
+    {
+        Ingredient currentItem = player.GetComponent<TestPickUpController>().currentPickedUpItem;
+        if (currentItem == null) return;
+        PlaceIngredient(currentItem);
+        player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
+    }
 }

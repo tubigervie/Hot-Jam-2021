@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientPickup : MonoBehaviour
+public class IngredientPickup : MonoBehaviour, IPickable
 {
     public Ingredient ingredient = null;
 
@@ -22,6 +22,12 @@ public class IngredientPickup : MonoBehaviour
         ShowPickup(false);
         yield return new WaitForSeconds(time);
         ShowPickup(true);
+    }
+
+    public Ingredient PickUp()
+    {
+        HideForSeconds(5f);
+        return ingredient;
     }
 
     private void ShowPickup(bool shouldShow)
