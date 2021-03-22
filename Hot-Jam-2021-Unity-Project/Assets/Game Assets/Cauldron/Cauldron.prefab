@@ -1,6 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< Updated upstream
 --- !u!1 &6730993717715376443
+=======
+--- !u!1 &2458468429802506972
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +12,79 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 5950917299353001222}
   - component: {fileID: 3787276460281846324}
   - component: {fileID: 872009698557357339}
   - component: {fileID: 3398338935622414698}
   m_Layer: 0
   m_Name: Sphere
+=======
+  - component: {fileID: 8006628613544725060}
+  - component: {fileID: 4999570300453079593}
+  - component: {fileID: 690016996307634257}
+  m_Layer: 0
+  m_Name: Cylinder
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &5950917299353001222
+=======
+--- !u!4 &8006628613544725060
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 6730993717715376443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4711, y: 1.7775117, z: 2.4711}
+=======
+  m_GameObject: {fileID: 2458468429802506972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000000032689}
+  m_LocalScale: {x: 1, y: 0.21810132, z: 0.72579}
+>>>>>>> Stashed changes
   m_Children: []
   m_Father: {fileID: 8180615511871425654}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!33 &3787276460281846324
+=======
+--- !u!33 &4999570300453079593
+>>>>>>> Stashed changes
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 6730993717715376443}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &872009698557357339
+=======
+  m_GameObject: {fileID: 2458468429802506972}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &690016996307634257
+>>>>>>> Stashed changes
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 6730993717715376443}
+=======
+  m_GameObject: {fileID: 2458468429802506972}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -80,6 +117,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
 --- !u!135 &3398338935622414698
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -93,6 +131,8 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &8180615511871425673
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,8 +142,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8180615511871425654}
+  - component: {fileID: 292148354}
+  - component: {fileID: 1930215942}
   - component: {fileID: 5864399488603329547}
+<<<<<<< Updated upstream
   - component: {fileID: 5860372717227468629}
+=======
+  - component: {fileID: 1930215944}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
@@ -122,10 +168,49 @@ Transform:
   m_LocalPosition: {x: -1.244, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 5950917299353001222}
+=======
+  - {fileID: 8006628613544725060}
+>>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &292148354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180615511871425673}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &1930215942
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180615511871425673}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.29
+  m_BaseOffset: 0.51
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &5864399488603329547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,18 +224,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storedIngredients: []
-  cauldronRecipe: {fileID: 0}
+  cauldronRecipe: {fileID: 11400000, guid: 6bee752214ea0524785db53b331d5cab, type: 2}
   index: 0
+<<<<<<< Updated upstream
 --- !u!135 &5860372717227468629
 SphereCollider:
+=======
+  completeMaterial: {fileID: 2100000, guid: 80cefa4d850e32f4fb83cc67a73eb974, type: 2}
+--- !u!114 &1930215944
+MonoBehaviour:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8180615511871425673}
+<<<<<<< Updated upstream
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+=======
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f16546eb1e35a4408a272718470cebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveSpeed: 6
+  wanderIntervalTime: 5
+  wanderRadius: 5
+  waypointTolerance: 1
+  currentState: 0
+  idleMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  wanderMaterial: {fileID: 2100000, guid: d5ca170a7582cc448a32c840c3ed3a8f, type: 2}
+>>>>>>> Stashed changes

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class CauldronContainer : MonoBehaviour, IInteractable
 {
+
     [SerializeField] List<Ingredient> storedIngredients = new List<Ingredient>(); //might change this
     [SerializeField] Recipe cauldronRecipe;
     [SerializeField] int index = 0;
-    bool isComplete = false;
 
+    bool isComplete = false;
     List<Ingredient> remainingIngredients = new List<Ingredient>();
+
+    [Header("Test Render Materials - will remove")]
+    [SerializeField] Material completeMaterial;
+
 
     private void Start()
     {
@@ -46,6 +51,7 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             if (cauldronRecipe.CheckForCompletion(storedIngredients))
             {
                 isComplete = true;
+                GetComponentInChildren<MeshRenderer>().material = completeMaterial;
                 Debug.Log("Recipe complete!");
             }
             else
