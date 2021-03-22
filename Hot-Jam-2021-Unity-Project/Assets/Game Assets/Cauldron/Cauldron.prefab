@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 8180615511871425673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.244, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 8006628613544725060}
   m_Father: {fileID: 0}
@@ -179,8 +179,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMoveSpeed: 6
   wanderIntervalTime: 5
-  wanderRadius: 5
+  wanderRadius: {x: 7.5, y: 10}
   waypointTolerance: 1
   currentState: 0
+  avoidanceMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   idleMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   wanderMaterial: {fileID: 2100000, guid: d5ca170a7582cc448a32c840c3ed3a8f, type: 2}

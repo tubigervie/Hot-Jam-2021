@@ -14,10 +14,10 @@ public class CauldronAI : MonoBehaviour
     [Header("AI Variables")]
     [SerializeField] float maxMoveSpeed = 6f;
     [SerializeField] float wanderIntervalTime;
-    [SerializeField] float wanderRadius = 5f;
+    [SerializeField] Vector2 wanderRadius = new Vector2(5f, 5f);
     [SerializeField] float waypointTolerance = .5f;
-
     [SerializeField] CauldronState currentState = CauldronState.Idle;
+    [SerializeField] LayerMask avoidanceMask;
 
     [Header("Test Render Materials - will remove")]
     [SerializeField] Material idleMaterial;
@@ -28,6 +28,7 @@ public class CauldronAI : MonoBehaviour
     Vector3 initialPosition;
     Quaternion initialRotation;
     MeshRenderer currentMesh;
+    float _currentWanderDistance;
 
     private void Awake()
     {
@@ -81,7 +82,10 @@ public class CauldronAI : MonoBehaviour
                 if(currentWayPoint == Vector3.zero || AtWaypoint())
                 {
                     currentMesh.material = wanderMaterial;
-                    currentWayPoint = RandomNavSphere(transform.position, wanderRadius);
+                    _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
+                    Vector3 randomNavWaypoint = RandomNavSphere(transform.position, _currentWanderDistance);
+                    randomNavWaypoint.y = transform.position.y;
+                    currentWayPoint = randomNavWaypoint;
                     MoveTo(currentWayPoint, 1);
                 }
                 break;
@@ -99,7 +103,7 @@ public class CauldronAI : MonoBehaviour
         return currentWayPoint;
     }
 
-    private static Vector3 RandomNavSphere(Vector3 origin, float distance)
+    private Vector3 RandomNavSphere(Vector3 origin, float distance)
     {
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
 
@@ -107,9 +111,18 @@ public class CauldronAI : MonoBehaviour
 
         NavMeshHit navHit;
 
-        NavMesh.SamplePosition(randomDirection, out navHit, distance, NavMesh.AllAreas);
+        NavMesh.SamplePosition(randomDirection, out navHit, distance, 1 >> 0);
+        
+        while(Vector3.Distance(transform.position, navHit.position) > 100)
+        {
+            NavMesh.SamplePosition(randomDirection, out navHit, distance, 1 >> 0);
+        }
+
+        Debug.Log(navHit.position);
+
         return navHit.position;
     }
+
 
     private void UpdateTimers()
     {
