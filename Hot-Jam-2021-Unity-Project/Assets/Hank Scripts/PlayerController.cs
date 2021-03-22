@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("No Rigidbody on Player!");
         }
+        cam = Camera.main;
     }
 
     // Update is called once per frame

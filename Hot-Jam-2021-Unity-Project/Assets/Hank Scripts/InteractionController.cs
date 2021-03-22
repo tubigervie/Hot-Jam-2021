@@ -20,7 +20,8 @@ public class InteractionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        helpText = GetComponent<HelpText>();
+        helpText = GameObject.Find("HelpTextCanvas").GetComponent<HelpText>();
+        debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
     }
 
     // Update is called once per frame

@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 2954d66295212cd45bcac2ec2768a8a2, type: 2}
+--- !u!114 &274096437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2339276214980531873, guid: 0f2c0cf93843d824485149588ab4d0b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2339276214708549524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9bd0bc2163a214e92a6b980d237952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &325584246
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +409,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: waypoints
+      value: 
+      objectReference: {fileID: 274096437}
     - target: {fileID: 8180615511871425654, guid: 654c8c5ffcc18774c8dcf9119833263d,
         type: 3}
       propertyPath: m_RootOrder
@@ -459,3 +475,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+--- !u!1001 &2339276214708549524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531872, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339276214980531879, guid: 0f2c0cf93843d824485149588ab4d0b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Cauldron Wander Waypoints
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f2c0cf93843d824485149588ab4d0b1, type: 3}
