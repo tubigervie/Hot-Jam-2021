@@ -16,6 +16,11 @@ public class DialogueUI : MonoBehaviour
     void Start()
     {
         playerConversant = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>();
+        if (playerConversant == null) 
+        {
+            Debug.Log("No player conversant found.");
+            return;
+        }
         playerConversant.onConversationUpdated += UpdateUI;
         nextButton.onClick.AddListener(Next);
     }
