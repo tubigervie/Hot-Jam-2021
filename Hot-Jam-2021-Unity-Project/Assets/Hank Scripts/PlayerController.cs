@@ -10,12 +10,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 15;
     [SerializeField] GameObject stunFX;
+    [SerializeField] GameObject slowFX;
 
+    Coroutine lastRoutine = null;
+
+    DebugPanelController debugPanel;
+
+    // Higher priority based on order (e.g., STUNNED can overwrite SLOWED, etc..)
     public enum PlayerState
     {
         NORMAL,
-        STUNNED,
         SLOWED,
+        STUNNED,
         ACTION,
         INDIALOGUE
     }
@@ -41,6 +47,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
     }
 
     // Update is called once per frame
@@ -91,6 +98,9 @@ public class PlayerController : MonoBehaviour
         if (playerDir != Vector3.zero && (currentState != PlayerState.STUNNED && currentState != PlayerState.INDIALOGUE)) {
             transform.rotation = Quaternion.LookRotation(playerDir);
         }
+
+        // DebugPanel Updates
+        debugPanel.UpdatePlayerState(currentState);
     }
 
     private void HandleGravity()
@@ -110,13 +120,17 @@ public class PlayerController : MonoBehaviour
     }
 
     // For debuff effects (e.g., stunned, slowed, etc..)
-    // For now, can only occur when player is perfectly normal
+    // For now, if newState has higher priority, then overwrite to newState
     public void ApplyEffect(PlayerState newState, float duration)
     {
-        if (currentState == PlayerState.NORMAL)
+        if (newState > currentState)
         {
             currentState = newState;
-            StartCoroutine(EffectDuration(duration));
+            if (lastRoutine != null)
+            {
+                StopCoroutine(lastRoutine);
+            }
+            lastRoutine = StartCoroutine(EffectDuration(duration));
         }
     }
 
@@ -135,6 +149,10 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.STUNNED)
         {
             Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        }
+        else if (currentState == PlayerState.SLOWED)
+        {
+            Instantiate(slowFX, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
         }
         yield return new WaitForSeconds(duration);
         currentState = PlayerState.NORMAL;

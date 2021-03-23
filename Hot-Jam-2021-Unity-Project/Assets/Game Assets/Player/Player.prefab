@@ -104,6 +104,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   moveSpeed: 15
   stunFX: {fileID: 1151595909491911585, guid: 5f12b21c7df245e49853108e8720abf0, type: 3}
+  slowFX: {fileID: 6687943155483675936, guid: 0e6167cab2293104e9fefe99c0f04e47, type: 3}
 --- !u!114 &4814336474313051577
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class DebugPanelController : MonoBehaviour
 {
     [SerializeField] Text heldObjLabel;
     [SerializeField] Text detectedObjLabel;
+    [SerializeField] Text playerStateLabel;
 
     public void UpdateHeldObj(string objName)
     {
@@ -16,6 +17,30 @@ public class DebugPanelController : MonoBehaviour
     public void UpdateDetectedObj(string objName)
     {
         detectedObjLabel.text = $"DetectedObj: {objName}";
+    }
+
+    public void UpdatePlayerState(PlayerController.PlayerState state)
+    {
+        string text = "";
+        switch(state)
+        {
+            case PlayerController.PlayerState.NORMAL:
+                text = "NORMAL";
+                break;
+            case PlayerController.PlayerState.SLOWED:
+                text = "SLOWED";
+                break;
+            case PlayerController.PlayerState.STUNNED:
+                text = "STUNNED";
+                break;
+            case PlayerController.PlayerState.ACTION:
+                text = "ACTION";
+                break;
+            default:
+                text = "N/A";
+                break;
+        }
+        playerStateLabel.text = $"PlayerState: {text}";
     }
 
     public void TogglePanel()
