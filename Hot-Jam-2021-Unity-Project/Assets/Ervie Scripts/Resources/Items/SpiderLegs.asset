@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Spider Legs
   _description: 
-  _pickup: {fileID: 0}
+  _pickup: {fileID: 448586732651310945, guid: b49e553f3e5476846aff6b2cbf82cd10, type: 3}
