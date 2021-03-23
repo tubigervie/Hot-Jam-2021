@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
         SLOWED,
         STUNNED,
         ACTION,
-        INDIALOGUE
+        INDIALOGUE,
+        TELEPORT
     }
+
+    public List<PlayerState> disableMoveStates = new List<PlayerState>();
 
     PlayerState currentState = PlayerState.NORMAL;
 
@@ -83,8 +86,10 @@ public class PlayerController : MonoBehaviour
         Vector3 playerDir = (camForward * verticalMove + camRight * horizontalMove).normalized;
         Vector3 playerMovement = playerDir * moveSpeed;
 
-        if (currentState == PlayerState.STUNNED || currentState == PlayerState.INDIALOGUE)
+        bool canMoveFlag = true;
+        if (disableMoveStates.Contains(currentState))
         {
+            canMoveFlag = false;
             playerMovement = Vector3.zero;
         }
         else if (currentState == PlayerState.SLOWED)
@@ -93,10 +98,15 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleGravity();
-        characterController.Move(playerMovement * Time.deltaTime);
-        characterController.Move(gravityDirection * Time.deltaTime);
-        if (playerDir != Vector3.zero && (currentState != PlayerState.STUNNED && currentState != PlayerState.INDIALOGUE)) {
-            transform.rotation = Quaternion.LookRotation(playerDir);
+
+        if (canMoveFlag)
+        {
+            characterController.Move(playerMovement * Time.deltaTime);
+            characterController.Move(gravityDirection * Time.deltaTime);
+            if (playerDir != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(playerDir);
+            }
         }
 
         // DebugPanel Updates
@@ -134,6 +144,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ApplyEffect(PlayerState newState)
+    {
+        if (newState != currentState)
+        {
+            currentState = newState;
+        }
+    }
+
+
     public void DialogueTriggerStartEvent()
     {
         currentState = PlayerState.INDIALOGUE;
@@ -142,6 +161,12 @@ public class PlayerController : MonoBehaviour
     public void DialogueTriggerEndEvent()
     {
         currentState = PlayerState.NORMAL;
+    }
+
+
+    public bool IsStunned()
+    {
+        return currentState == PlayerState.STUNNED;
     }
 
     IEnumerator EffectDuration(float duration)

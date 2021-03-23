@@ -70,6 +70,10 @@ public class InteractionController : MonoBehaviour
         {
             debugPanel.UpdateHeldObj(_currentIngredient.displayName);
         }
+        else if (_cauldronSlot != null)
+        {
+            debugPanel.UpdateHeldObj("Cauldron");
+        }
         else
         {
             debugPanel.UpdateHeldObj("N/A");
@@ -77,12 +81,12 @@ public class InteractionController : MonoBehaviour
         if (pickup != null)
         {
             helpText.SetText("Press SPACE to pickup");
-            debugPanel.UpdateDetectedObj("pickup");
+            debugPanel.UpdateDetectedObj(pickup.ToString());
         }
         else if (interactable != null)
         {
             helpText.SetText("Press SPACE to interact");
-            debugPanel.UpdateDetectedObj("interactable");
+            debugPanel.UpdateDetectedObj(interactable.ToString());
         }
         else
         {

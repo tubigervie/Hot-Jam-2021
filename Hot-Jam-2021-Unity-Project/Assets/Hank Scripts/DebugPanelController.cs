@@ -22,7 +22,7 @@ public class DebugPanelController : MonoBehaviour
     public void UpdatePlayerState(PlayerController.PlayerState state)
     {
         string text = "";
-        switch(state)
+        switch (state)
         {
             case PlayerController.PlayerState.NORMAL:
                 text = "NORMAL";
@@ -35,6 +35,12 @@ public class DebugPanelController : MonoBehaviour
                 break;
             case PlayerController.PlayerState.ACTION:
                 text = "ACTION";
+                break;
+            case PlayerController.PlayerState.INDIALOGUE:
+                text = "INDIALOGUE";
+                break;
+            case PlayerController.PlayerState.TELEPORT:
+                text = "TELEPORT";
                 break;
             default:
                 text = "N/A";

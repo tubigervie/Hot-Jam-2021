@@ -20,7 +20,8 @@ public class SlowPit : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerController playerControl = other.gameObject.GetComponent<PlayerController>();
-            playerControl.ApplyEffect(PlayerController.PlayerState.SLOWED, slowDuration);
+            if(!playerControl.IsStunned())
+                playerControl.ApplyEffect(PlayerController.PlayerState.SLOWED, slowDuration);
         }
     }
 }

@@ -8,6 +8,7 @@ public class Teleporter : MonoBehaviour
     [SerializeField] GameObject teleportFX;
     [SerializeField] bool isActive = true;
     [SerializeField] float _cooldown = 1f;
+    [SerializeField] float transitionCoolDown = .4f;
 
     public float cooldown { get { return _cooldown; } }
 
@@ -15,16 +16,27 @@ public class Teleporter : MonoBehaviour
     {
         if (isActive && other.gameObject.tag == "Player")
         {
-            destination.StartCooldown(destination.cooldown);
-            StartCooldown(cooldown);
-
-            CharacterController charControl = other.gameObject.GetComponent<CharacterController>();
-            charControl.enabled = false;
-            other.transform.position = destination.transform.position + Vector3.up * 1.5f;
-            charControl.enabled = true;
-
-            Instantiate(teleportFX, destination.transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            if (destination == null) return;
+            StartCoroutine(TeleportCoroutine(other));
         }
+    }
+
+    private IEnumerator TeleportCoroutine(Collider other)
+    {
+        PlayerController charControl = other.gameObject.GetComponent<PlayerController>();
+        charControl.ApplyEffect(PlayerController.PlayerState.TELEPORT);
+        charControl.GetComponent<CharacterController>().enabled = false;
+        if (teleportFX != null)
+            Instantiate(teleportFX, transform.position + Vector3.up * 1.1f, Quaternion.identity);
+        StartCooldown(cooldown);
+        destination.StartCooldown(destination.cooldown);
+        yield return new WaitForSeconds(transitionCoolDown);
+        other.transform.position = destination.transform.position + Vector3.up * 1.5f;
+        if (teleportFX != null)
+            Instantiate(teleportFX, destination.transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        yield return new WaitForSeconds(transitionCoolDown);
+        charControl.GetComponent<CharacterController>().enabled = true;
+        charControl.ApplyEffect(PlayerController.PlayerState.NORMAL);
     }
 
     public void TurnOn(bool shouldEnable)
