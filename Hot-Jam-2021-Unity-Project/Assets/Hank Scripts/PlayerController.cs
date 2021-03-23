@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera cam;
 
     [SerializeField] private float moveSpeed = 15;
+    [SerializeField] GameObject stunFX;
 
     CharacterController characterController;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     Vector3 gravityDirection;
 
     bool isGrounded;
+    bool _isStunned = false;
 
     private void Awake()
     {
@@ -64,10 +66,15 @@ public class PlayerController : MonoBehaviour
         Vector3 playerDir = (camForward * verticalMove + camRight * horizontalMove).normalized;
         Vector3 playerMovement = playerDir * moveSpeed;
 
+        if (_isStunned)
+        {
+            playerMovement = Vector3.zero;
+        }
+
         HandleGravity();
         characterController.Move(playerMovement * Time.deltaTime);
         characterController.Move(gravityDirection * Time.deltaTime);
-        if (playerDir != Vector3.zero) {
+        if (playerDir != Vector3.zero && !_isStunned) {
             transform.rotation = Quaternion.LookRotation(playerDir);
         }
     }
@@ -86,5 +93,21 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = flag;
         }
+    }
+
+    public void Stun(float duration)
+    {
+        if (!_isStunned)
+        {
+            _isStunned = true;
+            StartCoroutine(StunDuration(duration));
+        }
+    }
+
+    IEnumerator StunDuration(float duration)
+    {
+        Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        yield return new WaitForSeconds(duration);
+        _isStunned = false;
     }
 }

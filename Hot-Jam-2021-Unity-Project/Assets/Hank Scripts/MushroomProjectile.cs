@@ -7,7 +7,7 @@ public class MushroomProjectile : MonoBehaviour
     [SerializeField] float lifetime = 3f;
     [SerializeField] float moveSpeed = 3f;
 
-    [SerializeField] float stunLength = 1f;
+    [SerializeField] float stunDuration = 1f;
     Vector3 moveDir;
 
     float timer = 0f;
@@ -38,7 +38,7 @@ public class MushroomProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //To-Do: Apply Stun
+            other.gameObject.GetComponent<PlayerController>().Stun(stunDuration);
             Debug.Log("Hit Player!");
             Destroy(this.gameObject);
         }
