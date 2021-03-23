@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 1647303999}
   - component: {fileID: 7169221786723057781}
   - component: {fileID: 7383418928570052367}
+  - component: {fileID: 1665711460694449232}
+  - component: {fileID: 5886776428002031333}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionCollider: {fileID: 0}
   _currentIngredient: {fileID: 0}
+  _cauldronSlot: {fileID: 0}
   helpText: {fileID: 0}
   debugPanel: {fileID: 0}
 --- !u!143 &1647303999
@@ -166,6 +169,60 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1665711460694449232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814336474313051552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf86f760af015040af47890451da07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: PausePlayerInput
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4814336474313051582}
+        m_MethodName: DialogueTriggerStartEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5886776428002031333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814336474313051552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf86f760af015040af47890451da07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: ResumePlayerInput
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4814336474313051582}
+        m_MethodName: DialogueTriggerEndEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4814336474835249339
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7588830117065970887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 410f0ce0-0104-4ed1-8f7a-bcee295cf9ba
+  m_EditorClassIdentifier: 
+  text: Hello! I'm the familiar!
+  speaker: Familiar
+  child: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  spriteTexture: {fileID: 2800000, guid: 33fe8acfb7df26143bde265011064d67, type: 3}
+  rect:
+    serializedVersion: 2
+    x: 68
+    y: 83
+    width: 200
+    height: 200
+  onEnterAction: PausePlayerInput
+  onExitAction: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -7588830117065970887}
+  - {fileID: 2822272881502318547}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &2822272881502318547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  m_EditorClassIdentifier: 
+  text: Hi, I'm the witch and I am dying.
+  speaker: Witch
+  child: 
+  spriteTexture: {fileID: 2800000, guid: 9e09bb9ef503ca345a36fdb8feb1ad28, type: 3}
+  rect:
+    serializedVersion: 2
+    x: 381
+    y: 122
+    width: 200
+    height: 200
+  onEnterAction: 
+  onExitAction: ResumePlayerInput

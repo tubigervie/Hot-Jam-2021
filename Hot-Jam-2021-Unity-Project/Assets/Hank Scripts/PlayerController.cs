@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         STUNNED,
         SLOWED,
         ACTION,
+        INDIALOGUE
     }
 
     PlayerState currentState = PlayerState.NORMAL;
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
         Vector3 playerDir = (camForward * verticalMove + camRight * horizontalMove).normalized;
         Vector3 playerMovement = playerDir * moveSpeed;
 
-        if (currentState == PlayerState.STUNNED)
+        if (currentState == PlayerState.STUNNED || currentState == PlayerState.INDIALOGUE)
         {
             playerMovement = Vector3.zero;
         }
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
         HandleGravity();
         characterController.Move(playerMovement * Time.deltaTime);
         characterController.Move(gravityDirection * Time.deltaTime);
-        if (playerDir != Vector3.zero && currentState != PlayerState.STUNNED) {
+        if (playerDir != Vector3.zero && (currentState != PlayerState.STUNNED && currentState != PlayerState.INDIALOGUE)) {
             transform.rotation = Quaternion.LookRotation(playerDir);
         }
     }
@@ -117,6 +118,16 @@ public class PlayerController : MonoBehaviour
             currentState = newState;
             StartCoroutine(EffectDuration(duration));
         }
+    }
+
+    public void DialogueTriggerStartEvent()
+    {
+        currentState = PlayerState.INDIALOGUE;
+    }
+
+    public void DialogueTriggerEndEvent()
+    {
+        currentState = PlayerState.NORMAL;
     }
 
     IEnumerator EffectDuration(float duration)
