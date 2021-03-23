@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2458468429802506972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000000032689}
-  m_LocalScale: {x: 1, y: 0.21810132, z: 0.72579}
+  m_LocalScale: {x: 1, y: 0.21810132, z: 1}
   m_Children: []
   m_Father: {fileID: 8180615511871425654}
   m_RootOrder: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -177,13 +177,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f16546eb1e35a4408a272718470cebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 6
-  wanderIntervalTime: 5
+  maxMoveSpeed: 10
+  wanderIntervalTime: 10
   wanderRadius: {x: 7.5, y: 10}
   waypointTolerance: 1
-  currentState: 0
+  _currentState: 0
   avoidanceMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  waypoints: {fileID: 0}
   idleMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   wanderMaterial: {fileID: 2100000, guid: d5ca170a7582cc448a32c840c3ed3a8f, type: 2}

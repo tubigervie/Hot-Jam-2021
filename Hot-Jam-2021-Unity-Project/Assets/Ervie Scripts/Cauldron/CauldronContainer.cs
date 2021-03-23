@@ -11,10 +11,16 @@ public class CauldronContainer : MonoBehaviour, IInteractable
 
     bool isComplete = false;
     List<Ingredient> remainingIngredients = new List<Ingredient>();
+    CauldronAI cauldronAI;
 
     [Header("Test Render Materials - will remove")]
     [SerializeField] Material completeMaterial;
 
+
+    void Awake()
+    {
+        cauldronAI = GetComponent<CauldronAI>();
+    }
 
     private void Start()
     {
@@ -52,6 +58,7 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             {
                 isComplete = true;
                 GetComponentInChildren<MeshRenderer>().material = completeMaterial;
+                cauldronAI.Complete();
                 Debug.Log("Recipe complete!");
             }
             else
@@ -64,10 +71,25 @@ public class CauldronContainer : MonoBehaviour, IInteractable
     public void Interact(GameObject player)
     {
         //Ingredient currentItem = player.GetComponent<TestPickUpController>().currentPickedUpItem;
-        Ingredient currentItem = player.GetComponent<InteractionController>().currentIngredient;
-        if (currentItem == null) return;
-        PlaceIngredient(currentItem);
-        //player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
-        player.GetComponent<InteractionController>().SetCurrentItem(null);
+        if (cauldronAI.currentState == CauldronAI.CauldronState.Wandering)
+        {
+            InteractionController interactionController = player.GetComponent<InteractionController>();
+            Ingredient currentItem = interactionController.currentIngredient;
+            if (currentItem != null)
+            {
+                interactionController.DropIngredient();
+            }
+            interactionController.SetCauldronSlot(this);
+            interactionController.interactable = null;
+            cauldronAI.Carry();
+        }
+        else if (cauldronAI.currentState == CauldronAI.CauldronState.Idle)
+        {
+            Ingredient currentItem = player.GetComponent<InteractionController>().currentIngredient;
+            if (currentItem == null) return;
+            PlaceIngredient(currentItem);
+            //player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
+            player.GetComponent<InteractionController>().SetCurrentItem(null);
+        }
     }
 }

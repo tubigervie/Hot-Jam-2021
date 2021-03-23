@@ -7,12 +7,15 @@ public class InteractionController : MonoBehaviour
     // Using Collider over raycast due to the small size of the pickup colliders
     [SerializeField] Collider interactionCollider;
 
-    IPickable pickup = null;
-    IInteractable interactable = null;
+    public IPickable pickup = null;
+    public IInteractable interactable = null;
 
     public Ingredient currentIngredient { get { return _currentIngredient; } }
+    public CauldronContainer cauldronContainer { get { return _cauldronSlot; } }
 
     [SerializeField] Ingredient _currentIngredient = null;
+    [SerializeField] CauldronContainer _cauldronSlot = null;
+
 
     [SerializeField] HelpText helpText;
     [SerializeField] DebugPanelController debugPanel;
@@ -34,6 +37,11 @@ public class InteractionController : MonoBehaviour
                 if (_currentIngredient != null) {
                     DropIngredient();
                 }
+                else if(_cauldronSlot != null)
+                {
+                    cauldronContainer.GetComponent<CauldronAI>().Drop(this.transform);
+                    SetCauldronSlot(null);
+                }
                 SetCurrentItem(pickup.PickUp());
                 pickup = null;
             }
@@ -44,6 +52,11 @@ public class InteractionController : MonoBehaviour
             else if (_currentIngredient != null)
             {
                 DropIngredient();
+            }
+            else if (_cauldronSlot != null)
+            {
+                cauldronContainer.GetComponent<CauldronAI>().Drop(this.transform);
+                SetCauldronSlot(null);
             }
         }
 
@@ -112,7 +125,13 @@ public class InteractionController : MonoBehaviour
     {
         _currentIngredient = item;
     }
-    private void DropIngredient()
+
+    public void SetCauldronSlot(CauldronContainer cauldron)
+    {
+        _cauldronSlot = cauldron;
+    }
+
+    public void DropIngredient()
     {
         _currentIngredient.SpawnPickup(transform.position + transform.forward);
         _currentIngredient = null;

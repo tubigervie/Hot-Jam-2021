@@ -6,17 +6,20 @@ using UnityEngine.AI;
 
 public class CauldronAI : MonoBehaviour
 {
-    public enum CauldronState { Idle, Wandering };
+    public enum CauldronState { Idle, Wandering, Carried, Complete };
+    public CauldronState currentState { get { return _currentState; } }
 
     NavMeshAgent agent;
-    CauldronContainer container;
+    BoxCollider boxCollider;
+
 
     [Header("AI Variables")]
     [SerializeField] float maxMoveSpeed = 6f;
     [SerializeField] float wanderIntervalTime;
     [SerializeField] Vector2 wanderRadius = new Vector2(5f, 5f);
     [SerializeField] float waypointTolerance = .5f;
-    [SerializeField] CauldronState currentState = CauldronState.Idle;
+    [SerializeField] CauldronState _currentState = CauldronState.Idle;
+
     [SerializeField] LayerMask avoidanceMask;
     [SerializeField] CauldronWaypoints waypoints;
 
@@ -34,33 +37,43 @@ public class CauldronAI : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        container = GetComponent<CauldronContainer>();
         currentMesh = GetComponentInChildren<MeshRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
         currentWayPoint = Vector3.zero;
     }
 
     private void Start()
     {
-        _wanderTimer = 0;
         initialPosition = transform.position;
-        initialRotation = transform.rotation;
-        currentState = CauldronState.Idle;
-        currentMesh.material = idleMaterial;
+        _wanderTimer = 0;
+        SetCauldron();
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_currentState == CauldronState.Complete) return;
+        if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried)
         {
-            SetCauldron();
-            currentState = CauldronState.Idle;
-        }
-        if (_wanderTimer > wanderIntervalTime)
-        {
-            currentState = CauldronState.Wandering;
+            _currentState = CauldronState.Wandering;
+            currentMesh.material = wanderMaterial;
         }
         HandleStateBehaviours();
         UpdateTimers();
+    }
+
+    public void SetOnFirePit()
+    {
+        _wanderTimer = 0;
+        Cancel();
+        currentWayPoint = Vector3.zero;
+        _currentState = CauldronState.Idle;
+        currentMesh.material = idleMaterial;
+    }
+
+    public void ToggleCauldronVisibility(bool flag)
+    {
+        currentMesh.enabled = flag;
+        boxCollider.enabled = flag;
     }
 
     private void SetCauldron()
@@ -73,13 +86,24 @@ public class CauldronAI : MonoBehaviour
         Cancel();
     }
 
+    public void Complete()
+    {
+        _currentState = CauldronState.Complete;
+    }
+
     private void HandleStateBehaviours()
     {
-        switch (currentState)
+        switch (_currentState)
         {
+            case CauldronState.Complete:
+                Cancel();
+                break;
             case CauldronState.Idle:
                 break;
+            case CauldronState.Carried:
+                break;
             case CauldronState.Wandering:
+                if (transform.parent != null) transform.parent = null;
                 if(waypoints == null)
                 {
                     Debug.Log("cauldron requires a waypoint path!");
@@ -87,9 +111,7 @@ public class CauldronAI : MonoBehaviour
                 }
                 if(currentWayPoint == Vector3.zero || AtWaypoint())
                 {
-                    currentMesh.material = wanderMaterial;
                     Vector3 randomNavWaypoint = waypoints.GetRandomWaypoint();
-                    randomNavWaypoint.y = transform.position.y;
                     currentWayPoint = randomNavWaypoint;
                     MoveTo(currentWayPoint, 1);
                 }
@@ -97,6 +119,22 @@ public class CauldronAI : MonoBehaviour
         }
     }
 
+    public void Carry()
+    {
+        _currentState = CauldronState.Carried;
+        boxCollider.enabled = false;
+        Cancel();
+        ToggleCauldronVisibility(false);
+    }
+
+    public void Drop(Transform playerTransform)
+    {
+        _currentState = CauldronState.Idle;
+        boxCollider.enabled = true;
+        transform.parent = null;
+        transform.position = playerTransform.position;
+        ToggleCauldronVisibility(true);
+    }
     private bool AtWaypoint()
     {
         float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
@@ -147,7 +185,6 @@ public class CauldronAI : MonoBehaviour
 
     public void Cancel()
     {
-        agent.destination = initialPosition;
         agent.speed = 0;
         agent.isStopped = true;
     }
