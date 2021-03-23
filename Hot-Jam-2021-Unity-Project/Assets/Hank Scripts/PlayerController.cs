@@ -11,6 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 15;
     [SerializeField] GameObject stunFX;
 
+    public enum PlayerState
+    {
+        NORMAL,
+        STUNNED,
+        SLOWED,
+        ACTION,
+    }
+
+    PlayerState currentState = PlayerState.NORMAL;
+
     CharacterController characterController;
 
     float verticalMove;
@@ -20,7 +30,6 @@ public class PlayerController : MonoBehaviour
     Vector3 gravityDirection;
 
     bool isGrounded;
-    bool _isStunned = false;
 
     private void Awake()
     {
@@ -66,15 +75,19 @@ public class PlayerController : MonoBehaviour
         Vector3 playerDir = (camForward * verticalMove + camRight * horizontalMove).normalized;
         Vector3 playerMovement = playerDir * moveSpeed;
 
-        if (_isStunned)
+        if (currentState == PlayerState.STUNNED)
         {
             playerMovement = Vector3.zero;
+        }
+        else if (currentState == PlayerState.SLOWED)
+        {
+            playerMovement /= 2;
         }
 
         HandleGravity();
         characterController.Move(playerMovement * Time.deltaTime);
         characterController.Move(gravityDirection * Time.deltaTime);
-        if (playerDir != Vector3.zero && !_isStunned) {
+        if (playerDir != Vector3.zero && currentState != PlayerState.STUNNED) {
             transform.rotation = Quaternion.LookRotation(playerDir);
         }
     }
@@ -95,19 +108,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Stun(float duration)
+    // For debuff effects (e.g., stunned, slowed, etc..)
+    // For now, can only occur when player is perfectly normal
+    public void ApplyEffect(PlayerState newState, float duration)
     {
-        if (!_isStunned)
+        if (currentState == PlayerState.NORMAL)
         {
-            _isStunned = true;
-            StartCoroutine(StunDuration(duration));
+            currentState = newState;
+            StartCoroutine(EffectDuration(duration));
         }
     }
 
-    IEnumerator StunDuration(float duration)
+    IEnumerator EffectDuration(float duration)
     {
-        Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        if (currentState == PlayerState.STUNNED)
+        {
+            Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        }
         yield return new WaitForSeconds(duration);
-        _isStunned = false;
+        currentState = PlayerState.NORMAL;
     }
 }

@@ -38,7 +38,8 @@ public class MushroomProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().Stun(stunDuration);
+            PlayerController playerControl = other.gameObject.GetComponent<PlayerController>();
+            playerControl.ApplyEffect(PlayerController.PlayerState.STUNNED, stunDuration);
             Debug.Log("Hit Player!");
             Destroy(this.gameObject);
         }
