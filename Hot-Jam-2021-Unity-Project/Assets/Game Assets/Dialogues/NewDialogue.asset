@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-83333010809533723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 0c769331-295d-4694-afc9-6d17c6123417
+  m_EditorClassIdentifier: 
+  text: 
+  speaker: 
+  child: 
+  spriteTexture: {fileID: 0}
+  rect:
+    serializedVersion: 2
+    x: 37
+    y: 169
+    width: 200
+    height: 200
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: NewDialogue
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -83333010809533723}
+  newNodeOffset: {x: 250, y: 0}

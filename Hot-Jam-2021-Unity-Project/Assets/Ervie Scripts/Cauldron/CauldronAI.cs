@@ -28,11 +28,13 @@ public class CauldronAI : MonoBehaviour
     [SerializeField] Material wanderMaterial;
 
     float _wanderTimer = 0f;
-    Vector3 currentWayPoint;
+    [SerializeField] Vector3 currentWayPoint;
     Vector3 initialPosition;
     Quaternion initialRotation;
     MeshRenderer currentMesh;
     float _currentWanderDistance;
+
+    DebugPanelController debugPanel;
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class CauldronAI : MonoBehaviour
 
     private void Start()
     {
+        debugPanel = GameObject.FindObjectOfType<DebugPanelController>();
         initialPosition = transform.position;
         _wanderTimer = 0;
         SetCauldron();
@@ -59,6 +62,8 @@ public class CauldronAI : MonoBehaviour
         }
         HandleStateBehaviours();
         UpdateTimers();
+        debugPanel.UpdateCauldronState(_currentState);
+        debugPanel.UpdateCauldronTimer(_wanderTimer);
     }
 
     public void SetOnFirePit()
@@ -103,7 +108,11 @@ public class CauldronAI : MonoBehaviour
             case CauldronState.Carried:
                 break;
             case CauldronState.Wandering:
-                if (transform.parent != null) transform.parent = null;
+                if (transform.parent != null) 
+                {
+                    transform.parent.parent.GetComponent<FirePit>().EnableCollider(); //don't judge me....
+                    transform.parent = null;
+                }
                 if(waypoints == null)
                 {
                     Debug.Log("cauldron requires a waypoint path!");
@@ -134,6 +143,9 @@ public class CauldronAI : MonoBehaviour
         transform.parent = null;
         transform.position = playerTransform.position;
         ToggleCauldronVisibility(true);
+        Vector3 randomNavWaypoint = waypoints.GetRandomWaypoint();
+        currentWayPoint = randomNavWaypoint;
+        MoveTo(currentWayPoint, 1);
     }
     private bool AtWaypoint()
     {

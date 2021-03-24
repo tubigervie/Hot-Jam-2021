@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
+        debugPanel = GameObject.FindObjectOfType<DebugPanelController>();
     }
 
     // Update is called once per frame

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +17,12 @@ public class CauldronContainer : MonoBehaviour, IInteractable
     [Header("Test Render Materials - will remove")]
     [SerializeField] Material completeMaterial;
 
+    public Action onRecipeComplete;
 
     void Awake()
     {
         cauldronAI = GetComponent<CauldronAI>();
+        onRecipeComplete += cauldronAI.Complete;
     }
 
     private void Start()
@@ -56,10 +59,10 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             index++;
             if (cauldronRecipe.CheckForCompletion(storedIngredients))
             {
+                Debug.Log("Recipe complete!");
                 isComplete = true;
                 GetComponentInChildren<MeshRenderer>().material = completeMaterial;
-                cauldronAI.Complete();
-                Debug.Log("Recipe complete!");
+                onRecipeComplete();
             }
             else
             {

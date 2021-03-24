@@ -8,6 +8,8 @@ public class DebugPanelController : MonoBehaviour
     [SerializeField] Text heldObjLabel;
     [SerializeField] Text detectedObjLabel;
     [SerializeField] Text playerStateLabel;
+    [SerializeField] Text cauldronStateLabel;
+    [SerializeField] Text cauldronTimerLabel;
 
     public void UpdateHeldObj(string objName)
     {
@@ -47,6 +49,32 @@ public class DebugPanelController : MonoBehaviour
                 break;
         }
         playerStateLabel.text = $"PlayerState: {text}";
+    }
+
+    public void UpdateCauldronState(CauldronAI.CauldronState state)
+    {
+        string text = "";
+        switch (state)
+        {
+            case CauldronAI.CauldronState.Idle:
+                text = "IDLE";
+                break;
+            case CauldronAI.CauldronState.Wandering:
+                text = "WANDERING";
+                break;
+            case CauldronAI.CauldronState.Carried:
+                text = "CARRIED";
+                break;
+            case CauldronAI.CauldronState.Complete:
+                text = "COMPLETE";
+                break;
+        }
+        cauldronStateLabel.text = $"CauldronState: {text}";
+    }
+
+    public void UpdateCauldronTimer(float time)
+    {
+        cauldronTimerLabel.text = $"CauldronTimer: {time}";
     }
 
     public void TogglePanel()
