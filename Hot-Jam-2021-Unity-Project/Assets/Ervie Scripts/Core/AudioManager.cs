@@ -21,15 +21,31 @@ public class AudioManager : MonoBehaviour
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
+            if (currentTime > duration)
+                currentTime = duration;
             audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
             yield return null;
         }
         yield break;
     }
 
+    private IEnumerator StartFadePitchCoroutine(float duration, float targetPitch)
+    {
+        float currentVolume = audioSource.volume;
+        yield return StartFadeCoroutine(duration, currentVolume / 10);
+        audioSource.pitch = targetPitch;
+        yield return StartFadeCoroutine(duration, currentVolume);
+        
+    }
+
     public void StartFade(float duration, float targetVolume)
     {
         StartCoroutine(StartFadeCoroutine(duration, targetVolume));
+    }
+
+    public void StartFadePitch(float duration, float targetPitch)
+    {
+        StartCoroutine(StartFadePitchCoroutine(duration, targetPitch));
     }
 
     public void StartLevelTheme()

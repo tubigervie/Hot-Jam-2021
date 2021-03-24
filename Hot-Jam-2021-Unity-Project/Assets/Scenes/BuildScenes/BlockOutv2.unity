@@ -3745,6 +3745,11 @@ PrefabInstance:
       propertyPath: waypoints
       value: 
       objectReference: {fileID: 1844891580}
+    - target: {fileID: 2543097951364280787, guid: e2d1db180a47b694ca58c891230b322b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2778344753971526932, guid: e2d1db180a47b694ca58c891230b322b,
         type: 3}
       propertyPath: m_Name
@@ -38171,6 +38176,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419579854540988291, guid: be5a762605457f148bfc4a3b3d5066c8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4814336474313051552, guid: be5a762605457f148bfc4a3b3d5066c8,
         type: 3}
       propertyPath: m_Name
@@ -43310,6 +43320,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5217767130813362186, guid: 82ef705fd47d6fe439c849463660ffda,
+        type: 3}
+      propertyPath: totalBoilTimer
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5217767130813362187, guid: 82ef705fd47d6fe439c849463660ffda,
         type: 3}
       propertyPath: m_RootOrder

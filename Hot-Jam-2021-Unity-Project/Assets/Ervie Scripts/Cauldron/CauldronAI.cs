@@ -28,7 +28,10 @@ public class CauldronAI : MonoBehaviour
     [SerializeField] Material wanderMaterial;
 
     float _wanderTimer = 0f;
+    float _totalBoilTimer = 0f;
     float _boilTimer = 0f;
+    float _boilPitch = 1f;
+
     [SerializeField] Vector3 currentWayPoint;
     Vector3 initialPosition;
     Quaternion initialRotation;
@@ -56,11 +59,7 @@ public class CauldronAI : MonoBehaviour
     void Update()
     {
         if (_currentState == CauldronState.Pregame || _currentState == CauldronState.Complete || _currentState == CauldronState.Overflow) return;
-        if(_boilTimer <= 0)
-        {
-            _currentState = CauldronState.Overflow;
-            Debug.Log("Lost!");
-        }
+        HandleBoilState();
         if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried)
         {
             _currentState = CauldronState.Wandering;
@@ -80,6 +79,7 @@ public class CauldronAI : MonoBehaviour
     {
         _currentState = CauldronState.Idle;
         _boilTimer = boilTime;
+        _totalBoilTimer = boilTime;
     }
 
     public void SetOnFirePit()
@@ -96,9 +96,19 @@ public class CauldronAI : MonoBehaviour
         return _boilTimer;
     }
 
+    public float GetTotalBoilTimer()
+    {
+        return _totalBoilTimer;
+    }
+
     public void SetBoilTimer(float time)
     {
         _boilTimer = time;
+    }
+
+    public void SetTotalBoilTimer(float time)
+    {
+        _totalBoilTimer = time;
     }
 
     public void ToggleCauldronVisibility(bool flag)
@@ -189,6 +199,26 @@ public class CauldronAI : MonoBehaviour
         return currentWayPoint;
     }
 
+    private void HandleBoilState()
+    {
+        float boilInterval = GetBoilRatio();
+        if(_boilTimer <= 0)
+        {
+            _currentState = CauldronState.Overflow;
+            Debug.Log("Lost!");
+        }
+        else if(boilInterval < .1f && _boilPitch != 1.5f)
+        {
+            _boilPitch = 1.5f;
+            FindObjectOfType<AudioManager>().StartFadePitch(.8f, _boilPitch);
+        }
+        else if (boilInterval < .3f && (_boilPitch != 1.25f && _boilPitch != 1.5f))
+        {
+            _boilPitch = 1.25f;
+            FindObjectOfType<AudioManager>().StartFadePitch(.8f, _boilPitch);
+        }
+    }
+
     private Vector3 RandomNavSphere(Vector3 origin)
     {
         _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
@@ -211,6 +241,11 @@ public class CauldronAI : MonoBehaviour
         Debug.Log(navHit.position);
 
         return navHit.position;
+    }
+
+    private float GetBoilRatio()
+    {
+        return _boilTimer / _totalBoilTimer;
     }
 
 
