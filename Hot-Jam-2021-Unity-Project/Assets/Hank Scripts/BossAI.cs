@@ -36,6 +36,8 @@ public class BossAI : MonoBehaviour
 
     float healthRatio;  // used to define characteristics at different sizes
 
+    float speedMultiplier;
+
     MeshRenderer meshRender;
     Color regularColor;
     Color deathColor;
@@ -94,10 +96,10 @@ public class BossAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 towardsPlayer = (player.transform.position - transform.position);
-        towardsPlayer.y = 0;
+        Vector3 distToPlayer = (player.transform.position - transform.position);
+        distToPlayer.y = 0;
 
-        if (currentState == BossState.NEUTRAL && towardsPlayer.magnitude <= detectionRange)
+        if (currentState == BossState.NEUTRAL && distToPlayer.magnitude <= detectionRange)
         {
             lastRoutine = StartCoroutine(Jump(jumpDuration, jumpCooldown));
         }
@@ -106,7 +108,6 @@ public class BossAI : MonoBehaviour
             timer += Time.deltaTime;
 
             float verticalDisp = jumpCurve.Evaluate(timer);
-            float speedMultiplier = Mathf.Lerp(maxMoveSpeed, moveSpeed, healthRatio);
 
             Vector3 verticalChange = (verticalDisp - yOffset) * Vector3.up;
             Vector3 horizontalChange = moveDir * speedMultiplier * Time.deltaTime;
@@ -137,7 +138,7 @@ public class BossAI : MonoBehaviour
         currentState = BossState.JUMPING;
         timer = 0f;
         Vector3 target = (landedHit) ? spawnPos : player.transform.position;
-        CalculateJumpDir(target);
+        CalculateJumpMovement(target);
         yield return new WaitForSeconds(duration);
         lastRoutine = StartCoroutine(Rest(cooldown));
     }
@@ -149,11 +150,21 @@ public class BossAI : MonoBehaviour
         currentState = BossState.NEUTRAL;
     }
 
-    void CalculateJumpDir(Vector3 targetPos)
+    void CalculateJumpMovement(Vector3 targetPos)
     {
-        Vector3 towardsTarget = (targetPos - transform.position);
-        towardsTarget.y = 0;
-        moveDir = towardsTarget.normalized;
+        Vector3 toTarget = (targetPos - transform.position);
+        toTarget.y = 0;
+
+        speedMultiplier = Mathf.Lerp(maxMoveSpeed, moveSpeed, healthRatio);
+
+        if (toTarget.magnitude * (1 + Mathf.Lerp(healthRatio + .75f, healthRatio, healthRatio)) < speedMultiplier)
+        {
+            float newValue = toTarget.magnitude * (1 + Mathf.Lerp(healthRatio + .75f, healthRatio, healthRatio));
+            Debug.Log($"changed {speedMultiplier} to {newValue}");
+            speedMultiplier = newValue;
+        }
+        
+        moveDir = toTarget.normalized;
 
         landedHit = false;
     }
