@@ -6,11 +6,12 @@ public class BossAI : MonoBehaviour
 {
     [SerializeField] int maxHP = 10;
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float maxMoveSpeed = 12f;
     [SerializeField] float minScale = .75f;
     
     [SerializeField] float detectionRange = 30f;
-    [SerializeField] float chaseDuration = .5f;
-    [SerializeField] float chaseCooldown = .25f;
+    [SerializeField] float jumpDuration = .5f;
+    [SerializeField] float jumpCooldown = 1.5f;
     [SerializeField] float jumpHeight = 5f;
 
     [SerializeField] float stunDuration = 1f;
@@ -32,7 +33,6 @@ public class BossAI : MonoBehaviour
 
     float minMaxRatio;  // used to define min jump height and min moveSpeed of slime boss
     float minJumpHeight;
-    float minMoveSpeed;
 
     float healthRatio;  // used to define characteristics at different sizes
 
@@ -47,8 +47,8 @@ public class BossAI : MonoBehaviour
     public enum BossState
     {
         NEUTRAL,    // when boss is ready to sense for player
-        CHASING,    // basic hopping towards player
-        RESTING,    // the delay between hops
+        JUMPING,    // a single hop
+        RESTING,    // delay between hops
         DYING,      // for death anim
     }
 
@@ -83,12 +83,11 @@ public class BossAI : MonoBehaviour
         }
 
         // curve to sample from for Boss' hop y-pos
-        jumpCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(chaseDuration/2f, jumpHeight), new Keyframe(chaseDuration, 0));
+        jumpCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(jumpDuration / 2f, jumpHeight), new Keyframe(jumpDuration, 0));
 
         // initializing min/max values to lerp between
         minMaxRatio = minScale / originalScale;
         minJumpHeight = jumpHeight * minMaxRatio * 2;
-        minMoveSpeed = moveSpeed * minMaxRatio * 2;
         healthRatio = 1f;
     }
 
@@ -100,14 +99,14 @@ public class BossAI : MonoBehaviour
 
         if (currentState == BossState.NEUTRAL && towardsPlayer.magnitude <= detectionRange)
         {
-            lastRoutine = StartCoroutine(Chase(chaseDuration, chaseCooldown));
+            lastRoutine = StartCoroutine(Jump(jumpDuration, jumpCooldown));
         }
-        else if (currentState == BossState.CHASING)
+        else if (currentState == BossState.JUMPING)
         {
             timer += Time.deltaTime;
 
             float verticalDisp = jumpCurve.Evaluate(timer);
-            float speedMultiplier = Mathf.Lerp(minMoveSpeed, moveSpeed, healthRatio);
+            float speedMultiplier = Mathf.Lerp(maxMoveSpeed, moveSpeed, healthRatio);
 
             Vector3 verticalChange = (verticalDisp - yOffset) * Vector3.up;
             Vector3 horizontalChange = moveDir * speedMultiplier * Time.deltaTime;
@@ -125,7 +124,7 @@ public class BossAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && currentState != BossState.DYING)
         {
             PlayerController playerControl = other.gameObject.GetComponent<PlayerController>();
             playerControl.ApplyEffect(PlayerController.PlayerState.STUNNED, stunDuration);
@@ -133,9 +132,9 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    IEnumerator Chase(float duration, float cooldown)
+    IEnumerator Jump(float duration, float cooldown)
     {
-        currentState = BossState.CHASING;
+        currentState = BossState.JUMPING;
         timer = 0f;
         Vector3 target = (landedHit) ? spawnPos : player.transform.position;
         CalculateJumpDir(target);
@@ -168,7 +167,7 @@ public class BossAI : MonoBehaviour
         transform.localScale = new Vector3(scaleAmount, scaleAmount, scaleAmount);
 
         float jump = Mathf.Lerp(minJumpHeight, jumpHeight, healthRatio);
-        jumpCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(chaseDuration / 2f, jump), new Keyframe(chaseDuration, 0));
+        jumpCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(jumpDuration / 2f, jump), new Keyframe(jumpDuration, 0));
 
         // Ensure boss stays on the ground despite scale change (assumes scale only descreases)
         RaycastHit hit;
