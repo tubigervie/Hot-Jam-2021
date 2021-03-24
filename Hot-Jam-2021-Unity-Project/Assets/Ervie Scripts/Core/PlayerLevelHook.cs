@@ -15,4 +15,15 @@ public class PlayerLevelHook : MonoBehaviour
         level.OnLevelCompleteDialogueEnd();
     }
 
+    public void LevelStartTimersHook()
+    {
+        LevelManager level = FindObjectOfType<LevelManager>();
+        if (level == null)
+        {
+            Debug.Log("Level was not found");
+            return;
+        }
+        level.OnLevelStart();
+    }
+
 }

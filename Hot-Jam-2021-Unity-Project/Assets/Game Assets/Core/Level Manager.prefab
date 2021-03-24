@@ -43,4 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c609a975f33b46a4283e9a7bbc79a1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevelName: StartMenu
   cauldron: {fileID: 0}
+  player: {fileID: 0}
+  startDialogue: {fileID: 11400000, guid: b678b2380b1f9274eb40eea06c091a8d, type: 2}
+  completeDialogue: {fileID: 11400000, guid: 22d1c0231e163d64fafe4406243e91ae, type: 2}
+  totalBoilTimer: 120

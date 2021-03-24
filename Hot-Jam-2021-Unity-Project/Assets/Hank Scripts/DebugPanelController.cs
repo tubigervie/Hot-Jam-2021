@@ -10,6 +10,7 @@ public class DebugPanelController : MonoBehaviour
     [SerializeField] Text playerStateLabel;
     [SerializeField] Text cauldronStateLabel;
     [SerializeField] Text cauldronTimerLabel;
+    [SerializeField] Text boilTimerLabel;
 
     public void UpdateHeldObj(string objName)
     {
@@ -74,7 +75,12 @@ public class DebugPanelController : MonoBehaviour
 
     public void UpdateCauldronTimer(float time)
     {
-        cauldronTimerLabel.text = $"CauldronTimer: {time}";
+        cauldronTimerLabel.text = $"WanderTimer: {time}";
+    }
+
+    public void UpdateBoilTimer(float time)
+    {
+        boilTimerLabel.text = $"BoilTimer: {time}";
     }
 
     public void TogglePanel()

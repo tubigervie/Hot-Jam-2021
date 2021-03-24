@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
+    const string kAlphaCode = "<color=#00000000>";
+    const float kMaxTextTime = .1f;
+    public static int TextSpeed = 5;
+
+    Coroutine dialogueTextCoroutine;
+
     PlayerConversant playerConversant;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextMeshProUGUI speakerNameText;
@@ -31,9 +37,30 @@ public class DialogueUI : MonoBehaviour
         if (!playerConversant.IsActive()) return;
         Texture2D newTex = playerConversant.GetConversantSprite();
         portraitImage.sprite = Sprite.Create(newTex, new Rect(0, 0, newTex.width, newTex.height), new Vector2(.5f, .5f), 100.0f);
-        dialogueText.text = playerConversant.GetText();
         speakerNameText.text = playerConversant.GetCurrentConversantName();
+        dialogueTextCoroutine = StartCoroutine(DisplayDialogueText(playerConversant.GetText()));
     }
+
+    private IEnumerator DisplayDialogueText(string text)
+    {
+        dialogueText.text = "";
+
+        string originalText = playerConversant.GetText();
+        string displayedText = "";
+        int alphaIndex = 0;
+        foreach(char c in playerConversant.GetText().ToCharArray())
+        {
+            alphaIndex++;
+            dialogueText.text = originalText;
+            displayedText = dialogueText.text.Insert(alphaIndex, kAlphaCode);
+            dialogueText.text = displayedText;
+            yield return new WaitForSecondsRealtime(kMaxTextTime / TextSpeed);
+        }
+        dialogueTextCoroutine = null;
+        yield return null;
+    }
+
+
     void Next()
     {
         playerConversant.Next();
@@ -47,7 +74,14 @@ public class DialogueUI : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Next();
+                if(dialogueTextCoroutine != null)
+                {
+                    dialogueText.text = playerConversant.GetText();
+                    StopAllCoroutines();
+                    dialogueTextCoroutine = null;
+                }
+                else
+                    Next();
             }
         }
     }

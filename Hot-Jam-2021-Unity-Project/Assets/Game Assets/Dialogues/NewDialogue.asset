@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
   m_Name: 0c769331-295d-4694-afc9-6d17c6123417
   m_EditorClassIdentifier: 
-  speaker: Familiar
-  text: I did it! I gathered all of the ingredients!
+  speaker: Chamomile
+  text: You did it! You gathered all of the ingredients!
   child: d6bbeca1-0e76-4065-be6a-a9849fe70fe6
-  spriteTexture: {fileID: 2800000, guid: 33fe8acfb7df26143bde265011064d67, type: 3}
+  spriteTexture: {fileID: 2800000, guid: bf223dd4f7657ae4e9b8b82423cc6c41, type: 3}
   rect:
     serializedVersion: 2
     x: 185
@@ -54,12 +54,12 @@ MonoBehaviour:
   m_Name: d6bbeca1-0e76-4065-be6a-a9849fe70fe6
   m_EditorClassIdentifier: 
   speaker: Familiar
-  text: Now, master is saved!
+  text: Thank you, my little Basil~
   child: 
-  spriteTexture: {fileID: 2800000, guid: 33fe8acfb7df26143bde265011064d67, type: 3}
+  spriteTexture: {fileID: 2800000, guid: bf223dd4f7657ae4e9b8b82423cc6c41, type: 3}
   rect:
     serializedVersion: 2
-    x: 435
+    x: 436
     y: 154
     width: 200
     height: 200

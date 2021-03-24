@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class CauldronAI : MonoBehaviour
 {
-    public enum CauldronState { Idle, Wandering, Carried, Complete };
+    public enum CauldronState { Pregame, Idle, Wandering, Carried, Complete, Overflow };
     public CauldronState currentState { get { return _currentState; } }
 
     NavMeshAgent agent;
@@ -28,6 +28,7 @@ public class CauldronAI : MonoBehaviour
     [SerializeField] Material wanderMaterial;
 
     float _wanderTimer = 0f;
+    float _boilTimer = 0f;
     [SerializeField] Vector3 currentWayPoint;
     Vector3 initialPosition;
     Quaternion initialRotation;
@@ -42,32 +43,43 @@ public class CauldronAI : MonoBehaviour
         currentMesh = GetComponentInChildren<MeshRenderer>();
         boxCollider = GetComponent<BoxCollider>();
         currentWayPoint = Vector3.zero;
+        initialPosition = transform.position;
+        SetCauldron();
     }
 
     private void Start()
     {
         debugPanel = GameObject.FindObjectOfType<DebugPanelController>();
-        initialPosition = transform.position;
-        _wanderTimer = 0;
-        SetCauldron();
+        UpdateLabels();
     }
     // Update is called once per frame
     void Update()
     {
-        if (_currentState == CauldronState.Complete) return;
+        if (_currentState == CauldronState.Pregame || _currentState == CauldronState.Complete || _currentState == CauldronState.Overflow) return;
+        if(_boilTimer <= 0)
+        {
+            _currentState = CauldronState.Overflow;
+            Debug.Log("Lost!");
+        }
         if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried)
         {
             _currentState = CauldronState.Wandering;
             currentMesh.material = wanderMaterial;
         }
         HandleStateBehaviours();
-
+        float timeDelta = Time.deltaTime;
         if (shouldWander)
         {
-            UpdateTimers();
-            debugPanel.UpdateCauldronTimer(_wanderTimer);
+            _wanderTimer += timeDelta;
         }
-        debugPanel.UpdateCauldronState(_currentState);
+        _boilTimer -= timeDelta;    
+        UpdateLabels();
+    }
+
+    public void OnStartLevel(float boilTime)
+    {
+        _currentState = CauldronState.Idle;
+        _boilTimer = boilTime;
     }
 
     public void SetOnFirePit()
@@ -79,6 +91,16 @@ public class CauldronAI : MonoBehaviour
         currentMesh.material = idleMaterial;
     }
 
+    public float GetBoilTimer()
+    {
+        return _boilTimer;
+    }
+
+    public void SetBoilTimer(float time)
+    {
+        _boilTimer = time;
+    }
+
     public void ToggleCauldronVisibility(bool flag)
     {
         currentMesh.enabled = flag;
@@ -87,11 +109,12 @@ public class CauldronAI : MonoBehaviour
 
     private void SetCauldron()
     {
+        _currentState = CauldronState.Pregame;
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         currentWayPoint = Vector3.zero;
         _wanderTimer = 0;
-        debugPanel.UpdateCauldronTimer(_wanderTimer);
+        _boilTimer = 0;
         currentMesh.material = idleMaterial;
         Cancel();
     }
@@ -194,6 +217,15 @@ public class CauldronAI : MonoBehaviour
     private void UpdateTimers()
     {
         _wanderTimer += Time.deltaTime;
+        _boilTimer -= Time.deltaTime;
+        if (_boilTimer < 0) _boilTimer = 0;
+    }
+
+    private void UpdateLabels()
+    {
+        debugPanel.UpdateCauldronTimer(_wanderTimer);
+        debugPanel.UpdateBoilTimer(_boilTimer);
+        debugPanel.UpdateCauldronState(_currentState);
     }
 
     public void MoveTo(Vector3 destination, float speedFraction)

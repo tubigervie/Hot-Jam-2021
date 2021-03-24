@@ -89,17 +89,17 @@ public class InteractionController : MonoBehaviour
         }
         if (pickup != null)
         {
-            helpText.SetText("Press SPACE to pickup");
+            helpText.ToggleInteractIcon(true);
             debugPanel.UpdateDetectedObj(pickup.ToString());
         }
         else if (interactable != null)
         {
-            helpText.SetText("Press SPACE to interact");
+            helpText.ToggleInteractIcon(true);
             debugPanel.UpdateDetectedObj(interactable.ToString());
         }
         else
         {
-            helpText.SetText("");
+            helpText.ToggleInteractIcon(false);
             debugPanel.UpdateDetectedObj("N/A");
         }
     }

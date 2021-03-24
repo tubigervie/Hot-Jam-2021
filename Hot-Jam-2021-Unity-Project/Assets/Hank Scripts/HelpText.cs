@@ -5,18 +5,27 @@ using UnityEngine.UI;
 
 public class HelpText : MonoBehaviour
 {
-    [SerializeField] Text label;
+    [SerializeField] Image label;
 
     InteractionController interactControl;
 
     // Start is called before the first frame update
     void Start()
     {
-        interactControl = GetComponent<InteractionController>();
+        interactControl = FindObjectOfType<InteractionController>();
     }
 
-    public void SetText(string desc)
+    private void Update()
     {
-        label.text = desc;
+        if (label.enabled)
+        {
+            label.transform.position = Camera.main.WorldToScreenPoint(interactControl.transform.position + Vector3.up * 3.5f);
+        }
+    }
+
+    public void ToggleInteractIcon(bool flag)
+    {
+        label.transform.position = Camera.main.WorldToScreenPoint(interactControl.transform.position + Vector3.up * 3.5f);
+        label.enabled = flag;
     }
 }

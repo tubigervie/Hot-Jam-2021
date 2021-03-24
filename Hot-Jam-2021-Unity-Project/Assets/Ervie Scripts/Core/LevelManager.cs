@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Dialogue startDialogue;
     [SerializeField] Dialogue completeDialogue;
+    [SerializeField] float totalBoilTimer = 120f;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class LevelManager : MonoBehaviour
             player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
             player.GetComponent<PlayerConversant>().QueueDialogue(startDialogue, 1f);
         }
+        FindObjectOfType<AudioManager>().StartLevelTheme();
     }
 
     public void OnRecipeComplete()
@@ -43,8 +45,14 @@ public class LevelManager : MonoBehaviour
 
     public void OnLevelCompleteDialogueEnd()
     {
+        FindObjectOfType<AudioManager>().StartFade(1.5f, 0);
         SceneManagement sceneManager = FindObjectOfType<SceneManagement>();
         sceneManager.LoadScene(nextLevelName);
+    }
+
+    public void OnLevelStart()
+    {
+        cauldron.GetComponent<CauldronAI>().OnStartLevel(totalBoilTimer);
     }
 
 

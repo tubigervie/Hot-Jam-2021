@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 1953332734}
   - component: {fileID: 1849227882}
   - component: {fileID: 1849227883}
+  - component: {fileID: 1320633614}
+  - component: {fileID: 1235460390}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -59,6 +61,7 @@ MonoBehaviour:
   moveSpeed: 10
   stunFX: {fileID: 1151595909491911585, guid: 5f12b21c7df245e49853108e8720abf0, type: 3}
   slowFX: {fileID: 6687943155483675936, guid: 0e6167cab2293104e9fefe99c0f04e47, type: 3}
+  hitSFX: {fileID: 8300000, guid: 784e288d33262c245bd60a6e85b8aebc, type: 3}
   disableMoveStates: 020000000400000005000000
 --- !u!114 &4814336474313051577
 MonoBehaviour:
@@ -73,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionCollider: {fileID: 0}
+  pickupSFX: {fileID: 8300000, guid: 25dac1ff1a099a24fb099df053d8acb2, type: 3}
   _currentIngredient: {fileID: 0}
   _cauldronSlot: {fileID: 0}
   helpText: {fileID: 0}
@@ -120,11 +124,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 4814336474313051552}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.55
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.28, z: 0}
 --- !u!114 &1665711460694449232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +212,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1849227883}
-        m_MethodName: LevelCompleteHook
+        m_MethodName: LevelCompleteDialogueHook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -230,6 +234,129 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281ba615bc01bf24c8a3e84c1375aa0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1320633614
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814336474313051552}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1235460390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814336474313051552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf86f760af015040af47890451da07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: StartCauldronAI
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1849227883}
+        m_MethodName: LevelStartTimersHook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4814336474835249339
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,15 +408,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4814336474313051583}
     m_Modifications:
+    - target: {fileID: 2047363067583485874, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
@@ -319,12 +451,27 @@ PrefabInstance:
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.0025
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.0025
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
@@ -369,7 +516,7 @@ PrefabInstance:
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6700001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
@@ -390,6 +537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HelpTextCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7818199628684467033, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee580ca4957115249a92fac2385e11ec, type: 3}

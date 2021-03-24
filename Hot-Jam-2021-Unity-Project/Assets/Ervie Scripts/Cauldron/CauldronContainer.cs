@@ -18,6 +18,8 @@ public class CauldronContainer : MonoBehaviour, IInteractable
     [SerializeField] Material completeMaterial;
 
     public Action onRecipeComplete;
+    public Action onCorrectIngredientReceived;
+    public Action onWrongIngredientReceived;
 
     void Awake()
     {
@@ -47,11 +49,11 @@ public class CauldronContainer : MonoBehaviour, IInteractable
         }
         if (cauldronRecipe.requireInOrder && !cauldronRecipe.CheckForRightIngredientAtIndex(ingredient, index))
         {
-            Debug.Log("Wrong ingredient or not right order!");
+            onWrongIngredientReceived.Invoke();
         }
         else if(!cauldronRecipe.requireInOrder && !cauldronRecipe.CheckAndRemoveIfContains(ref remainingIngredients, ingredient))
         {
-            Debug.Log("Wrong ingredient!");
+            onWrongIngredientReceived.Invoke();
         }
         else
         {
@@ -59,14 +61,14 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             index++;
             if (cauldronRecipe.CheckForCompletion(storedIngredients))
             {
-                Debug.Log("Recipe complete!");
+                onCorrectIngredientReceived.Invoke();
                 isComplete = true;
                 GetComponentInChildren<MeshRenderer>().material = completeMaterial;
                 onRecipeComplete();
             }
             else
             {
-                Debug.Log($"Added ingredient: {ingredient}!");
+                onCorrectIngredientReceived.Invoke();
             }
         }
     }
