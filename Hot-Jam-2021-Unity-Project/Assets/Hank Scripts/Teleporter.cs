@@ -31,9 +31,9 @@ public class Teleporter : MonoBehaviour
         StartCooldown(cooldown);
         destination.StartCooldown(destination.cooldown);
         yield return new WaitForSeconds(transitionCoolDown);
-        other.transform.position = destination.transform.position + Vector3.up * 1.5f;
+        other.transform.position = destination.transform.position + Vector3.up * 1.1f;
         if (teleportFX != null)
-            Instantiate(teleportFX, destination.transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            Instantiate(teleportFX, destination.transform.position + Vector3.up * 1.1f, Quaternion.identity);
         yield return new WaitForSeconds(transitionCoolDown);
         charControl.GetComponent<CharacterController>().enabled = true;
         charControl.ApplyEffect(PlayerController.PlayerState.NORMAL);
