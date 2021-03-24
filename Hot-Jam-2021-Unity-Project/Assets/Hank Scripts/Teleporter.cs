@@ -9,8 +9,17 @@ public class Teleporter : MonoBehaviour
     [SerializeField] bool isActive = true;
     [SerializeField] float _cooldown = 1f;
     [SerializeField] float transitionCoolDown = .4f;
+    [SerializeField] AudioClip teleportSFX;
+
+    AudioSource audioSource;
 
     public float cooldown { get { return _cooldown; } }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,6 +40,7 @@ public class Teleporter : MonoBehaviour
         StartCooldown(cooldown);
         destination.StartCooldown(destination.cooldown);
         yield return new WaitForSeconds(transitionCoolDown);
+        audioSource.PlayOneShot(teleportSFX);
         other.transform.position = destination.transform.position + Vector3.up * 1.1f;
         if (teleportFX != null)
             Instantiate(teleportFX, destination.transform.position + Vector3.up * 1.1f, Quaternion.identity);

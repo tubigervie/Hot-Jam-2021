@@ -11,9 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 15;
     [SerializeField] GameObject stunFX;
     [SerializeField] GameObject slowFX;
+    [SerializeField] AudioClip hitSFX;
 
     Coroutine lastRoutine = null;
-
+    AudioSource audioSource;
     DebugPanelController debugPanel;
 
     // Higher priority based on order (e.g., STUNNED can overwrite SLOWED, etc..)
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -167,6 +169,16 @@ public class PlayerController : MonoBehaviour
     public bool IsStunned()
     {
         return currentState == PlayerState.STUNNED;
+    }
+
+    public void PlayHitSFX()
+    {
+        audioSource.PlayOneShot(hitSFX);
+    }
+
+    public PlayerState GetState()
+    {
+        return currentState;
     }
 
     IEnumerator EffectDuration(float duration)

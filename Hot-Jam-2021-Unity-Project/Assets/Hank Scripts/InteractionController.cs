@@ -6,6 +6,7 @@ public class InteractionController : MonoBehaviour
 {
     // Using Collider over raycast due to the small size of the pickup colliders
     [SerializeField] Collider interactionCollider;
+    [SerializeField] AudioClip pickupSFX;
 
     public IPickable pickup = null;
     public IInteractable interactable = null;
@@ -19,6 +20,13 @@ public class InteractionController : MonoBehaviour
 
     [SerializeField] HelpText helpText;
     [SerializeField] DebugPanelController debugPanel;
+
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +50,7 @@ public class InteractionController : MonoBehaviour
                     cauldronContainer.GetComponent<CauldronAI>().Drop(this.transform);
                     SetCauldronSlot(null);
                 }
+                audioSource.PlayOneShot(pickupSFX);
                 SetCurrentItem(pickup.PickUp());
                 pickup = null;
             }

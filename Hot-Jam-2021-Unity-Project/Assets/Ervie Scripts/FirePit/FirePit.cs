@@ -10,6 +10,7 @@ public class FirePit : MonoBehaviour, IInteractable
     void Awake()
     {
         fireCollider = GetComponent<BoxCollider>();
+        fireCollider.enabled = false;
     }
 
     public void Interact(GameObject player)
