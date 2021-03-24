@@ -134,6 +134,8 @@ public class CauldronAI : MonoBehaviour
         Cancel();
         _currentState = CauldronState.Complete;
         debugPanel.UpdateCauldronState(_currentState);
+        _boilPitch = 1;
+        FindObjectOfType<AudioManager>().StartFadePitch(2f, _boilPitch);
         _wanderTimer = 0;
         debugPanel.UpdateCauldronTimer(_wanderTimer);
     }

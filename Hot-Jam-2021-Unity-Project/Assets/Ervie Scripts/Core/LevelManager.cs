@@ -35,6 +35,10 @@ public class LevelManager : MonoBehaviour
             player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
             player.GetComponent<PlayerConversant>().QueueDialogue(startDialogue, 1f);
         }
+        else
+        {
+            OnLevelStart();
+        }
         FindObjectOfType<AudioManager>().StartLevelTheme();
     }
 

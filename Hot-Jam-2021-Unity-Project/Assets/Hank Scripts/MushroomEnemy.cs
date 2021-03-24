@@ -10,7 +10,7 @@ public class MushroomEnemy : MonoBehaviour
     float timer = 0f;
     [SerializeField] bool isLooping = true;
 
-    [SerializeField] Transform objectPool;
+    [SerializeField] ObjectPool objectPool;
     [SerializeField] AudioClip shootSFX;
 
     AudioSource audioSource;
@@ -23,7 +23,7 @@ public class MushroomEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        objectPool = FindObjectOfType<ObjectPool>().transform;
+        objectPool = FindObjectOfType<ObjectPool>();
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class MushroomEnemy : MonoBehaviour
 
     void Fire()
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, objectPool);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, (objectPool != null) ? objectPool.transform : null);
         audioSource.PlayOneShot(shootSFX);
         bullet.GetComponent<MushroomProjectile>().SetMoveDir(transform.forward);
     }
