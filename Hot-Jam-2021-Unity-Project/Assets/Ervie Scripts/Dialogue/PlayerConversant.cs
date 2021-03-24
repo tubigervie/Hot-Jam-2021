@@ -2,31 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerConversant : MonoBehaviour
 {
-    [SerializeField] Dialogue testDialogue;
     Dialogue currentDialogue;
     //AIConversant currentConversant = null;
     DialogueNode currentNode = null;
 
-    public event Action onConversationUpdated;
+    public UnityAction onConversationUpdated;
 
     public bool IsActive()
     {
         return currentDialogue != null;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            StartDialogue(testDialogue);
-        }
-    }
-
     public void StartDialogue(Dialogue newDialogue)
     {
+        if (newDialogue == null) return;
         if (currentDialogue == newDialogue) return;
         currentDialogue = newDialogue;
         if (currentDialogue != null)
@@ -35,6 +28,18 @@ public class PlayerConversant : MonoBehaviour
             TriggerEnterAction();
             onConversationUpdated();
         }
+    }
+
+    public void QueueDialogue(Dialogue newDialogue, float delayTimer)
+    {
+        if (newDialogue == null) return;
+        StartCoroutine(DelayDialogueCoroutine(newDialogue, delayTimer));
+    }
+
+    private IEnumerator DelayDialogueCoroutine(Dialogue newDialogue, float delayTimer)
+    {
+        yield return new WaitForSeconds(delayTimer);
+        StartDialogue(newDialogue);
     }
 
     public void Quit()
@@ -86,17 +91,19 @@ public class PlayerConversant : MonoBehaviour
 
     private void TriggerEnterAction()
     {
-        if(currentNode != null && currentNode.GetOnEnterAction() != "")
+        if(currentNode != null && currentNode.GetOnEnterActions().Count > 0)
         {
-            TriggerAction(currentNode.GetOnEnterAction());
+            foreach(string action in currentNode.GetOnEnterActions())
+                TriggerAction(action);
         }
     }
 
     private void TriggerExitAction()
     {
-        if (currentNode != null && currentNode.GetOnExitAction() != "")
+        if (currentNode != null && currentNode.GetOnExitActions().Count > 0)
         {
-            TriggerAction(currentNode.GetOnExitAction());
+            foreach (string action in currentNode.GetOnExitActions())
+                TriggerAction(action);
         }
     }
 

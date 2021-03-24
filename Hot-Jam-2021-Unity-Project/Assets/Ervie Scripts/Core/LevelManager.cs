@@ -6,8 +6,11 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    [SerializeField] string nextLevelName;
     [SerializeField] CauldronContainer cauldron;
     [SerializeField] GameObject player;
+    [SerializeField] Dialogue startDialogue;
+    [SerializeField] Dialogue completeDialogue;
 
     private void Awake()
     {
@@ -17,18 +20,31 @@ public class LevelManager : MonoBehaviour
             instance = this;
 
         cauldron = FindObjectOfType<CauldronContainer>();
-        cauldron.onRecipeComplete += OnLevelComplete;
         player = GameObject.FindGameObjectWithTag("Player");
+        cauldron.onRecipeComplete += OnRecipeComplete;
     }
+
+    
 
     private void Start()
     {
         FindObjectOfType<GameManager>().SetCurrentLevel(this);
+        if(player != null && startDialogue != null)
+        {
+            player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
+            player.GetComponent<PlayerConversant>().QueueDialogue(startDialogue, 1f);
+        }
     }
 
-    public void OnLevelComplete()
+    public void OnRecipeComplete()
     {
-        Debug.Log("level complete! transition to main menu");
+        player.GetComponent<PlayerConversant>().QueueDialogue(completeDialogue, 1f);
+    }
+
+    public void OnLevelCompleteDialogueEnd()
+    {
+        SceneManagement sceneManager = FindObjectOfType<SceneManagement>();
+        sceneManager.LoadScene(nextLevelName);
     }
 
 

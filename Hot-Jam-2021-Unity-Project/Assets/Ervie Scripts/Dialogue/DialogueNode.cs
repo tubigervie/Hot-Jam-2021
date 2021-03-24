@@ -6,10 +6,11 @@ using UnityEngine;
 public class DialogueNode : ScriptableObject
 {
     [SerializeField]
-    private string text;
-
-    [SerializeField]
     private string speaker;
+
+    [TextArea]
+    [SerializeField]
+    private string text;
 
     [SerializeField]
     public string child;
@@ -21,10 +22,10 @@ public class DialogueNode : ScriptableObject
     private Rect rect = new Rect(10, 10, 200, 200);
 
     [SerializeField]
-    private string onEnterAction;
+    private List<string> onEnterActions = new List<string>();
 
     [SerializeField]
-    private string onExitAction;
+    private List<string> onExitActions = new List<string>();
 
     public string GetText()
     {
@@ -49,14 +50,14 @@ public class DialogueNode : ScriptableObject
         return spriteTexture;
     }
 
-    public string GetOnEnterAction()
+    public List<string> GetOnEnterActions()
     {
-        return onEnterAction;
+        return onEnterActions;
     }
 
-    public string GetOnExitAction()
+    public List<string> GetOnExitActions()
     {
-        return onExitAction;
+        return onExitActions;
     }
 
 #if UNITY_EDITOR

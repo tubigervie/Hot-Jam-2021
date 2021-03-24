@@ -12,18 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
   m_Name: 410f0ce0-0104-4ed1-8f7a-bcee295cf9ba
   m_EditorClassIdentifier: 
-  text: Hello! I'm the familiar!
   speaker: Familiar
-  child: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  text: This is the start of the level.
+  child: 7f882b83-dc95-484e-9e9e-efee77d4f74d
   spriteTexture: {fileID: 2800000, guid: 33fe8acfb7df26143bde265011064d67, type: 3}
   rect:
     serializedVersion: 2
-    x: 68
-    y: 83
+    x: 45
+    y: 85
     width: 200
     height: 200
-  onEnterAction: PausePlayerInput
-  onExitAction: 
+  onEnterActions:
+  - PausePlayerInput
+  onExitActions: []
+--- !u!114 &-5076343022433252646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 7f882b83-dc95-484e-9e9e-efee77d4f74d
+  m_EditorClassIdentifier: 
+  speaker: Familiar
+  text: Master is really sick.
+  child: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  spriteTexture: {fileID: 2800000, guid: 9e09bb9ef503ca345a36fdb8feb1ad28, type: 3}
+  rect:
+    serializedVersion: 2
+    x: 368
+    y: 115
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,6 +64,7 @@ MonoBehaviour:
   nodes:
   - {fileID: -7588830117065970887}
   - {fileID: 2822272881502318547}
+  - {fileID: -5076343022433252646}
   newNodeOffset: {x: 250, y: 0}
 --- !u!114 &2822272881502318547
 MonoBehaviour:
@@ -52,15 +78,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
   m_Name: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
   m_EditorClassIdentifier: 
-  text: Hi, I'm the witch and I am dying.
-  speaker: Witch
+  speaker: Familiar
+  text: I need to find these ingredients and make this potion quick!
   child: 
-  spriteTexture: {fileID: 2800000, guid: 9e09bb9ef503ca345a36fdb8feb1ad28, type: 3}
+  spriteTexture: {fileID: 2800000, guid: 33fe8acfb7df26143bde265011064d67, type: 3}
   rect:
     serializedVersion: 2
-    x: 381
-    y: 122
+    x: 691
+    y: 121
     width: 200
     height: 200
-  onEnterAction: 
-  onExitAction: ResumePlayerInput
+  onEnterActions: []
+  onExitActions:
+  - ResumePlayerInput

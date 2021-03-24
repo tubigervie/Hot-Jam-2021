@@ -19,7 +19,7 @@ public class CauldronAI : MonoBehaviour
     [SerializeField] Vector2 wanderRadius = new Vector2(5f, 5f);
     [SerializeField] float waypointTolerance = .5f;
     [SerializeField] CauldronState _currentState = CauldronState.Idle;
-
+    [SerializeField] bool shouldWander = false;
     [SerializeField] LayerMask avoidanceMask;
     [SerializeField] CauldronWaypoints waypoints;
 
@@ -61,9 +61,13 @@ public class CauldronAI : MonoBehaviour
             currentMesh.material = wanderMaterial;
         }
         HandleStateBehaviours();
-        UpdateTimers();
+
+        if (shouldWander)
+        {
+            UpdateTimers();
+            debugPanel.UpdateCauldronTimer(_wanderTimer);
+        }
         debugPanel.UpdateCauldronState(_currentState);
-        debugPanel.UpdateCauldronTimer(_wanderTimer);
     }
 
     public void SetOnFirePit()
@@ -87,13 +91,18 @@ public class CauldronAI : MonoBehaviour
         transform.rotation = initialRotation;
         currentWayPoint = Vector3.zero;
         _wanderTimer = 0;
+        debugPanel.UpdateCauldronTimer(_wanderTimer);
         currentMesh.material = idleMaterial;
         Cancel();
     }
 
     public void Complete()
     {
+        Cancel();
         _currentState = CauldronState.Complete;
+        debugPanel.UpdateCauldronState(_currentState);
+        _wanderTimer = 0;
+        debugPanel.UpdateCauldronTimer(_wanderTimer);
     }
 
     private void HandleStateBehaviours()
@@ -101,7 +110,6 @@ public class CauldronAI : MonoBehaviour
         switch (_currentState)
         {
             case CauldronState.Complete:
-                Cancel();
                 break;
             case CauldronState.Idle:
                 break;
