@@ -10,6 +10,7 @@ public class Teleporter : MonoBehaviour
     [SerializeField] float _cooldown = 1f;
     [SerializeField] float transitionCoolDown = .4f;
     [SerializeField] AudioClip teleportSFX;
+    [SerializeField] bool shouldLerpToCenter = true;
 
     AudioSource audioSource;
 
@@ -35,15 +36,18 @@ public class Teleporter : MonoBehaviour
         PlayerController charControl = other.gameObject.GetComponent<PlayerController>();
         charControl.ApplyEffect(PlayerController.PlayerState.TELEPORT);
         charControl.GetComponent<CharacterController>().enabled = false;
-        Vector3 startPosition = other.transform.position;
-        float currentTime = 0;
-        while (currentTime < .3f)
+        if (shouldLerpToCenter)
         {
-            currentTime += Time.deltaTime;
-            if (currentTime > .3f)
-                currentTime = .3f;
-            other.transform.position = Vector3.Lerp(startPosition, transform.position + Vector3.up * 1.1f, currentTime / .3f);
-            yield return null;
+            Vector3 startPosition = other.transform.position;
+            float currentTime = 0;
+            while (currentTime < .3f)
+            {
+                currentTime += Time.deltaTime;
+                if (currentTime > .3f)
+                    currentTime = .3f;
+                other.transform.position = Vector3.Lerp(startPosition, transform.position + Vector3.up * 1.1f, currentTime / .3f);
+                yield return null;
+            }
         }
         if (teleportFX != null)
             Instantiate(teleportFX, transform.position + Vector3.up * 1.1f, Quaternion.identity);

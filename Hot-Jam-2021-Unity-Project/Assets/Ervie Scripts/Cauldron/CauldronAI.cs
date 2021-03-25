@@ -9,6 +9,8 @@ public class CauldronAI : MonoBehaviour
     public enum CauldronState { Pregame, Idle, Wandering, Carried, Complete, Overflow };
     public CauldronState currentState { get { return _currentState; } }
 
+    public enum BoilState { Normal, Rush};
+
     NavMeshAgent agent;
     BoxCollider boxCollider;
 
@@ -19,6 +21,7 @@ public class CauldronAI : MonoBehaviour
     [SerializeField] Vector2 wanderRadius = new Vector2(5f, 5f);
     [SerializeField] float waypointTolerance = .5f;
     [SerializeField] CauldronState _currentState = CauldronState.Idle;
+    [SerializeField] BoilState _boilState = BoilState.Normal;
     [SerializeField] bool shouldWander = false;
     [SerializeField] LayerMask avoidanceMask;
     [SerializeField] CauldronWaypoints waypoints;
@@ -30,7 +33,6 @@ public class CauldronAI : MonoBehaviour
     float _wanderTimer = 0f;
     float _totalBoilTimer = 0f;
     float _boilTimer = 0f;
-    float _boilPitch = 1f;
 
     [SerializeField] Vector3 currentWayPoint;
     Vector3 initialPosition;
@@ -39,6 +41,9 @@ public class CauldronAI : MonoBehaviour
     float _currentWanderDistance;
 
     DebugPanelController debugPanel;
+
+    public Action onCauldronStart;
+    public Action onUpdateTimer;
 
     private void Awake()
     {
@@ -71,15 +76,19 @@ public class CauldronAI : MonoBehaviour
         {
             _wanderTimer += timeDelta;
         }
-        _boilTimer -= timeDelta;    
+        _boilTimer -= timeDelta;
+        if (_boilTimer < 0)
+            _boilTimer = 0;
+        onUpdateTimer.Invoke();
         UpdateLabels();
     }
 
     public void OnStartLevel(float boilTime)
     {
         _currentState = CauldronState.Idle;
-        _boilTimer = boilTime;
+        _boilTimer = 60;
         _totalBoilTimer = boilTime;
+        onCauldronStart.Invoke();
     }
 
     public void SetOnFirePit()
@@ -134,8 +143,7 @@ public class CauldronAI : MonoBehaviour
         Cancel();
         _currentState = CauldronState.Complete;
         debugPanel.UpdateCauldronState(_currentState);
-        _boilPitch = 1;
-        FindObjectOfType<AudioManager>().StartFadePitch(2f, _boilPitch);
+        _boilState = BoilState.Normal;
         _wanderTimer = 0;
         debugPanel.UpdateCauldronTimer(_wanderTimer);
     }
@@ -209,15 +217,15 @@ public class CauldronAI : MonoBehaviour
             _currentState = CauldronState.Overflow;
             Debug.Log("Lost!");
         }
-        else if(boilInterval < .1f && _boilPitch != 1.5f)
+        else if(boilInterval <= .35f && _boilState != BoilState.Rush)
         {
-            _boilPitch = 1.5f;
-            FindObjectOfType<AudioManager>().StartFadePitch(.8f, _boilPitch);
+            _boilState = BoilState.Rush;
+            FindObjectOfType<AudioManager>().StartLevelRushTheme();
         }
-        else if (boilInterval < .3f && (_boilPitch != 1.25f && _boilPitch != 1.5f))
+        else if(boilInterval > .35f && _boilState != BoilState.Normal)
         {
-            _boilPitch = 1.25f;
-            FindObjectOfType<AudioManager>().StartFadePitch(.8f, _boilPitch);
+            _boilState = BoilState.Normal;
+            FindObjectOfType<AudioManager>().StartLevelTheme();
         }
     }
 

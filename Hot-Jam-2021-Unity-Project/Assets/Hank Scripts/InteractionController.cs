@@ -23,9 +23,12 @@ public class InteractionController : MonoBehaviour
 
     AudioSource audioSource;
 
+    private CharacterController charController;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        charController = GetComponent<CharacterController>();
     }
 
     // Start is called before the first frame update
@@ -89,50 +92,105 @@ public class InteractionController : MonoBehaviour
         }
         if (pickup != null)
         {
-            helpText.ToggleInteractIcon(true);
             debugPanel.UpdateDetectedObj(pickup.ToString());
         }
         else if (interactable != null)
         {
-            helpText.ToggleInteractIcon(true);
             debugPanel.UpdateDetectedObj(interactable.ToString());
         }
         else
         {
-            helpText.ToggleInteractIcon(false);
             debugPanel.UpdateDetectedObj("N/A");
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        IPickable item = other.gameObject.GetComponent<IPickable>();
-        IInteractable tool = other.gameObject.GetComponent<IInteractable>();
-        if (item != null)   // If collided obj has IPickable
+        InterfaceCheck();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y , transform.position.z), .75f);
+    }
+
+    private void InterfaceCheck()
+    {
+        float closestObjectDistance = float.PositiveInfinity;
+        Collider closestPickableCollider = null;
+        Collider[] triggerColliders = Physics.OverlapSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), .75f);
+        foreach (Collider collider in triggerColliders)
         {
-            pickup = item;
+            IPickable item = collider.gameObject.GetComponent<IPickable>();
+            IInteractable tool = collider.gameObject.GetComponent<IInteractable>();
+            if (item != null || tool != null)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < closestObjectDistance)
+                {
+                    closestObjectDistance = distance;
+                    closestPickableCollider = collider;
+                }
+            }
+        }
+        if(closestPickableCollider == null)
+        {
+            pickup = null;
+            interactable = null;
+            helpText.ToggleInteractIcon(false, null);
+            return;
+        }
+
+        IPickable closestPickable = closestPickableCollider.GetComponent<IPickable>(); //just to get null
+        IInteractable closestInteractable = closestPickableCollider.GetComponent<IInteractable>(); //just to get null
+
+        if (closestPickable != null)   // If collided obj has IPickable
+        {
+            pickup = closestPickable;
+            helpText.ToggleInteractIcon(true, closestPickableCollider.gameObject);
             interactable = null;
         }
-        else if (tool != null) // If collided obj has IInteractable
+        else if (closestInteractable != null) // If collided obj has IInteractable
         {
-            interactable = tool;
+            interactable = closestInteractable;
+            Debug.Log(closestPickableCollider.name);
+            helpText.ToggleInteractIcon(true, closestPickableCollider.gameObject);
             pickup = null;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        IPickable item = other.gameObject.GetComponent<IPickable>();
-        IInteractable tool = other.gameObject.GetComponent<IInteractable>();
-        if (item != null)   // If collided obj has IPickable
-        {
-            pickup = null;
-        }
-        else if (tool != null)  // If collided obj has IInteractable
-        {
-            interactable = null;
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    IPickable item = other.gameObject.GetComponent<IPickable>();
+    //    IInteractable tool = other.gameObject.GetComponent<IInteractable>();
+    //    if (item != null)   // If collided obj has IPickable
+    //    {
+    //        pickup = item;
+    //        helpText.ToggleInteractIcon(true, other.gameObject);
+    //        interactable = null;
+    //    }
+    //    else if (tool != null) // If collided obj has IInteractable
+    //    {
+    //        interactable = tool;
+    //        helpText.ToggleInteractIcon(true, other.gameObject);
+    //        pickup = null;
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    IPickable item = other.gameObject.GetComponent<IPickable>();
+    //    IInteractable tool = other.gameObject.GetComponent<IInteractable>();
+    //    if (item != null)   // If collided obj has IPickable
+    //    {
+    //        pickup = null;
+    //    }
+    //    else if (tool != null)  // If collided obj has IInteractable
+    //    {
+    //        interactable = null;
+    //    }
+    //}
 
     public void SetCurrentItem(Ingredient item)
     {

@@ -23,7 +23,7 @@ public class PlayerLevelHook : MonoBehaviour
             Debug.Log("Level was not found");
             return;
         }
-        level.OnLevelStart();
+        level.onLevelStart.Invoke();
     }
 
 }

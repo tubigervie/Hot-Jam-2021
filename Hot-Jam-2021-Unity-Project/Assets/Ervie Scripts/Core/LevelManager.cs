@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Dialogue completeDialogue;
     [SerializeField] float totalBoilTimer = 120f;
 
+    public Action onLevelStart;
+
     private void Awake()
     {
         if(instance != null)
@@ -23,6 +26,7 @@ public class LevelManager : MonoBehaviour
         cauldron = FindObjectOfType<CauldronContainer>();
         player = GameObject.FindGameObjectWithTag("Player");
         cauldron.onRecipeComplete += OnRecipeComplete;
+        onLevelStart += OnLevelStart;
     }
 
     
@@ -37,7 +41,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            OnLevelStart();
+            onLevelStart.Invoke();
         }
         FindObjectOfType<AudioManager>().StartLevelTheme();
     }

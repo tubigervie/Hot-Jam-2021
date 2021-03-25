@@ -364,7 +364,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -461,4 +461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStartTheme: {fileID: 8300000, guid: ca95b81fb6608ef4981095a141aa3ec8, type: 3}
-  levelTheme: {fileID: 8300000, guid: 90c086c755366c44c88b2740109853ad, type: 3}
+  levelThemeLoop: {fileID: 8300000, guid: 90c086c755366c44c88b2740109853ad, type: 3}
+  rushStartTheme: {fileID: 8300000, guid: d426c4e700b65d244badac6e621c9d83, type: 3}
+  rushThemeLoop: {fileID: 8300000, guid: 20a878db41fab494497bbf85c1556950, type: 3}

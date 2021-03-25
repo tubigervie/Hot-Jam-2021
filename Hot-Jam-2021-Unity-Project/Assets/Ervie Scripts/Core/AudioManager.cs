@@ -6,7 +6,10 @@ public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
     [SerializeField] AudioClip levelStartTheme;
-    [SerializeField] AudioClip levelTheme;
+    [SerializeField] AudioClip levelThemeLoop;
+
+    [SerializeField] AudioClip rushStartTheme;
+    [SerializeField] AudioClip rushThemeLoop;
 
     private void Awake()
     {
@@ -53,15 +56,35 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(LevelThemeCoroutine());
     }
 
+    public void StartLevelRushTheme()
+    {
+        StartCoroutine(RushThemeCoroutine());
+    }
+
+    private IEnumerator RushThemeCoroutine()
+    {
+        yield return StartFadeCoroutine(2f, 0f);
+        audioSource.loop = false;
+        audioSource.clip = rushStartTheme;
+        audioSource.volume = 0;
+        audioSource.Play();
+        yield return StartFadeCoroutine(1f, .8f);
+        yield return new WaitForSeconds(audioSource.clip.length - 1f);
+        audioSource.clip = rushThemeLoop;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
     private IEnumerator LevelThemeCoroutine()
     {
+        yield return StartFadeCoroutine(2f, 0f);
         audioSource.loop = false;
         audioSource.clip = levelStartTheme;
         audioSource.volume = 0;
         audioSource.Play();
         yield return StartFadeCoroutine(3f, .8f);
         yield return new WaitForSeconds(audioSource.clip.length - 3f);
-        audioSource.clip = levelTheme;
+        audioSource.clip = levelThemeLoop;
         audioSource.loop = true;
         audioSource.Play();
     }

@@ -12,6 +12,10 @@ public class DebugPanelController : MonoBehaviour
     [SerializeField] Text cauldronTimerLabel;
     [SerializeField] Text boilTimerLabel;
 
+    private void Start()
+    {
+    }
+
     public void UpdateHeldObj(string objName)
     {
         heldObjLabel.text = $"HeldObj: {objName}";
