@@ -8,6 +8,7 @@ public class CauldronUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] Image fillImage;
+    [SerializeField] GameObject steamObject;
 
     CauldronAI cauldron;
     Animator anim;
@@ -42,11 +43,13 @@ public class CauldronUI : MonoBehaviour
         {
             anim.SetBool("Rush", true);
             anim.SetFloat("Blend", 1 - ratio);
+            steamObject.SetActive(true);
         }
         else
         {
             anim.SetBool("Rush", false);
             anim.SetFloat("Blend", 0);
+            steamObject.SetActive(false);
         }
         fillImage.fillAmount = 1 - ratio;
         fillImage.color = Color.Lerp(startColor, endColor, 1 - ratio);
@@ -64,6 +67,7 @@ public class CauldronUI : MonoBehaviour
         {
             child.gameObject.SetActive(flag);
         }
+        steamObject.SetActive(false);
     }
 
 }

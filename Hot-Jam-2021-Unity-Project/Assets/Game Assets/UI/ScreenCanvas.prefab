@@ -1630,6 +1630,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7006758598795869672}
     m_Modifications:
+    - target: {fileID: 95744987381767995, guid: 0a733a4cb9fbdbe46864a1c34c118129,
+        type: 3}
+      propertyPath: steamObject
+      value: 
+      objectReference: {fileID: 3025086585961468512}
     - target: {fileID: 2889092694944693113, guid: 0a733a4cb9fbdbe46864a1c34c118129,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1713,7 +1718,7 @@ PrefabInstance:
     - target: {fileID: 2889092694944693113, guid: 0a733a4cb9fbdbe46864a1c34c118129,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -162.41998
+      value: -161
       objectReference: {fileID: 0}
     - target: {fileID: 2889092694944693113, guid: 0a733a4cb9fbdbe46864a1c34c118129,
         type: 3}
@@ -1745,6 +1750,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5248032133194246483, guid: 0a733a4cb9fbdbe46864a1c34c118129,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: a0606fb2f3b91e34787afaaaf62bfc62, type: 2}
     - target: {fileID: 7150723344413495121, guid: 0a733a4cb9fbdbe46864a1c34c118129,
         type: 3}
       propertyPath: m_fontSize
@@ -1792,6 +1802,12 @@ PrefabInstance:
 --- !u!224 &3775443015936545101 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2889092694944693113, guid: 0a733a4cb9fbdbe46864a1c34c118129,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052813587079637556}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3025086585961468512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3856852783994140756, guid: 0a733a4cb9fbdbe46864a1c34c118129,
     type: 3}
   m_PrefabInstance: {fileID: 2052813587079637556}
   m_PrefabAsset: {fileID: 0}

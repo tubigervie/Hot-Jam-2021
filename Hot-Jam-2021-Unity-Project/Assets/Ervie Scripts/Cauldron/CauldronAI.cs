@@ -86,7 +86,7 @@ public class CauldronAI : MonoBehaviour
     public void OnStartLevel(float boilTime)
     {
         _currentState = CauldronState.Idle;
-        _boilTimer = 60;
+        _boilTimer = boilTime;
         _totalBoilTimer = boilTime;
         onCauldronStart.Invoke();
     }

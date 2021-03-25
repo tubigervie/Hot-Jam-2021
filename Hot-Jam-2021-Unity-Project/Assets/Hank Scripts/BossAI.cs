@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,8 @@ public class BossAI : MonoBehaviour
     Color deathColor;
 
     Coroutine lastRoutine = null;
+
+    public Action onDie;
 
     // State Transitions: NEUTRAL -> (Player nearby) -> CHASING -> (finish 1 hop) -> RESTING -> NEUTRAL
     //      NEUTRAL / CHASING / RESTING -> (hp <= 0) -> DYING
@@ -160,7 +163,6 @@ public class BossAI : MonoBehaviour
         if (toTarget.magnitude * (1 + Mathf.Lerp(healthRatio + .75f, healthRatio, healthRatio)) < speedMultiplier)
         {
             float newValue = toTarget.magnitude * (1 + Mathf.Lerp(healthRatio + .75f, healthRatio, healthRatio));
-            Debug.Log($"changed {speedMultiplier} to {newValue}");
             speedMultiplier = newValue;
         }
         
@@ -211,6 +213,7 @@ public class BossAI : MonoBehaviour
     {
         timer = 0f;
         currentState = BossState.DYING;
+        onDie.Invoke();
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }

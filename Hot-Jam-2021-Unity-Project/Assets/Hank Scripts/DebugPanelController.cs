@@ -89,6 +89,10 @@ public class DebugPanelController : MonoBehaviour
 
     public void TogglePanel()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(!child.gameObject.activeSelf);
+        }
+        GetComponent<Image>().enabled = !GetComponent<Image>().isActiveAndEnabled;
     }
 }

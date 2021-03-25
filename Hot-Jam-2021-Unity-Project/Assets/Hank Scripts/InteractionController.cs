@@ -36,6 +36,7 @@ public class InteractionController : MonoBehaviour
     {
         helpText = GameObject.Find("PlayerCanvas").GetComponent<HelpText>();
         debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
+        debugPanel.TogglePanel();
     }
 
     // Update is called once per frame
