@@ -5,10 +5,13 @@ using UnityEngine.AI;
 
 public class Spider : MonoBehaviour, IInteractable
 {
-    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float maxSpeed = 20f;
+    [SerializeField] float minSpeed = 5f;
     [SerializeField] float detectionRange = 10f;
+
     [SerializeField] float jitterMagnitude = .1f;
     [SerializeField] float jitterSpeedMultiplier = 30f;
+    [SerializeField] float slowdownPerWaypoint = 1f;
 
     [SerializeField] GameObject spiderLegPickup;
 
@@ -18,21 +21,24 @@ public class Spider : MonoBehaviour, IInteractable
     int currentWaypoint = 0;
     int totalWaypoints;
 
-    BoxCollider interactionCollider = null;
     GameObject player = null;
     GameObject spiderBody = null;
+
+    MeshRenderer[] bodyParts;
+    Color startColor;
+    Color deathColor;
 
     SpiderState currentState = SpiderState.WAITING;
 
     NavMeshAgent agent = null;
 
     float timer = 0f;
+    bool canInteract = true;
 
     public enum SpiderState
     {
         WAITING,    // no movement; waiting for player interaction
         RUNNING,    // detect player and move to next waypoint
-        TIRED,      // arrived at last waypoint; waiting for player interaction
         DYING       // after player pulls its legs off
     }
 
@@ -40,10 +46,17 @@ public class Spider : MonoBehaviour, IInteractable
     void Start()
     {
         player = GameObject.Find("Player");
-        interactionCollider = GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
 
         spiderBody = transform.GetChild(0).gameObject;
+        bodyParts = new MeshRenderer[spiderBody.transform.childCount];
+        for (int i = 0; i < spiderBody.transform.childCount; ++i)
+        {
+            bodyParts[i] = spiderBody.transform.GetChild(i).GetComponent<MeshRenderer>();
+        }
+        startColor = bodyParts[0].material.color;
+        deathColor = startColor;
+        deathColor.a = 0f;
 
         totalWaypoints = wayPoints.transform.childCount;
         wayPointsPos = new Vector3[totalWaypoints];
@@ -53,7 +66,7 @@ public class Spider : MonoBehaviour, IInteractable
             wayPointsPos[i] = wayPoints.transform.GetChild(i).transform.position;
         }
 
-        agent.speed = moveSpeed;
+        agent.speed = maxSpeed;
     }
 
     // Update is called once per frame
@@ -67,14 +80,10 @@ public class Spider : MonoBehaviour, IInteractable
             
             if (agent.remainingDistance <= agent.stoppingDistance && agent.velocity.magnitude == 0f)
             {
-                if (currentWaypoint == totalWaypoints - 1)  // is the last waypoint
+                if (distToPlayer <= detectionRange)
                 {
-                    currentState = SpiderState.TIRED;
-                    interactionCollider.enabled = true;
-                }
-                else if (distToPlayer <= detectionRange)
-                {
-                    UpdateWaypoint(currentWaypoint + 1);
+                    int nextWaypoint = (currentWaypoint + 1) % totalWaypoints;
+                    UpdateWaypoint(nextWaypoint);
                 }
                 else if (distToPlayer > detectionRange)
                 {
@@ -86,7 +95,11 @@ public class Spider : MonoBehaviour, IInteractable
         }
         else if (currentState == SpiderState.DYING)
         {
-            // runaway and disappear
+            timer += Time.deltaTime;
+            for (int i = 0; i < bodyParts.Length; ++i)
+            {
+                bodyParts[i].material.color = Color.Lerp(startColor, deathColor, timer);
+            }
         }
     }
 
@@ -94,6 +107,7 @@ public class Spider : MonoBehaviour, IInteractable
     {
         agent.destination = wayPointsPos[index];
         currentWaypoint = index;
+        agent.speed -= slowdownPerWaypoint;
     }
 
     public void Interact(GameObject player)
@@ -101,10 +115,10 @@ public class Spider : MonoBehaviour, IInteractable
         if (currentState == SpiderState.WAITING)
         {
             currentState = SpiderState.RUNNING;
-            StartCoroutine(DelayDeactivation(.5f));
+            StartCoroutine(DelayReactivation(.5f));
             UpdateWaypoint(0);
         }
-        else if (currentState == SpiderState.TIRED)
+        else if (canInteract && currentState == SpiderState.RUNNING)
         {
             StartCoroutine(Die());
         }
@@ -114,15 +128,15 @@ public class Spider : MonoBehaviour, IInteractable
     {
         currentState = SpiderState.DYING;
         Instantiate(spiderLegPickup, transform.position, Quaternion.identity);
-        interactionCollider.enabled = false;
-        UpdateWaypoint(0);
+        timer = 0f;
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }
 
-    IEnumerator DelayDeactivation(float seconds)
+    IEnumerator DelayReactivation(float seconds)
     {
+        canInteract = false;
         yield return new WaitForSeconds(seconds);
-        interactionCollider.enabled = false;
+        canInteract = true;
     }
 }
