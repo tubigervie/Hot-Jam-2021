@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 359e5db1613fc9446a67950f800c84bb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Hellraiser SC
+  fontNames:
+  - Hellraiser SC
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c2fc231374e2330419ac9489e5ac78c3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

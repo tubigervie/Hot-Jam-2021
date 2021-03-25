@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PhoenixEgg
   m_EditorClassIdentifier: 
   _displayName: Phoenix Egg
-  _description: 
+  _sprite: {fileID: 21300000, guid: df3741390955db44aa42315af14ab49e, type: 3}
   _pickup: {fileID: 448586732651310945, guid: afa4ebf9f426b9b4c98dc0d4de51f479, type: 3}

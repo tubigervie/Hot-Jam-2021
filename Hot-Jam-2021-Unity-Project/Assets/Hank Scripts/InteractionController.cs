@@ -112,7 +112,6 @@ public class InteractionController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Debug.Log(transform.position + transform.forward);
         Gizmos.DrawWireSphere(transform.position + transform.forward, .75f);
     }
 
@@ -140,6 +139,14 @@ public class InteractionController : MonoBehaviour
             pickup = null;
             interactable = null;
             helpText.ToggleInteractIcon(false, null);
+            if(_currentIngredient != null)
+            {
+                helpText.TogglePickableIcon(true, this.gameObject);
+            }
+            else
+            {
+                helpText.TogglePickableIcon(false, null);
+            }
             return;
         }
 
@@ -149,15 +156,17 @@ public class InteractionController : MonoBehaviour
         if (closestPickable != null)   // If collided obj has IPickable
         {
             pickup = closestPickable;
-            helpText.ToggleInteractIcon(true, closestPickableCollider.gameObject);
+            helpText.TogglePickableIcon(true, closestPickableCollider.gameObject);
+            helpText.ToggleInteractIcon(true, this.transform.gameObject);
             interactable = null;
         }
         else if (closestInteractable != null) // If collided obj has IInteractable
         {
             interactable = closestInteractable;
-            Debug.Log(closestPickableCollider.name);
             helpText.ToggleInteractIcon(true, closestPickableCollider.gameObject);
             pickup = null;
+            if(currentIngredient == null)
+                helpText.TogglePickableIcon(false, null);
         }
     }
 

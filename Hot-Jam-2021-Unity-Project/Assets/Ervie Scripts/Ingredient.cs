@@ -7,13 +7,12 @@ using UnityEngine;
 public class Ingredient : ScriptableObject
 {
     [SerializeField] string _displayName;
-    [TextArea]
-    [SerializeField] string _description;
+    [SerializeField] Sprite _sprite;
     [SerializeField] IngredientPickup _pickup;
 
     public string displayName { get { return _displayName; } }
 
-    public string description { get { return _description; } }
+    public Sprite sprite { get { return _sprite; } }
 
     public IngredientPickup SpawnPickup(Vector3 position)
     {

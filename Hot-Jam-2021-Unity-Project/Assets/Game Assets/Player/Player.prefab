@@ -408,11 +408,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4814336474313051583}
     m_Modifications:
-    - target: {fileID: 2047363067583485874, guid: ee580ca4957115249a92fac2385e11ec,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_Pivot.x
@@ -456,21 +451,6 @@ PrefabInstance:
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
-        type: 3}
-      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2047363067583485875, guid: ee580ca4957115249a92fac2385e11ec,
@@ -537,11 +517,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7818199628684467033, guid: ee580ca4957115249a92fac2385e11ec,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee580ca4957115249a92fac2385e11ec, type: 3}

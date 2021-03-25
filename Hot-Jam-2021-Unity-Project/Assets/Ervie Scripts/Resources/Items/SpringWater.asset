@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpringWater
   m_EditorClassIdentifier: 
   _displayName: Spring Water
-  _description: 
+  _sprite: {fileID: 21300000, guid: 0c484f67942bad540b83281914579448, type: 3}
   _pickup: {fileID: 448586732651310945, guid: a04676d7a7a67464a90c46696fb1a00e, type: 3}

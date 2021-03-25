@@ -23754,7 +23754,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c6cfa486c25939945a1412e69dc023cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35790,6 +35790,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2921032417740767500, guid: be5a762605457f148bfc4a3b3d5066c8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4814336474313051552, guid: be5a762605457f148bfc4a3b3d5066c8,
         type: 3}
       propertyPath: m_Name
@@ -36566,6 +36571,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3241216374756220559, guid: aac79a80f54415c40ad1a3ce2154e145,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3775443015936545101, guid: aac79a80f54415c40ad1a3ce2154e145,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -36764,6 +36774,11 @@ PrefabInstance:
     - target: {fileID: 7720301070216218941, guid: aac79a80f54415c40ad1a3ce2154e145,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007857660809237439, guid: aac79a80f54415c40ad1a3ce2154e145,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -40929,7 +40944,8 @@ PrefabInstance:
         type: 3}
       propertyPath: startDialogue
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: b678b2380b1f9274eb40eea06c091a8d,
+        type: 2}
     - target: {fileID: 5217767130813362186, guid: 82ef705fd47d6fe439c849463660ffda,
         type: 3}
       propertyPath: totalBoilTimer

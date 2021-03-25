@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class HelpText : MonoBehaviour
 {
-    [SerializeField] Image label;
+    [SerializeField] Image interactLabel;
+    [SerializeField] float interactIconFloatHeight = 2.5f;
+    [SerializeField] Image pickableLabel;
+    [SerializeField] float pickableIconFloatHeight = 1.5f;
 
     InteractionController interactControl;
 
-    GameObject _currentSpawnObject = null;
+    GameObject _currentInteractSpawnObject = null;
+    GameObject _currentPickableSpawnObject = null;
 
     // Start is called before the first frame update
     void Start()
@@ -19,19 +23,50 @@ public class HelpText : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (label.enabled && _currentSpawnObject != null)
+        if (interactLabel.enabled && _currentInteractSpawnObject != null)
         {
-            label.transform.position = Camera.main.WorldToScreenPoint(_currentSpawnObject.transform.position + Vector3.up * 1.5f);
+            interactLabel.transform.position = Camera.main.WorldToScreenPoint(_currentInteractSpawnObject.transform.position + Vector3.up * interactIconFloatHeight);
+        }
+        else
+        {
+            interactLabel.enabled = false;
+        }
+        if (pickableLabel.enabled && _currentPickableSpawnObject != null)
+        {
+            pickableLabel.transform.position = Camera.main.WorldToScreenPoint(_currentPickableSpawnObject.transform.position + Vector3.up * pickableIconFloatHeight);
+        }
+        else
+        {
+            pickableLabel.enabled = false;
         }
     }
 
     public void ToggleInteractIcon(bool flag, GameObject spawnObject)
     {
-        _currentSpawnObject = spawnObject;
+        _currentInteractSpawnObject = spawnObject;
         if(spawnObject != null)
         {
-            label.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * 1.5f);
+            interactLabel.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * interactIconFloatHeight);
         }
-        label.enabled = flag;
+        interactLabel.enabled = flag;
+    }
+
+    public void TogglePickableIcon(bool flag, GameObject spawnObject)
+    {
+        _currentPickableSpawnObject = spawnObject;
+        if(spawnObject != null)
+        {
+            if(spawnObject.tag != "Player")
+            {
+                pickableLabel.sprite = spawnObject.GetComponent<IngredientPickup>().ingredient.sprite;
+                pickableLabel.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * pickableIconFloatHeight);
+            }
+            else
+            {
+                pickableLabel.sprite = spawnObject.GetComponent<InteractionController>().currentIngredient.sprite;
+                pickableLabel.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * interactIconFloatHeight * 1.5f);
+            }
+        }
+        pickableLabel.enabled = flag;
     }
 }

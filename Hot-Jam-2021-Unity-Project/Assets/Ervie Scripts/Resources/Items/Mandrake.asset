@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mandrake
   m_EditorClassIdentifier: 
   _displayName: Mandrake Root
-  _description: 
+  _sprite: {fileID: 21300000, guid: 5a480a725464d5c4abb17ead6ab70e1f, type: 3}
   _pickup: {fileID: 448586732651310945, guid: 141b28cdc4b291e4c8db8abbff8aa467, type: 3}
