@@ -112,14 +112,15 @@ public class InteractionController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y , transform.position.z), .75f);
+        Debug.Log(transform.position + transform.forward);
+        Gizmos.DrawWireSphere(transform.position + transform.forward, .75f);
     }
 
     private void InterfaceCheck()
     {
         float closestObjectDistance = float.PositiveInfinity;
         Collider closestPickableCollider = null;
-        Collider[] triggerColliders = Physics.OverlapSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), .75f);
+        Collider[] triggerColliders = Physics.OverlapSphere(transform.position + transform.forward, .75f);
         foreach (Collider collider in triggerColliders)
         {
             IPickable item = collider.gameObject.GetComponent<IPickable>();
