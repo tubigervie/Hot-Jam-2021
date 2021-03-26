@@ -12,6 +12,7 @@ public class Spider : MonoBehaviour, IInteractable
     [SerializeField] float jitterMagnitude = .1f;
     [SerializeField] float jitterSpeedMultiplier = 30f;
     [SerializeField] float slowdownPerWaypoint = 1f;
+    [SerializeField] AudioClip critterSFX;
 
     [SerializeField] GameObject spiderLegPickup;
 
@@ -32,6 +33,8 @@ public class Spider : MonoBehaviour, IInteractable
 
     NavMeshAgent agent = null;
 
+    AudioSource audiosource;
+
     float timer = 0f;
     bool canInteract = true;
 
@@ -42,10 +45,15 @@ public class Spider : MonoBehaviour, IInteractable
         DYING       // after player pulls its legs off
     }
 
+    void Awake()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
 
         spiderBody = transform.GetChild(0).gameObject;
@@ -82,6 +90,7 @@ public class Spider : MonoBehaviour, IInteractable
             {
                 if (distToPlayer <= detectionRange)
                 {
+                    audiosource.PlayOneShot(critterSFX);
                     int nextWaypoint = (currentWaypoint + 1) % totalWaypoints;
                     UpdateWaypoint(nextWaypoint);
                 }

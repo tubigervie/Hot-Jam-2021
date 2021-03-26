@@ -54,8 +54,8 @@ public class LevelManager : MonoBehaviour
     public void OnLevelCompleteDialogueEnd()
     {
         FindObjectOfType<AudioManager>().StartFade(1.5f, 0);
-        SceneManagement sceneManager = FindObjectOfType<SceneManagement>();
-        sceneManager.LoadScene(nextLevelName);
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.LoadScene(nextLevelName);
     }
 
     public void OnLevelStart()

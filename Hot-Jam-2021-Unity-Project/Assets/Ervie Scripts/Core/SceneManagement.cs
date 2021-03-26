@@ -7,6 +7,7 @@ public class SceneManagement : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
+        Debug.Log("scene name: " + sceneName);
         StartCoroutine(LoadSceneCoroutine(sceneName));
     }
 
@@ -14,7 +15,10 @@ public class SceneManagement : MonoBehaviour
     {
         Fader fader = FindObjectOfType<Fader>();
         yield return fader.FadeOut(fadeOutTime);
-        SceneManager.LoadScene(sceneName);
+        if (string.IsNullOrEmpty(sceneName))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        else
+            SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(fadeWaitTime);
         yield return fader.FadeIn(fadeInTime);
     }

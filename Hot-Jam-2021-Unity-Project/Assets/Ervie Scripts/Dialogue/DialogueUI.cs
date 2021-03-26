@@ -18,6 +18,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] Image portraitImage;
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Button nextButton;
+    [SerializeField] GameObject leafCursor;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class DialogueUI : MonoBehaviour
     private IEnumerator DisplayDialogueText(string text)
     {
         dialogueText.text = "";
-
+        leafCursor.SetActive(false);
         string originalText = playerConversant.GetText();
         string displayedText = "";
         int alphaIndex = 0;
@@ -54,8 +55,9 @@ public class DialogueUI : MonoBehaviour
             dialogueText.text = originalText;
             displayedText = dialogueText.text.Insert(alphaIndex, kAlphaCode);
             dialogueText.text = displayedText;
-            yield return new WaitForSecondsRealtime(kMaxTextTime / TextSpeed);
+            yield return new WaitForSeconds(kMaxTextTime / TextSpeed);
         }
+        leafCursor.SetActive(true);
         dialogueTextCoroutine = null;
         yield return null;
     }
@@ -77,8 +79,9 @@ public class DialogueUI : MonoBehaviour
                 if(dialogueTextCoroutine != null)
                 {
                     dialogueText.text = playerConversant.GetText();
-                    StopAllCoroutines();
+                    StopCoroutine(dialogueTextCoroutine);
                     dialogueTextCoroutine = null;
+                    leafCursor.SetActive(true);
                 }
                 else
                     Next();
