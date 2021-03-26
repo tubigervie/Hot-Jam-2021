@@ -88,7 +88,7 @@ public class CauldronAI : MonoBehaviour
         _currentState = CauldronState.Idle;
         _boilTimer = boilTime;
         _totalBoilTimer = boilTime;
-        onCauldronStart.Invoke();
+         onCauldronStart.Invoke();
     }
 
     public void SetOnFirePit()

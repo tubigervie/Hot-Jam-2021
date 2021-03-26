@@ -19,16 +19,16 @@ public class CauldronUI : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
         cauldron = FindObjectOfType<CauldronAI>();
-        if(cauldron != null)
+        if (cauldron != null)
         {
             cauldron.onCauldronStart += ToggleImageElementsOn;
             cauldron.onUpdateTimer += UpdateCauldronUI;
         }
+    }
+
+    private void Start()
+    {
         ToggleImageElements(false);
     }
 
