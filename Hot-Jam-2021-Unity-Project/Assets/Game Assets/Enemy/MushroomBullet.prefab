@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 3
   moveSpeed: 3
-  stunLength: 1
+  stunDuration: 1
 --- !u!135 &8619474684285519118
 SphereCollider:
   m_ObjectHideFlags: 0

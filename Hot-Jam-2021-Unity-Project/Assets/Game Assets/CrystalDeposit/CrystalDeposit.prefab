@@ -110,7 +110,7 @@ MonoBehaviour:
   explodeDelay: 3
   stunRange: 5
   stunDuration: 4
-  explosionFX: {fileID: 4190156999470517794, guid: 817fdcf1aa57a66488617f3824c2a191,
+  explosionFX: {fileID: 135417163608381709, guid: 906a97f8d4216854489506ae63a41ba5,
     type: 3}
   crystalPickup: {fileID: 54651542872752102, guid: 4b4749a40e6583843b835813fb973852,
     type: 3}

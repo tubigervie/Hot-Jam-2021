@@ -203,11 +203,15 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState == PlayerState.STUNNED)
         {
-            Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            GameObject effect = Instantiate(stunFX, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            ParticleSystem.MainModule main = effect.GetComponent<ParticleSystem>().main;
+            main.startLifetime = duration;
         }
         else if (currentState == PlayerState.SLOWED)
         {
-            Instantiate(slowFX, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
+            GameObject effect = Instantiate(slowFX, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
+            ParticleSystem.MainModule main = effect.GetComponent<ParticleSystem>().main;
+            main.startLifetime = duration;
         }
         yield return new WaitForSeconds(duration);
         currentState = PlayerState.NORMAL;

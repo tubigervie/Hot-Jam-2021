@@ -32,6 +32,7 @@ public class MushroomProjectile : MonoBehaviour
     public void SetMoveDir(Vector3 dir)
     {
         moveDir = dir.normalized;
+        transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
     private void OnTriggerEnter(Collider other)

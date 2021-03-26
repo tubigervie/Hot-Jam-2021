@@ -53,10 +53,6 @@ public class CrystalDeposit : MonoBehaviour, IInteractable
     public void Interact(GameObject player)
     {
         StartCoroutine(SetFuse(explodeDelay));
-        if (isReal)
-        {
-            Instantiate(crystalPickup, transform.position, Quaternion.identity);
-        }
     }
 
     IEnumerator SetFuse(float fuseTime)
@@ -81,6 +77,12 @@ public class CrystalDeposit : MonoBehaviour, IInteractable
                 playerControl.ApplyEffect(PlayerController.PlayerState.STUNNED, stunDuration);
             }
         }
+
+        if (isReal)
+        {
+            Instantiate(crystalPickup, transform.position, Quaternion.identity);
+        }
+
         Destroy(this.gameObject);
     }
 }

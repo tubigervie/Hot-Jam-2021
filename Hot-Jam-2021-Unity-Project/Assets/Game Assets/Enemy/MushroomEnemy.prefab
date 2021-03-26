@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
-  bulletPrefab: {fileID: 1268063962133782065, guid: 30cf12ae9543e094f87c401273cc35c7,
+  bulletPrefab: {fileID: 1268063962133782065, guid: e65a7f22007f53642b32b9f7c43200c9,
     type: 3}
   isLooping: 1
   objectPool: {fileID: 0}

@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   moveSpeed: 10
-  stunFX: {fileID: 1151595909491911585, guid: 5f12b21c7df245e49853108e8720abf0, type: 3}
-  slowFX: {fileID: 6687943155483675936, guid: 0e6167cab2293104e9fefe99c0f04e47, type: 3}
+  stunFX: {fileID: 1193694149658368499, guid: 1004e5fe2a84c4a498475b5560ed1370, type: 3}
+  slowFX: {fileID: 1474871345824110866, guid: c1fbd312cf2215a478f143e628f39a91, type: 3}
   hitSFX: {fileID: 8300000, guid: 784e288d33262c245bd60a6e85b8aebc, type: 3}
   castDistance: 1.5
   disableMoveStates: 020000000400000005000000

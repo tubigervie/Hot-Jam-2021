@@ -25,6 +25,7 @@ public class TurretProjectile : MonoBehaviour
     public void SetMoveDir(Vector3 dir)
     {
         moveDir = dir.normalized;
+        transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
     public void SetDmg(int amount)
