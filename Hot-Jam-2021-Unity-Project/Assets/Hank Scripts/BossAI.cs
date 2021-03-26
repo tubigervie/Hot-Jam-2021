@@ -214,6 +214,7 @@ public class BossAI : MonoBehaviour
         timer = 0f;
         currentState = BossState.DYING;
         onDie.Invoke();
+        FindObjectOfType<HelpText>().SpawnDeathIcon(true, this.gameObject);
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }

@@ -42,7 +42,7 @@ public class DialogueUI : MonoBehaviour
     void UpdateUI()
     {
         dialogueBox.SetActive(playerConversant.IsActive());
-        if (!playerConversant.IsActive()) return;
+        if (!dialogueBox.activeSelf) return;
         Texture2D newTex = playerConversant.GetConversantSprite();
         portraitImage.sprite = Sprite.Create(newTex, new Rect(0, 0, newTex.width, newTex.height), new Vector2(.5f, .5f), 100.0f);
         portraitImage.GetComponent<RectTransform>().sizeDelta = playerConversant.GetDialogueSpriteSize();

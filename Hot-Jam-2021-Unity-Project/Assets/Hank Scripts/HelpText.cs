@@ -10,15 +10,16 @@ public class HelpText : MonoBehaviour
     [SerializeField] Image pickableLabel;
     [SerializeField] float pickableIconFloatHeight = 1.5f;
 
-    InteractionController interactControl;
+    [SerializeField] Image deathLabel;
+
 
     GameObject _currentInteractSpawnObject = null;
     GameObject _currentPickableSpawnObject = null;
+    GameObject _currentDeathSpawnObject = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        interactControl = FindObjectOfType<InteractionController>();
     }
 
     private void FixedUpdate()
@@ -39,6 +40,25 @@ public class HelpText : MonoBehaviour
         {
             pickableLabel.enabled = false;
         }
+        if (deathLabel.enabled && _currentDeathSpawnObject != null)
+        {
+            deathLabel.transform.position = Camera.main.WorldToScreenPoint(_currentDeathSpawnObject.transform.position + Vector3.up * 4);
+        }
+        else
+        {
+            deathLabel.enabled = false;
+        }
+    }
+
+    public void SpawnDeathIcon(bool flag, GameObject spawnObject)
+    {
+        _currentDeathSpawnObject = spawnObject;
+        if (spawnObject != null)
+        {
+            deathLabel.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * interactIconFloatHeight);
+        }
+        deathLabel.enabled = flag;
+        deathLabel.GetComponent<Animation>().Play();
     }
 
     public void ToggleInteractIcon(bool flag, GameObject spawnObject)
