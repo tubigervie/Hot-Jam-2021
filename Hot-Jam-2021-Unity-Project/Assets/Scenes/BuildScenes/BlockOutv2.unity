@@ -35300,18 +35300,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 326020575, guid: be5a762605457f148bfc4a3b3d5066c8, type: 3}
+    - target: {fileID: 2921032417740767500, guid: be5a762605457f148bfc4a3b3d5066c8,
+        type: 3}
       propertyPath: m_SizeDelta.x
       value: 80
       objectReference: {fileID: 0}
-    - target: {fileID: 326020575, guid: be5a762605457f148bfc4a3b3d5066c8, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1419579854540988291, guid: be5a762605457f148bfc4a3b3d5066c8,
+    - target: {fileID: 2921032417740767500, guid: be5a762605457f148bfc4a3b3d5066c8,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 4814336474313051552, guid: be5a762605457f148bfc4a3b3d5066c8,
         type: 3}
@@ -40671,7 +40668,8 @@ PrefabInstance:
         type: 3}
       propertyPath: startDialogue
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: b678b2380b1f9274eb40eea06c091a8d,
+        type: 2}
     - target: {fileID: 5217767130813362186, guid: 82ef705fd47d6fe439c849463660ffda,
         type: 3}
       propertyPath: totalBoilTimer

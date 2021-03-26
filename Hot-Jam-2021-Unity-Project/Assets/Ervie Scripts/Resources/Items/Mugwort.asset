@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Mugwort
   m_EditorClassIdentifier: 
   _displayName: Mugwort Herb
-  _sprite: {fileID: 21300000, guid: e3f31f6e158bbe247a5b7f780281e82b, type: 3}
+  _sprite: {fileID: 21300000, guid: f0600476c72fa984cac4dab6c1d9c616, type: 3}
   _pickup: {fileID: 448586732651310945, guid: 3fedbe1eb4dc9e74cb83b496c803c9aa, type: 3}
