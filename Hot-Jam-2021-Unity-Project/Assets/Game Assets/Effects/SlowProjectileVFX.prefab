@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4658034395711470045}
   - component: {fileID: 1780568599059158636}
   m_Layer: 0
-  m_Name: SporeProjectileSlow
+  m_Name: SlowProjectileVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4869,7 +4869,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
+      scalar: 1.5
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -5414,7 +5414,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 10
+    angle: 5
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -5500,7 +5500,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.5
+      value: 0.25
       mode: 0
       spread: 0
       speed:

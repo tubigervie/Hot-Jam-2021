@@ -182,10 +182,12 @@ public class BossAI : MonoBehaviour
         float jump = Mathf.Lerp(minJumpHeight, jumpHeight, healthRatio);
         jumpCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(jumpDuration / 2f, jump), new Keyframe(jumpDuration, 0));
 
+        int layerMask = LayerMask.GetMask("Terrain");
+
         // Ensure boss stays on the ground despite scale change (assumes scale only descreases)
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit))
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, layerMask))
         {
             Debug.Log(hit.collider.gameObject.name);
             transform.position -= Vector3.up * (hit.distance - transform.localScale.x / 2) - yOffset * Vector3.up;
