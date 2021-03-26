@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] LevelManager currentLevel;
     string currentSceneName;
+    public static bool tutorialComplete = false;
 
     public void SetCurrentLevel(LevelManager level)
     {
@@ -21,9 +22,20 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public bool TutorialComplete()
+    {
+        return tutorialComplete;
+    }
+
     public void RestartGame()
     {
         StartCoroutine(RestartCoroutine());
+    }
+
+    public void LoadFirstLevel()
+    {
+        tutorialComplete = true;
+        RestartGame();
     }
 
     private IEnumerator RestartCoroutine()

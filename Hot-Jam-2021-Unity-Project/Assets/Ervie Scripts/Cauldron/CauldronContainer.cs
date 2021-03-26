@@ -7,6 +7,7 @@ public class CauldronContainer : MonoBehaviour, IInteractable
 {
 
     [SerializeField] List<Ingredient> storedIngredients = new List<Ingredient>(); //might change this
+    [SerializeField] Ingredient tutorialIngredient;
     [SerializeField] Recipe cauldronRecipe;
     [SerializeField] int index = 0;
 
@@ -42,6 +43,11 @@ public class CauldronContainer : MonoBehaviour, IInteractable
 
     public void PlaceIngredient(Ingredient ingredient)
     {
+        if(cauldronAI.currentState == CauldronAI.CauldronState.Pregame && ingredient.name == "Mandrake")
+        {
+            FindObjectOfType<LevelManager>().OnTutorialComplete();
+            return;
+        }
         if (isComplete)
         {
             Debug.Log("Cauldron full!");
@@ -94,6 +100,13 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             if (currentItem == null) return;
             PlaceIngredient(currentItem);
             //player.GetComponent<TestPickUpController>().SetCurrentPickedItem(null);
+            player.GetComponent<InteractionController>().SetCurrentItem(null);
+        }
+        else if(cauldronAI.currentState == CauldronAI.CauldronState.Pregame)
+        {
+            Ingredient currentItem = player.GetComponent<InteractionController>().currentIngredient;
+            if (currentItem == null) return;
+            PlaceIngredient(currentItem);
             player.GetComponent<InteractionController>().SetCurrentItem(null);
         }
     }

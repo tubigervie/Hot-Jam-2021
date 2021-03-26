@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 1849227883}
   - component: {fileID: 1320633614}
   - component: {fileID: 1235460390}
+  - component: {fileID: 1919570241}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -450,6 +451,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1919570241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814336474313051552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf86f760af015040af47890451da07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: EndTutorial
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1849227883}
+        m_MethodName: TutorialEndHook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4814336474835249339
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,8 +641,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2833742758436456764, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833742758436456764, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 7259122965888403044, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}
