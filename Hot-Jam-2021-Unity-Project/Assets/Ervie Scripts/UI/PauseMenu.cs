@@ -34,6 +34,10 @@ public class PauseMenu : MonoBehaviour
         {
             TogglePause(!isPaused);
         }
+        else if (currentLevel == null)
+        {
+            currentLevel = FindObjectOfType<LevelManager>();
+        }
     }
 
     public void Resume()

@@ -215,6 +215,7 @@ public class CauldronAI : MonoBehaviour
         if(_boilTimer <= 0)
         {
             _currentState = CauldronState.Overflow;
+            FindObjectOfType<GameManager>().LoadLose();
             Debug.Log("Lost!");
         }
         else if(boilInterval <= .35f && _boilState != BoilState.Rush)

@@ -32,5 +32,4 @@ public class PlayerLevelHook : MonoBehaviour
         Debug.Log("getting here");
         game.LoadFirstLevel();
     }
-
 }

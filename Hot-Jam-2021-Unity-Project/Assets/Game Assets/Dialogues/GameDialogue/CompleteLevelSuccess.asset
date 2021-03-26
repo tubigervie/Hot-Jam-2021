@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6475730816306276165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 3834a4af-39c5-4af7-abe4-78cc159a30d1
+  m_EditorClassIdentifier: 
+  speaker: Basil
+  text: ( . . . )
+  child: 60af0829-149c-4971-a245-3b3e51a2b258
+  spriteTexture: {fileID: 2800000, guid: b5602be70a6be954d87999fbad249c75, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 323e8d9f8aa24cc4e948bea50275d858, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 260
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
+--- !u!114 &-2799485505734018219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 60af0829-149c-4971-a245-3b3e51a2b258
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: I figured out a way that will make Pieris lose his fire power.
+  child: a06af270-07ae-4d2e-b753-de235bc2e9a5
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 510
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
+--- !u!114 &-2530271817085433476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: f73893ee-ff4f-4b7a-8450-3537a0f949bb
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: Thank you so much, Basil! Now to see if this works . . .
+  child: 3834a4af-39c5-4af7-abe4-78cc159a30d1
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions:
+  - PausePlayerInput
+  onExitActions: []
+--- !u!114 &-390312238431692796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: a06af270-07ae-4d2e-b753-de235bc2e9a5
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: This potion will turn Pieris into a - !
+  child: 
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 760
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions:
+  - ExitLevel
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: CompleteLevelSuccess
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -2530271817085433476}
+  - {fileID: -6475730816306276165}
+  - {fileID: -2799485505734018219}
+  - {fileID: -390312238431692796}
+  newNodeOffset: {x: 250, y: 0}

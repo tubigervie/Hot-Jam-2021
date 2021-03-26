@@ -22,7 +22,7 @@ public class HelpText : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (interactLabel.enabled && _currentInteractSpawnObject != null)
         {
@@ -38,6 +38,7 @@ public class HelpText : MonoBehaviour
         }
         else
         {
+            Debug.Log("being disabled");
             pickableLabel.enabled = false;
         }
         if (deathLabel.enabled && _currentDeathSpawnObject != null)

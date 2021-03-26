@@ -65,6 +65,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnLevelStart()
     {
+        FindObjectOfType<GameManager>().SetCurrentLevel(this);
         cauldron.GetComponent<CauldronAI>().OnStartLevel(totalBoilTimer);
     }
 

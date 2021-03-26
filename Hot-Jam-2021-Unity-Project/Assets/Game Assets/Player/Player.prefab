@@ -507,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &881075695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -914,6 +914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d977a4bcc363b334483f440f473d59b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recipeControlsText: {fileID: 881075694}
+  playerController: {fileID: 4814336474313051582}
 --- !u!114 &370914907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,6 +1380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079531838619340210, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1395541367991286247, guid: ee580ca4957115249a92fac2385e11ec,
         type: 3}

@@ -77,36 +77,36 @@ public class InteractionController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            debugPanel.TogglePanel();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    debugPanel.TogglePanel();
+        //}
 
-        // Debug Panel Updates
-        if (_currentIngredient != null)
-        {
-            debugPanel.UpdateHeldObj(_currentIngredient.displayName);
-        }
-        else if (_cauldronSlot != null)
-        {
-            debugPanel.UpdateHeldObj("Cauldron");
-        }
-        else
-        {
-            debugPanel.UpdateHeldObj("N/A");
-        }
-        if (pickup != null)
-        {
-            debugPanel.UpdateDetectedObj(pickup.ToString());
-        }
-        else if (interactable != null)
-        {
-            debugPanel.UpdateDetectedObj(interactable.ToString());
-        }
-        else
-        {
-            debugPanel.UpdateDetectedObj("N/A");
-        }
+        //// Debug Panel Updates
+        //if (_currentIngredient != null)
+        //{
+        //    debugPanel.UpdateHeldObj(_currentIngredient.displayName);
+        //}
+        //else if (_cauldronSlot != null)
+        //{
+        //    debugPanel.UpdateHeldObj("Cauldron");
+        //}
+        //else
+        //{
+        //    debugPanel.UpdateHeldObj("N/A");
+        //}
+        //if (pickup != null)
+        //{
+        //    debugPanel.UpdateDetectedObj(pickup.ToString());
+        //}
+        //else if (interactable != null)
+        //{
+        //    debugPanel.UpdateDetectedObj(interactable.ToString());
+        //}
+        //else
+        //{
+        //    debugPanel.UpdateDetectedObj("N/A");
+        //}
     }
 
     private void FixedUpdate()

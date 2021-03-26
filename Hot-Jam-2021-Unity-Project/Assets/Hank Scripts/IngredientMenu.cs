@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class IngredientMenu : MonoBehaviour
 {
+    [SerializeField] GameObject recipeControlsText;
     CanvasGroup ingredientMenuCanvas;
-
+    [SerializeField] PlayerController playerController;
     LevelManager currentLevel;
+    GameManager gameManager;
     bool isActive = false;
 
     // Start is called before the first frame update
     void Start()
     {
         currentLevel = FindObjectOfType<LevelManager>();
+        gameManager = FindObjectOfType<GameManager>();
+        currentLevel.onLevelStart += ToggleRecipeControlsText;
         ingredientMenuCanvas = GetComponent<CanvasGroup>();
         ToggleMenuImmediate(isActive);
+        recipeControlsText.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && currentLevel != null)
+        if (Input.GetKeyDown(KeyCode.F) && currentLevel != null && playerController.CanAct() && gameManager.TutorialComplete() && Time.timeScale > 0)
         {
             if (isActive)
             {
@@ -33,6 +38,11 @@ public class IngredientMenu : MonoBehaviour
         }
     }
 
+    private void ToggleRecipeControlsText()
+    {
+        recipeControlsText.SetActive(true);
+    }
+
     private void ToggleMenuImmediate(bool pauseFlag)
     {
         ingredientMenuCanvas.alpha = (pauseFlag) ? 1 : 0;
@@ -42,6 +52,7 @@ public class IngredientMenu : MonoBehaviour
 
     private IEnumerator FadeInMenu(float time)
     {
+        recipeControlsText.SetActive(isActive);
         while (ingredientMenuCanvas.alpha < 1) //alpha is not 1
         {
             ingredientMenuCanvas.alpha += Time.unscaledDeltaTime / time;
@@ -53,6 +64,7 @@ public class IngredientMenu : MonoBehaviour
 
     private IEnumerator FadeOutMenu(float time)
     {
+        recipeControlsText.SetActive(isActive);
         while (ingredientMenuCanvas.alpha > 0) //alpha is not 1
         {
             ingredientMenuCanvas.alpha -= Time.unscaledDeltaTime / time;
