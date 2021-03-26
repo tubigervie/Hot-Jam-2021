@@ -6,7 +6,7 @@ public class IngredientMenu : MonoBehaviour
 {
     [SerializeField] GameObject recipeControlsText;
     CanvasGroup ingredientMenuCanvas;
-    [SerializeField] PlayerController playerController;
+    PlayerController playerController;
     LevelManager currentLevel;
     GameManager gameManager;
     bool isActive = false;
@@ -16,6 +16,7 @@ public class IngredientMenu : MonoBehaviour
     {
         currentLevel = FindObjectOfType<LevelManager>();
         gameManager = FindObjectOfType<GameManager>();
+        playerController = FindObjectOfType<PlayerController>();
         currentLevel.onLevelStart += ToggleRecipeControlsText;
         ingredientMenuCanvas = GetComponent<CanvasGroup>();
         ToggleMenuImmediate(isActive);

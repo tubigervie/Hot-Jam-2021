@@ -189,7 +189,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &2726288452711595328
 MonoBehaviour:
@@ -657,6 +657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pause Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7785636598319589424, guid: 83d51770b85c98e4fa1af6febd2a41c4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7934882756582994283, guid: 83d51770b85c98e4fa1af6febd2a41c4,
         type: 3}

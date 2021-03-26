@@ -22,7 +22,7 @@ public class HelpText : MonoBehaviour
     {
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (interactLabel.enabled && _currentInteractSpawnObject != null)
         {

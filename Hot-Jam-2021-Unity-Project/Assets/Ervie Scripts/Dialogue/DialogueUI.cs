@@ -63,7 +63,7 @@ public class DialogueUI : MonoBehaviour
             alphaIndex++;
             dialogueText.text = originalText;
             displayedText = dialogueText.text.Insert(alphaIndex, kAlphaCode);
-            if(alphaIndex % 6 == 0 && playerConversant.GetDialogueFX() != null)
+            if(alphaIndex % 4 == 0 && playerConversant.GetDialogueFX() != null)
                 audioSource.PlayOneShot(playerConversant.GetDialogueFX(), playerConversant.GetDialogueVolume());
             dialogueText.text = displayedText;
             yield return new WaitForSeconds(kMaxTextTime / TextSpeed);

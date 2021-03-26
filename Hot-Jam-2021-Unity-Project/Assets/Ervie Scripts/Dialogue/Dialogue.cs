@@ -12,6 +12,11 @@ public class Dialogue : ScriptableObject, ISerializationCallbackReceiver
 
     Dictionary<string, DialogueNode> nodeLookup = new Dictionary<string, DialogueNode>();
 
+    void Awake()
+    {
+        OnValidate();
+    }
+
     private void OnValidate()
     {
         nodeLookup.Clear();
@@ -104,27 +109,25 @@ public class Dialogue : ScriptableObject, ISerializationCallbackReceiver
             }
         }
     }
-
+#endif
     public void OnBeforeSerialize()
     {
-        if (nodes.Count == 0)
-        {
-            DialogueNode newChild = MakeNode(null);
-            AddNode(newChild);
-        }
+        //if (nodes.Count == 0)
+        //{
+        //    DialogueNode newChild = MakeNode(null);
+        //    AddNode(newChild);
+        //}
 
-        string assetPath = AssetDatabase.GetAssetPath(this);
-        if (!String.IsNullOrEmpty(assetPath))
-        {
-            foreach (DialogueNode node in GetAllNodes())
-            {
-                if (AssetDatabase.GetAssetPath(node) == "")
-                    AssetDatabase.AddObjectToAsset(node, this);
-            }
-        }
-#endif
+        //string assetPath = AssetDatabase.GetAssetPath(this);
+        //if (!String.IsNullOrEmpty(assetPath))
+        //{
+        //    foreach (DialogueNode node in GetAllNodes())
+        //    {
+        //        if (AssetDatabase.GetAssetPath(node) == "")
+        //            AssetDatabase.AddObjectToAsset(node, this);
+        //    }
+        //}
     }
-
     public void OnAfterDeserialize()
     {
     }
