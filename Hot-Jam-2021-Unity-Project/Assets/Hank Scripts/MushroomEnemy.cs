@@ -46,7 +46,7 @@ public class MushroomEnemy : MonoBehaviour
 
     void Fire()
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, (objectPool != null) ? objectPool.transform : null);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + Vector3.up * .5f, Quaternion.identity, (objectPool != null) ? objectPool.transform : null);
         audioSource.PlayOneShot(shootSFX);
         bullet.GetComponent<MushroomProjectile>().SetMoveDir(transform.forward);
     }

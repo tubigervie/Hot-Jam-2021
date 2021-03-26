@@ -9,7 +9,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject quitMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject restartMenu;
-    [SerializeField] GameObject ingredientMenu;
     bool isPaused = false;
 
 
@@ -35,6 +34,10 @@ public class PauseMenu : MonoBehaviour
         {
             TogglePause(!isPaused);
         }
+        else if (currentLevel == null)
+        {
+            currentLevel = FindObjectOfType<LevelManager>();
+        }
     }
 
     public void Resume()
@@ -46,7 +49,6 @@ public class PauseMenu : MonoBehaviour
     {
         quitMenu.SetActive(false);
         restartMenu.SetActive(false);
-        ingredientMenu.SetActive(false);
         pauseMenu.SetActive(true);
         isPaused = flag;
         if (!isPaused)
@@ -103,7 +105,6 @@ public class PauseMenu : MonoBehaviour
     {
         quitMenu.SetActive(false);
         restartMenu.SetActive(false);
-        ingredientMenu.SetActive(false);
         pauseMenu.SetActive(true);
         pauseMenuCanvas.alpha = (pauseFlag) ? 1 : 0;
         pauseMenuCanvas.interactable = pauseFlag;

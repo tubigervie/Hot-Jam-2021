@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, float fadeWaitTime = 1f, float fadeOutTime = 1f, float fadeInTime = 1f)
     {
         Debug.Log("scene name: " + sceneName);
-        StartCoroutine(LoadSceneCoroutine(sceneName));
+        StartCoroutine(LoadSceneCoroutine(sceneName, fadeWaitTime, fadeOutTime, fadeInTime));
     }
 
     private IEnumerator LoadSceneCoroutine(string sceneName, float fadeWaitTime = 1f, float fadeOutTime = 1f, float fadeInTime = 1f)

@@ -15,4 +15,4 @@ MonoBehaviour:
   dialogueSpriteSize: {x: 500, y: 750}
   dialogueSpritePosition: {x: -475, y: 190}
   dialogueSFX: {fileID: 8300000, guid: dfa3645b516cb0947b105bb0979c6705, type: 3}
-  dialogueVolume: 0.1
+  dialogueVolume: 0.2

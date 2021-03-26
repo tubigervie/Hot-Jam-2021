@@ -36,7 +36,7 @@ public class InteractionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        helpText = GameObject.Find("PlayerCanvas").GetComponent<HelpText>();
+        helpText = FindObjectOfType<HelpText>();
         debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
         debugPanel.TogglePanel();
     }
@@ -77,36 +77,36 @@ public class InteractionController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            debugPanel.TogglePanel();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    debugPanel.TogglePanel();
+        //}
 
-        // Debug Panel Updates
-        if (_currentIngredient != null)
-        {
-            debugPanel.UpdateHeldObj(_currentIngredient.displayName);
-        }
-        else if (_cauldronSlot != null)
-        {
-            debugPanel.UpdateHeldObj("Cauldron");
-        }
-        else
-        {
-            debugPanel.UpdateHeldObj("N/A");
-        }
-        if (pickup != null)
-        {
-            debugPanel.UpdateDetectedObj(pickup.ToString());
-        }
-        else if (interactable != null)
-        {
-            debugPanel.UpdateDetectedObj(interactable.ToString());
-        }
-        else
-        {
-            debugPanel.UpdateDetectedObj("N/A");
-        }
+        //// Debug Panel Updates
+        //if (_currentIngredient != null)
+        //{
+        //    debugPanel.UpdateHeldObj(_currentIngredient.displayName);
+        //}
+        //else if (_cauldronSlot != null)
+        //{
+        //    debugPanel.UpdateHeldObj("Cauldron");
+        //}
+        //else
+        //{
+        //    debugPanel.UpdateHeldObj("N/A");
+        //}
+        //if (pickup != null)
+        //{
+        //    debugPanel.UpdateDetectedObj(pickup.ToString());
+        //}
+        //else if (interactable != null)
+        //{
+        //    debugPanel.UpdateDetectedObj(interactable.ToString());
+        //}
+        //else
+        //{
+        //    debugPanel.UpdateDetectedObj("N/A");
+        //}
     }
 
     private void FixedUpdate()
@@ -219,7 +219,27 @@ public class InteractionController : MonoBehaviour
 
     public void DropIngredient()
     {
-        _currentIngredient.SpawnPickup(transform.position + transform.forward);
+        StartCoroutine(DropAnim());
+    }
+
+    IEnumerator DropAnim()
+    {
+        GameObject pickup = _currentIngredient.SpawnPickup(transform.position + transform.up * 1.5f).gameObject;
+        BoxCollider colliderBox = pickup.GetComponent<BoxCollider>();
+        colliderBox.enabled = false;
+
         _currentIngredient = null;
+
+        float timer = 0f;
+        float dropSpeed = 2f;
+
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime;
+            pickup.transform.position += -Vector3.up * dropSpeed * Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        colliderBox.enabled = true;
     }
 }

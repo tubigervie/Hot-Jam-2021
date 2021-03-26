@@ -26,4 +26,10 @@ public class PlayerLevelHook : MonoBehaviour
         level.onLevelStart.Invoke();
     }
 
+    public void TutorialEndHook()
+    {
+        GameManager game = FindObjectOfType<GameManager>();
+        Debug.Log("getting here");
+        game.LoadFirstLevel();
+    }
 }

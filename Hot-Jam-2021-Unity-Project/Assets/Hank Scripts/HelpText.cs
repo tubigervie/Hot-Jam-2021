@@ -38,6 +38,7 @@ public class HelpText : MonoBehaviour
         }
         else
         {
+            Debug.Log("being disabled");
             pickableLabel.enabled = false;
         }
         if (deathLabel.enabled && _currentDeathSpawnObject != null)

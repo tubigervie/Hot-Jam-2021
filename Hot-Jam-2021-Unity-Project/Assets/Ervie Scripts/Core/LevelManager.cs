@@ -10,7 +10,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] string nextLevelName;
     [SerializeField] CauldronContainer cauldron;
     [SerializeField] GameObject player;
+    [SerializeField] Dialogue tutorialDialogue;
     [SerializeField] Dialogue startDialogue;
+    [SerializeField] Dialogue afterTutorialDialogue;
     [SerializeField] Dialogue completeDialogue;
     [SerializeField] float totalBoilTimer = 120f;
 
@@ -34,15 +36,18 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         FindObjectOfType<GameManager>().SetCurrentLevel(this);
-        if(player != null && startDialogue != null)
+        if (FindObjectOfType<GameManager>().TutorialComplete())
         {
             player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
-            player.GetComponent<PlayerConversant>().QueueDialogue(startDialogue, 1f);
+            player.GetComponent<PlayerConversant>().QueueDialogue(startDialogue, 2f);
+        }
+        else if (player != null && tutorialDialogue != null)
+        {
+            player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
+            player.GetComponent<PlayerConversant>().QueueDialogue(tutorialDialogue, 2f);
         }
         else
-        {
             onLevelStart.Invoke();
-        }
         FindObjectOfType<AudioManager>().StartLevelTheme();
     }
 
@@ -60,8 +65,13 @@ public class LevelManager : MonoBehaviour
 
     public void OnLevelStart()
     {
+        FindObjectOfType<GameManager>().SetCurrentLevel(this);
         cauldron.GetComponent<CauldronAI>().OnStartLevel(totalBoilTimer);
     }
 
-
+    public void OnTutorialComplete()
+    {
+        player.GetComponent<PlayerController>().ApplyEffect(PlayerController.PlayerState.INDIALOGUE);
+        player.GetComponent<PlayerConversant>().QueueDialogue(afterTutorialDialogue, 1f);
+    }
 }

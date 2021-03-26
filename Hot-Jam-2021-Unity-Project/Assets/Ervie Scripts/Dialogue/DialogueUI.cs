@@ -89,8 +89,8 @@ public class DialogueUI : MonoBehaviour
             {
                 if(dialogueTextCoroutine != null)
                 {
+                    StopAllCoroutines();
                     dialogueText.text = playerConversant.GetText();
-                    StopCoroutine(dialogueTextCoroutine);
                     dialogueTextCoroutine = null;
                     leafCursor.SetActive(true);
                 }

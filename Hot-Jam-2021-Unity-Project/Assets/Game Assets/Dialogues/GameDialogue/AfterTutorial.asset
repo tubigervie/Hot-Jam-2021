@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2107421958808622121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: d0197b5e-5efa-4907-9dc0-f2e8ddb32ab1
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: Thanks! That's all I need for this one.
+  child: 43b83665-eb31-469a-9629-dfa05044f0fb
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions:
+  - PausePlayerInput
+  onExitActions: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: AfterTutorial
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -2107421958808622121}
+  - {fileID: 3659744982008181333}
+  - {fileID: 50564200543472756}
+  - {fileID: 2724015614619753402}
+  - {fileID: 8693746020309043286}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &50564200543472756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: f789c0d4-ac5e-4b2d-b82e-bd7b989f87fe
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: Okay, let's start on the next one Basil! You'll need another mandrake and
+    some other ingredients for the next potion.
+  child: 82196c41-4afc-4038-b466-abd189650e89
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 510
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
+--- !u!114 &2724015614619753402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 82196c41-4afc-4038-b466-abd189650e89
+  m_EditorClassIdentifier: 
+  speaker: Pieris
+  text: Not before I burn down your beloved forest, he he he...
+  child: 42d3dbd4-178c-4910-b9ea-46fa72bcb4ab
+  spriteTexture: {fileID: 2800000, guid: c27948af4917e63419a0ec57315be1c1, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 743
+    y: 36
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
+--- !u!114 &3659744982008181333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 43b83665-eb31-469a-9629-dfa05044f0fb
+  m_EditorClassIdentifier: 
+  speaker: Pieris
+  text: ...To make something futile in effort...
+  child: f789c0d4-ac5e-4b2d-b82e-bd7b989f87fe
+  spriteTexture: {fileID: 2800000, guid: 44d7c6782bd7b3248b42ae5541b2a77e, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 272
+    y: 12
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
+--- !u!114 &8693746020309043286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 42d3dbd4-178c-4910-b9ea-46fa72bcb4ab
+  m_EditorClassIdentifier: 
+  speaker: Pieris
+  text: NONONO WAIT. NOT THE SPOON!
+  child: 
+  spriteTexture: {fileID: 2800000, guid: df982645900b2844b8e83d1a59765475, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 749
+    y: 248
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions:
+  - EndTutorial
