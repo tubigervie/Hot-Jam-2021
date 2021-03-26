@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentState == PlayerState.SLOWED)
         {
-            GameObject effect = Instantiate(slowFX, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
+            GameObject effect = Instantiate(slowFX, transform.position + Vector3.up * .25f, Quaternion.identity, transform);
             ParticleSystem.MainModule main = effect.GetComponent<ParticleSystem>().main;
             main.startLifetime = duration;
         }
