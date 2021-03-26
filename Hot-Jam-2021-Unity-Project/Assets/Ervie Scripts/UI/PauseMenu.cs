@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject ingredientMenu;
     bool isPaused = false;
 
+
+    LevelManager currentLevel;
+    //public Action onPause;
+    //public Action onResume;
+
     private void Awake()
     {
         pauseMenuCanvas = GetComponent<CanvasGroup>();
@@ -18,9 +24,14 @@ public class PauseMenu : MonoBehaviour
         ToggleMenuImmediate(isPaused);
     }
 
+    private void Start()
+    {
+        currentLevel = FindObjectOfType<LevelManager>();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && currentLevel != null)
         {
             TogglePause(!isPaused);
         }

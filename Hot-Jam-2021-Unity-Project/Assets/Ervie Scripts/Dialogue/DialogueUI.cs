@@ -11,7 +11,7 @@ public class DialogueUI : MonoBehaviour
     public static int TextSpeed = 5;
 
     Coroutine dialogueTextCoroutine;
-
+    AudioSource audioSource;
     PlayerConversant playerConversant;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextMeshProUGUI speakerNameText;
@@ -19,6 +19,12 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Button nextButton;
     [SerializeField] GameObject leafCursor;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
 
     void Start()
     {
@@ -31,13 +37,16 @@ public class DialogueUI : MonoBehaviour
         playerConversant.onConversationUpdated += UpdateUI;
         nextButton.onClick.AddListener(Next);
     }
-
+    //-330, 20, 400, 550
+    //-410, 114, 400, 600
     void UpdateUI()
     {
         dialogueBox.SetActive(playerConversant.IsActive());
         if (!playerConversant.IsActive()) return;
         Texture2D newTex = playerConversant.GetConversantSprite();
         portraitImage.sprite = Sprite.Create(newTex, new Rect(0, 0, newTex.width, newTex.height), new Vector2(.5f, .5f), 100.0f);
+        portraitImage.GetComponent<RectTransform>().sizeDelta = playerConversant.GetDialogueSpriteSize();
+        portraitImage.GetComponent<RectTransform>().anchoredPosition = playerConversant.GetSpritePosition();
         speakerNameText.text = playerConversant.GetCurrentConversantName();
         dialogueTextCoroutine = StartCoroutine(DisplayDialogueText(playerConversant.GetText()));
     }
@@ -54,6 +63,8 @@ public class DialogueUI : MonoBehaviour
             alphaIndex++;
             dialogueText.text = originalText;
             displayedText = dialogueText.text.Insert(alphaIndex, kAlphaCode);
+            if(alphaIndex % 4 == 0 && playerConversant.GetDialogueFX() != null)
+                audioSource.PlayOneShot(playerConversant.GetDialogueFX(), playerConversant.GetDialogueVolume());
             dialogueText.text = displayedText;
             yield return new WaitForSeconds(kMaxTextTime / TextSpeed);
         }

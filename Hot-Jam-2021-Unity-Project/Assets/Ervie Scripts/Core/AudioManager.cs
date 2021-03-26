@@ -74,6 +74,11 @@ public class AudioManager : MonoBehaviour
         rushCoroutine = StartCoroutine(RushThemeCoroutine());
     }
 
+    public void PlayOneShot(AudioClip clip, float volume)
+    {
+        audioSource.PlayOneShot(clip, volume);
+    }
+
     private IEnumerator RushThemeCoroutine()
     {
         yield return StartFadeCoroutine(2f, 0f);
@@ -95,7 +100,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = levelStartTheme;
         audioSource.volume = 0;
         audioSource.Play();
-        yield return StartFadeCoroutine(3f, ostVolume);
+        yield return StartFadeCoroutine(2f, ostVolume);
         yield return new WaitForSecondsRealtime(audioSource.clip.length - 3f);
         audioSource.clip = levelThemeLoop;
         audioSource.loop = true;

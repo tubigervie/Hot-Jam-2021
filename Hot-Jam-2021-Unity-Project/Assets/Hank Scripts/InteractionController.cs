@@ -24,11 +24,13 @@ public class InteractionController : MonoBehaviour
     AudioSource audioSource;
 
     private CharacterController charController;
+    private PlayerController playerController;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         charController = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     // Start is called before the first frame update
@@ -39,10 +41,12 @@ public class InteractionController : MonoBehaviour
         debugPanel.TogglePanel();
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && playerController.CanAct() && Time.timeScale > 0)
         {
             if (pickup != null)     // If current focus is IPickable
             {
@@ -54,7 +58,7 @@ public class InteractionController : MonoBehaviour
                     cauldronContainer.GetComponent<CauldronAI>().Drop(this.transform);
                     SetCauldronSlot(null);
                 }
-                audioSource.PlayOneShot(pickupSFX);
+                audioSource.PlayOneShot(pickupSFX, .5f);
                 SetCurrentItem(pickup.PickUp());
                 pickup = null;
             }

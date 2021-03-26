@@ -116,7 +116,7 @@ public class Spider : MonoBehaviour, IInteractable
     {
         agent.destination = wayPointsPos[index];
         currentWaypoint = index;
-        agent.speed -= slowdownPerWaypoint;
+        agent.speed = Mathf.Clamp(agent.speed - slowdownPerWaypoint, minSpeed, maxSpeed);
     }
 
     public void Interact(GameObject player)

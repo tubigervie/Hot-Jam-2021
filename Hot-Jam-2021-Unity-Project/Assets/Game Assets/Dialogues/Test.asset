@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9071445687864691654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 7829bf58-b612-42a1-a086-487c5e5c299b
+  m_EditorClassIdentifier: 
+  speaker: Pieris
+  text: I'm abouta BLOW UP!! HURRY UP! AND STUFF! OTHER THINGS SO I CAN HEAR HOW
+    THE SFX SOUNDS!
+  child: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  spriteTexture: {fileID: 2800000, guid: 44d7c6782bd7b3248b42ae5541b2a77e, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 557
+    y: 85
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []
 --- !u!114 &-7588830117065970887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,14 +38,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
   m_Name: 410f0ce0-0104-4ed1-8f7a-bcee295cf9ba
   m_EditorClassIdentifier: 
-  speaker: Chamomile
+  speaker: Basil
   text: This is the start of the level.
   child: 7f882b83-dc95-484e-9e9e-efee77d4f74d
-  spriteTexture: {fileID: 2800000, guid: bf223dd4f7657ae4e9b8b82423cc6c41, type: 3}
+  spriteTexture: {fileID: 2800000, guid: 43ad9e857cc6cf040a169dca5158728e, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 323e8d9f8aa24cc4e948bea50275d858, type: 2}
   rect:
     serializedVersion: 2
-    x: 45
-    y: 85
+    x: 107
+    y: 94
     width: 200
     height: 200
   onEnterActions:
@@ -39,12 +66,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker: Chamomile
   text: Basil, I'm feeling really sick.
-  child: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
+  child: 7829bf58-b612-42a1-a086-487c5e5c299b
   spriteTexture: {fileID: 2800000, guid: bf223dd4f7657ae4e9b8b82423cc6c41, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
   rect:
     serializedVersion: 2
-    x: 368
-    y: 115
+    x: 328
+    y: 105
     width: 200
     height: 200
   onEnterActions: []
@@ -65,6 +93,7 @@ MonoBehaviour:
   - {fileID: -7588830117065970887}
   - {fileID: 2822272881502318547}
   - {fileID: -5076343022433252646}
+  - {fileID: -9071445687864691654}
   newNodeOffset: {x: 250, y: 0}
 --- !u!114 &2822272881502318547
 MonoBehaviour:
@@ -78,14 +107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
   m_Name: 0fb48b0e-b6c0-40d0-811f-f7548997cb65
   m_EditorClassIdentifier: 
-  speaker: Chamomile
-  text: Can you find these ingredients and make this potion for me?
+  speaker: Basil
+  text: Don't worry, master! I'll find these ingredients and make this potion for
+    you.
   child: 
-  spriteTexture: {fileID: 2800000, guid: bf223dd4f7657ae4e9b8b82423cc6c41, type: 3}
+  spriteTexture: {fileID: 2800000, guid: 43ad9e857cc6cf040a169dca5158728e, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 323e8d9f8aa24cc4e948bea50275d858, type: 2}
   rect:
     serializedVersion: 2
-    x: 635
-    y: 130
+    x: 791
+    y: 129
     width: 200
     height: 200
   onEnterActions: []

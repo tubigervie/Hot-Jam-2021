@@ -68,6 +68,27 @@ public class PlayerConversant : MonoBehaviour
         return currentNode.GetSpriteTexture();
     }
 
+    public AudioClip GetDialogueFX()
+    {
+        if (currentNode == null) return null;
+        return currentNode.dialogueSpriteSO.GetDialogueClip();
+    }
+
+    public float GetDialogueVolume()
+    {
+        return currentNode.dialogueSpriteSO.GetVolume();
+    }
+
+    public Vector2 GetSpritePosition()
+    {
+        return currentNode.dialogueSpriteSO.GetSpritePosition();
+    }
+
+    public Vector2 GetDialogueSpriteSize()
+    {
+        return currentNode.dialogueSpriteSO.GetSpriteSize();
+    }
+
     public void Next()
     {
         DialogueNode child = currentDialogue.GetChild(currentNode);

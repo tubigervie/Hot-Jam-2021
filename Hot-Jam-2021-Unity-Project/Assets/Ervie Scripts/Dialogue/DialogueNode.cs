@@ -18,6 +18,8 @@ public class DialogueNode : ScriptableObject
     [SerializeField]
     private Texture2D spriteTexture;
 
+    public DialogueSpriteSO dialogueSpriteSO;
+
     [SerializeField]
     private Rect rect = new Rect(10, 10, 200, 200);
 
@@ -30,6 +32,7 @@ public class DialogueNode : ScriptableObject
     public string GetText()
     {
         return text;
+        //-353, 32, 500, 750
     }
     public string GetSpeaker()
     {

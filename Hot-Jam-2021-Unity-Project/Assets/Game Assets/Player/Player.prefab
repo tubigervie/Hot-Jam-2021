@@ -62,7 +62,9 @@ MonoBehaviour:
   stunFX: {fileID: 1151595909491911585, guid: 5f12b21c7df245e49853108e8720abf0, type: 3}
   slowFX: {fileID: 6687943155483675936, guid: 0e6167cab2293104e9fefe99c0f04e47, type: 3}
   hitSFX: {fileID: 8300000, guid: 784e288d33262c245bd60a6e85b8aebc, type: 3}
+  castDistance: 1.5
   disableMoveStates: 020000000400000005000000
+  isGrounded: 0
 --- !u!114 &4814336474313051577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,6 +520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2833742758436456764, guid: ee580ca4957115249a92fac2385e11ec,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee580ca4957115249a92fac2385e11ec, type: 3}
 --- !u!224 &1419579854540988291 stripped
@@ -588,6 +595,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5714460365239546982, guid: 3431d8b0566a5e642b86c831179a36d1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d2ad917b679da840a9b5d99c05693c0, type: 2}
     - target: {fileID: 919132149155446097, guid: 3431d8b0566a5e642b86c831179a36d1,
         type: 3}
       propertyPath: m_Name

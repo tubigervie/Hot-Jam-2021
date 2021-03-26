@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject stunFX;
     [SerializeField] GameObject slowFX;
     [SerializeField] AudioClip hitSFX;
+    [SerializeField] float castDistance = .75f;
 
     Coroutine lastRoutine = null;
     AudioSource audioSource;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     float gravitySpeed = 1f;
     Vector3 gravityDirection;
 
-    bool isGrounded;
+    [SerializeField] bool isGrounded;
 
     private void Awake()
     {
@@ -74,6 +75,11 @@ public class PlayerController : MonoBehaviour
     //    RaycastHit hit; 
     //    if(Physics.Raycast(transform.position,  Vector3.down, out hit, ))
     //}
+
+    public bool CanAct()
+    {
+        return !disableMoveStates.Contains(currentState) && isGrounded;
+    }
 
     private void FixedUpdate()
     {
@@ -115,13 +121,20 @@ public class PlayerController : MonoBehaviour
         debugPanel.UpdatePlayerState(currentState);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(base.transform.position + new Vector3(0f, 0.5f, 0f), base.transform.position - (base.transform.up * castDistance));
+        Gizmos.DrawSphere(base.transform.position - (base.transform.up * castDistance), .15f);
+    }
+
     private void HandleGravity()
     {
         gravity = Mathf.Lerp(gravity, (!isGrounded) ? (-20f) : (-10), Time.deltaTime);
         gravityDirection = base.transform.up * gravity * gravitySpeed;
         gravityDirection = new Vector3(0, gravityDirection.y, 0);
         bool flag = false;
-        if (Physics.SphereCast(base.transform.position + new Vector3(0f, 0.5f, 0f), .15f, -base.transform.up, out RaycastHit hitInfo, .5f, 1 << LayerMask.NameToLayer("Terrain")))
+        if (Physics.SphereCast(base.transform.position + new Vector3(0f, 0.5f, 0f), .15f, -base.transform.up, out RaycastHit hitInfo, castDistance, 1 << LayerMask.NameToLayer("Terrain")))
         {
             flag = true;
         }
@@ -152,6 +165,11 @@ public class PlayerController : MonoBehaviour
         {
             currentState = newState;
         }
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
     }
 
 
