@@ -219,7 +219,27 @@ public class InteractionController : MonoBehaviour
 
     public void DropIngredient()
     {
-        _currentIngredient.SpawnPickup(transform.position + transform.forward);
+        StartCoroutine(DropAnim());
+    }
+
+    IEnumerator DropAnim()
+    {
+        GameObject pickup = _currentIngredient.SpawnPickup(transform.position + transform.up * 1.5f).gameObject;
+        BoxCollider colliderBox = pickup.GetComponent<BoxCollider>();
+        colliderBox.enabled = false;
+
         _currentIngredient = null;
+
+        float timer = 0f;
+        float dropSpeed = 2f;
+
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime;
+            pickup.transform.position += -Vector3.up * dropSpeed * Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        colliderBox.enabled = true;
     }
 }

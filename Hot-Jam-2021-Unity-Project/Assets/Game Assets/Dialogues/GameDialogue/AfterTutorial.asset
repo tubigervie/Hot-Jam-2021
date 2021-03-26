@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 82196c41-4afc-4038-b466-abd189650e89
   m_EditorClassIdentifier: 
   speaker: Pieris
-  text: Not before I burn down the forest, he he he.
+  text: Not before I burn down your beloved forest, he he he...
   child: 42d3dbd4-178c-4910-b9ea-46fa72bcb4ab
   spriteTexture: {fileID: 2800000, guid: c27948af4917e63419a0ec57315be1c1, type: 3}
   dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
@@ -109,14 +109,14 @@ MonoBehaviour:
   m_Name: 43b83665-eb31-469a-9629-dfa05044f0fb
   m_EditorClassIdentifier: 
   speaker: Pieris
-  text: (says something passive aggressive)
+  text: ...To make something futile in effort...
   child: f789c0d4-ac5e-4b2d-b82e-bd7b989f87fe
   spriteTexture: {fileID: 2800000, guid: 44d7c6782bd7b3248b42ae5541b2a77e, type: 3}
   dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
   rect:
     serializedVersion: 2
-    x: 260
-    y: 10
+    x: 272
+    y: 12
     width: 200
     height: 200
   onEnterActions: []
