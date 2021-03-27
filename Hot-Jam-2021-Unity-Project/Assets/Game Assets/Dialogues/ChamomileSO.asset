@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ChamomileSO
   m_EditorClassIdentifier: 
   dialogueSpriteSize: {x: 600, y: 850}
-  dialogueSpritePosition: {x: -400, y: 114}
+  dialogueSpritePosition: {x: -475, y: 114}
   dialogueSFX: {fileID: 8300000, guid: e2313737a8dd9dc47a4ee7c4762c4d3f, type: 3}
   dialogueVolume: 0.1

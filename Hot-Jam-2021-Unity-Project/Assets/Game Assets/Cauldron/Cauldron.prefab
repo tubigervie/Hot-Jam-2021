@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 5864399488603329547}
   - component: {fileID: 1930215944}
   - component: {fileID: 1075297428}
-  - component: {fileID: 7190377172933440643}
+  - component: {fileID: 2215669494540696226}
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storedIngredients: []
+  tutorialIngredient: {fileID: 0}
   cauldronRecipe: {fileID: 11400000, guid: 691b82def592a424da6da006a8b7f2ca, type: 2}
   index: 0
   completeMaterial: {fileID: 2100000, guid: 80cefa4d850e32f4fb83cc67a73eb974, type: 2}
@@ -294,7 +295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMoveSpeed: 10
   wanderIntervalTime: 10
-  wanderRadius: {x: 7.5, y: 10}
   waypointTolerance: 1
   _currentState: 0
   _boilState: 0
@@ -303,8 +303,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   waypoints: {fileID: 0}
-  idleMaterial: {fileID: 2100000, guid: a7100b08379bfb942b3cd3c1bcd36c9b, type: 2}
-  wanderMaterial: {fileID: 2100000, guid: d5ca170a7582cc448a32c840c3ed3a8f, type: 2}
   currentWayPoint: {x: 0, y: 0, z: 0}
 --- !u!82 &1075297428
 AudioSource:
@@ -402,21 +400,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &7190377172933440643
-Animation:
+--- !u!95 &2215669494540696226
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8180615511871425673}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 631ff4bce1bca0d45b0941a1572842e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3809940077089588702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,6 +496,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f2cf47f31c4ed9544aed7edf123b8ed2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50e7fe5cbb251054689f03282571e904, type: 2}
     - target: {fileID: 919132149155446097, guid: f2cf47f31c4ed9544aed7edf123b8ed2,
         type: 3}
       propertyPath: m_Name

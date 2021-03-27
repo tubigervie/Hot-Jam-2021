@@ -93,7 +93,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778344753158458591}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -353,9 +353,42 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1930215942, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: m_Height
+      value: 2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215942, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: m_Radius
+      value: 1.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215942, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: steamFX
+      value: 
+      objectReference: {fileID: 6935924316194473349}
     - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
       propertyPath: waypoints
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: maxMoveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: shouldWander
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930215944, guid: 654c8c5ffcc18774c8dcf9119833263d, type: 3}
+      propertyPath: waypointsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543097950153735056, guid: 654c8c5ffcc18774c8dcf9119833263d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3698890350300914229, guid: 654c8c5ffcc18774c8dcf9119833263d,
         type: 3}
@@ -532,3 +565,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16d254f09fdefd49b349f7e1e742ee4, type: 3}
+--- !u!1 &6935924316194473349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1486850747083210486, guid: c16d254f09fdefd49b349f7e1e742ee4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8422576323673668467}
+  m_PrefabAsset: {fileID: 0}

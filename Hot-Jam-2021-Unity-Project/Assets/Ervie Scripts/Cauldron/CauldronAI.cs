@@ -12,24 +12,21 @@ public class CauldronAI : MonoBehaviour
     public enum BoilState { Normal, Rush};
 
     NavMeshAgent agent;
-    BoxCollider boxCollider;
+    SphereCollider sphereCollider;
 
+    Animator anim;
 
     [Header("AI Variables")]
     [SerializeField] float maxMoveSpeed = 6f;
-    [SerializeField] float wanderIntervalTime;
-    [SerializeField] Vector2 wanderRadius = new Vector2(5f, 5f);
+    [SerializeField] float wanderIntervalTime = 15;
     [SerializeField] float waypointTolerance = .5f;
     [SerializeField] CauldronState _currentState = CauldronState.Idle;
     [SerializeField] BoilState _boilState = BoilState.Normal;
     [SerializeField] bool shouldWander = false;
     [SerializeField] LayerMask avoidanceMask;
     [SerializeField] CauldronWaypoints waypoints;
-
-    [Header("Test Render Materials - will remove")]
-    [SerializeField] Material idleMaterial;
-    [SerializeField] Material wanderMaterial;
-
+    [SerializeField] List<CauldronWaypoints> waypointsList = new List<CauldronWaypoints>();
+    [SerializeField] GameObject steamFX;
     float _wanderTimer = 0f;
     float _totalBoilTimer = 0f;
     float _boilTimer = 0f;
@@ -45,11 +42,14 @@ public class CauldronAI : MonoBehaviour
     public Action onCauldronStart;
     public Action onUpdateTimer;
 
+    int wayPointIndex = 0;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         currentMesh = GetComponentInChildren<MeshRenderer>();
-        boxCollider = GetComponent<BoxCollider>();
+        anim = GetComponent<Animator>();
+        sphereCollider = GetComponent<SphereCollider>();
         currentWayPoint = Vector3.zero;
         initialPosition = transform.position;
         SetCauldron();
@@ -65,10 +65,11 @@ public class CauldronAI : MonoBehaviour
     {
         if (_currentState == CauldronState.Pregame || _currentState == CauldronState.Complete || _currentState == CauldronState.Overflow) return;
         HandleBoilState();
-        if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried)
+        if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried && _currentState != CauldronState.Wandering)
         {
             _currentState = CauldronState.Wandering;
-            currentMesh.material = wanderMaterial;
+            waypoints = waypointsList[UnityEngine.Random.Range(0, waypointsList.Count)];
+            anim.SetBool("isWandering", true);
         }
         HandleStateBehaviours();
         float timeDelta = Time.deltaTime;
@@ -97,7 +98,7 @@ public class CauldronAI : MonoBehaviour
         Cancel();
         currentWayPoint = Vector3.zero;
         _currentState = CauldronState.Idle;
-        currentMesh.material = idleMaterial;
+        anim.SetBool("isWandering", false);
     }
 
     public float GetBoilTimer()
@@ -123,7 +124,8 @@ public class CauldronAI : MonoBehaviour
     public void ToggleCauldronVisibility(bool flag)
     {
         currentMesh.enabled = flag;
-        boxCollider.enabled = flag;
+        sphereCollider.enabled = flag;
+        steamFX.SetActive(flag);
     }
 
     private void SetCauldron()
@@ -132,9 +134,8 @@ public class CauldronAI : MonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         currentWayPoint = Vector3.zero;
-        _wanderTimer = 0;
+        _wanderTimer = wanderIntervalTime;
         _boilTimer = 0;
-        currentMesh.material = idleMaterial;
         Cancel();
     }
 
@@ -169,10 +170,20 @@ public class CauldronAI : MonoBehaviour
                     Debug.Log("cauldron requires a waypoint path!");
                     return;
                 }
-                if(currentWayPoint == Vector3.zero || AtWaypoint())
+                if(currentWayPoint == Vector3.zero)
                 {
-                    Vector3 randomNavWaypoint = waypoints.GetRandomWaypoint();
-                    currentWayPoint = randomNavWaypoint;
+                    currentWayPoint = waypoints.GetWaypoint(wayPointIndex);
+                    MoveTo(currentWayPoint, 1);
+                }
+                if (AtWaypoint())
+                {
+                    wayPointIndex++;
+                    if (wayPointIndex >= waypoints.transform.childCount)
+                    {
+                        waypoints = waypointsList[UnityEngine.Random.Range(0, waypointsList.Count)];
+                        wayPointIndex = 0;
+                    }
+                    currentWayPoint = waypoints.GetWaypoint(wayPointIndex);
                     MoveTo(currentWayPoint, 1);
                 }
                 break;
@@ -182,7 +193,7 @@ public class CauldronAI : MonoBehaviour
     public void Carry()
     {
         _currentState = CauldronState.Carried;
-        boxCollider.enabled = false;
+        sphereCollider.enabled = false;
         Cancel();
         ToggleCauldronVisibility(false);
     }
@@ -190,12 +201,11 @@ public class CauldronAI : MonoBehaviour
     public void Drop(Transform playerTransform)
     {
         _currentState = CauldronState.Idle;
-        boxCollider.enabled = true;
+        sphereCollider.enabled = true;
         transform.parent = null;
         transform.position = playerTransform.position;
         ToggleCauldronVisibility(true);
-        Vector3 randomNavWaypoint = waypoints.GetRandomWaypoint();
-        currentWayPoint = randomNavWaypoint;
+        currentWayPoint = waypoints.GetWaypoint(wayPointIndex);
         MoveTo(currentWayPoint, 1);
     }
     private bool AtWaypoint()
@@ -230,29 +240,29 @@ public class CauldronAI : MonoBehaviour
         }
     }
 
-    private Vector3 RandomNavSphere(Vector3 origin)
-    {
-        _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * _currentWanderDistance;
+    //private Vector3 RandomNavSphere(Vector3 origin)
+    //{
+    //    _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
+    //    Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * _currentWanderDistance;
 
-        randomDirection += origin;
+    //    randomDirection += origin;
 
-        NavMeshHit navHit;
+    //    NavMeshHit navHit;
 
-        NavMesh.SamplePosition(randomDirection, out navHit, _currentWanderDistance, 1 >> 0);
+    //    NavMesh.SamplePosition(randomDirection, out navHit, _currentWanderDistance, 1 >> 0);
         
-        while(Vector3.Distance(transform.position, navHit.position) > 100)
-        {
-            _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
-            randomDirection = UnityEngine.Random.insideUnitSphere * _currentWanderDistance;
-            randomDirection += origin;
-            NavMesh.SamplePosition(randomDirection, out navHit, _currentWanderDistance, 1 >> 0);
-        }
+    //    while(Vector3.Distance(transform.position, navHit.position) > 100)
+    //    {
+    //        _currentWanderDistance = UnityEngine.Random.Range(wanderRadius.x, wanderRadius.y);
+    //        randomDirection = UnityEngine.Random.insideUnitSphere * _currentWanderDistance;
+    //        randomDirection += origin;
+    //        NavMesh.SamplePosition(randomDirection, out navHit, _currentWanderDistance, 1 >> 0);
+    //    }
 
-        Debug.Log(navHit.position);
+    //    Debug.Log(navHit.position);
 
-        return navHit.position;
-    }
+    //    return navHit.position;
+    //}
 
     private float GetBoilRatio()
     {
