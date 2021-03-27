@@ -11,7 +11,7 @@ public class HelpText : MonoBehaviour
     [SerializeField] float pickableIconFloatHeight = 1.5f;
 
     [SerializeField] Image deathLabel;
-
+    [SerializeField] Sprite cauldronSprite;
 
     GameObject _currentInteractSpawnObject = null;
     GameObject _currentPickableSpawnObject = null;
@@ -83,7 +83,15 @@ public class HelpText : MonoBehaviour
             }
             else
             {
-                pickableLabel.sprite = spawnObject.GetComponent<InteractionController>().currentIngredient.sprite;
+                if (spawnObject.GetComponent<InteractionController>().cauldronContainer != null)
+                {
+                    Debug.Log("Cauldron sprite!");
+                    pickableLabel.sprite = cauldronSprite;
+                }
+                else
+                {
+                    pickableLabel.sprite = spawnObject.GetComponent<InteractionController>().currentIngredient.sprite;
+                }
                 pickableLabel.transform.position = Camera.main.WorldToScreenPoint(spawnObject.transform.position + Vector3.up * interactIconFloatHeight * 1.5f);
             }
         }

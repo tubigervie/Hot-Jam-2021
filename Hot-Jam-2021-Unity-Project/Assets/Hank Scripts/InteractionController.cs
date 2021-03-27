@@ -17,7 +17,6 @@ public class InteractionController : MonoBehaviour
     [SerializeField] Ingredient _currentIngredient = null;
     [SerializeField] CauldronContainer _cauldronSlot = null;
 
-
     [SerializeField] HelpText helpText;
     [SerializeField] DebugPanelController debugPanel;
 
@@ -76,6 +75,11 @@ public class InteractionController : MonoBehaviour
             else if (interactable != null)  // If current focus is IInteractable
             {
                 interactable.Interact(this.gameObject);
+                if (_cauldronSlot != null)
+                {
+                    Debug.Log("Acquired a cauldron!");
+                    helpText.TogglePickableIcon(true, this.gameObject);
+                }
             }
             else if (_currentIngredient != null)
             {
@@ -155,7 +159,7 @@ public class InteractionController : MonoBehaviour
             pickup = null;
             interactable = null;
             helpText.ToggleInteractIcon(false, null);
-            if(_currentIngredient != null)
+            if(_currentIngredient != null || _cauldronSlot != null)
             {
                 helpText.TogglePickableIcon(true, this.gameObject);
             }
@@ -181,7 +185,7 @@ public class InteractionController : MonoBehaviour
             interactable = closestInteractable;
             helpText.ToggleInteractIcon(true, closestPickableCollider.gameObject);
             pickup = null;
-            if(currentIngredient == null)
+            if(currentIngredient == null && _cauldronSlot == null)
                 helpText.TogglePickableIcon(false, null);
         }
     }
