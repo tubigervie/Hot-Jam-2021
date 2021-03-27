@@ -168,6 +168,8 @@ public class BossAI : MonoBehaviour
         
         moveDir = toTarget.normalized;
 
+        transform.rotation = Quaternion.LookRotation(moveDir);
+
         landedHit = false;
     }
 
@@ -187,7 +189,7 @@ public class BossAI : MonoBehaviour
         // Ensure boss stays on the ground despite scale change (assumes scale only descreases)
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 1 << layerMask))
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 10f, layerMask))
         {
             Debug.Log(hit.collider.gameObject.name);
             transform.position -= Vector3.up * (hit.distance - transform.localScale.x / 2) - yOffset * Vector3.up;
