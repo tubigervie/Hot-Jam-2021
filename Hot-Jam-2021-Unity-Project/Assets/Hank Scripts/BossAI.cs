@@ -125,6 +125,17 @@ public class BossAI : MonoBehaviour
             transform.position += horizontalChange + verticalChange;
 
             yOffset = verticalDisp; // update new total offset from original y-pos
+
+            int layerMask = LayerMask.GetMask("Terrain");
+
+            // Ensure boss stays on the ground despite scale change (assumes scale only descreases)
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, -Vector3.up, out hit, 10f, layerMask))
+            {
+                Debug.Log(hit.collider.gameObject.name);
+                transform.position -= Vector3.up * (hit.distance - transform.localScale.x / 2) - yOffset * Vector3.up;
+            }
         }
         else if (currentState == BossState.DYING)
         {

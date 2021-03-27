@@ -16,7 +16,6 @@ public class CauldronContainer : MonoBehaviour, IInteractable
     CauldronAI cauldronAI;
 
     [Header("Test Render Materials - will remove")]
-    [SerializeField] Material completeMaterial;
 
     public Action onRecipeComplete;
     public Action onCorrectIngredientReceived;
@@ -71,7 +70,6 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             {
                 onCorrectIngredientReceived.Invoke();
                 isComplete = true;
-                GetComponentInChildren<MeshRenderer>().material = completeMaterial;
                 onRecipeComplete();
             }
             else
