@@ -9,6 +9,9 @@ public class IconRotator : MonoBehaviour
     [SerializeField] float frequency = 1f;
     [SerializeField] float degreeOffset = 0f;
 
+    [SerializeField] float bobMagnitude = .1f;
+    [SerializeField] float bobFrequency = 1f;
+
     RectTransform rectTrans;
 
     Vector3 rotation = Vector3.zero;
@@ -24,5 +27,6 @@ public class IconRotator : MonoBehaviour
     {
         timer += Time.deltaTime;
         rectTrans.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(timer * frequency) * magnitude + degreeOffset));
+        rectTrans.position = new Vector3(rectTrans.position.x, rectTrans.position.y + Mathf.Sin(timer * bobFrequency) * bobMagnitude, rectTrans.position.z);
     }
 }

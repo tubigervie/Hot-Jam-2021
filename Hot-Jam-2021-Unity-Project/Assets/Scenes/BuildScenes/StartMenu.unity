@@ -303,6 +303,8 @@ MonoBehaviour:
   magnitude: 10
   frequency: 1
   degreeOffset: 0
+  bobMagnitude: 0
+  bobFrequency: 1
 --- !u!1 &366702401
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +395,8 @@ MonoBehaviour:
   magnitude: 15
   frequency: 0.5
   degreeOffset: 0
+  bobMagnitude: 0
+  bobFrequency: 1
 --- !u!1 &814609987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1134,7 @@ GameObject:
   - component: {fileID: 1719340028}
   - component: {fileID: 1719340027}
   - component: {fileID: 1719340026}
+  - component: {fileID: 1719340029}
   m_Layer: 0
   m_Name: Resume Button
   m_TagString: Untagged
@@ -1154,8 +1159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.286, y: 0.5536807}
   m_AnchorMax: {x: 0.286, y: 0.5536807}
-  m_AnchoredPosition: {x: -16, y: 39}
-  m_SizeDelta: {x: 182.98975, y: 118.405136}
+  m_AnchoredPosition: {x: 22.100006, y: 31.800003}
+  m_SizeDelta: {x: 134.89636, y: 87.285904}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1719340026
 MonoBehaviour:
@@ -1248,6 +1253,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719340024}
   m_CullTransparentMesh: 0
+--- !u!114 &1719340029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719340024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e8a1bf2e0a7c047bab5576ed4a28a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 0
+  frequency: 0
+  degreeOffset: 0
+  bobMagnitude: 0.005
+  bobFrequency: 1
 --- !u!1001 &1809073222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1427,6 +1449,8 @@ MonoBehaviour:
   magnitude: 15
   frequency: 1.25
   degreeOffset: 0
+  bobMagnitude: 0
+  bobFrequency: 1
 --- !u!1001 &2032324230
 PrefabInstance:
   m_ObjectHideFlags: 0
