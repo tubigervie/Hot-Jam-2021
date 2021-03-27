@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: 97422b1c-4829-4d1b-a7d6-fa85e42c98a1
   m_EditorClassIdentifier: 
   speaker: Chamomile
-  text: Let me know if you need more phoenix eggs. I can snap a few necks and be
-    right back.
-  child: 1503bf3c-f348-48c8-bae8-85430ee5d749
+  text: The forest is a tricky place- watch out for teleporters and magical traps.
+  child: 4cef2122-dd15-49b2-b3ec-06b56201239b
   spriteTexture: {fileID: 2800000, guid: f263b56085d422a4eb23635bad2f3a2d, type: 3}
   dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
   rect:
@@ -45,8 +44,8 @@ MonoBehaviour:
   dialogueSpriteSO: {fileID: 11400000, guid: 323e8d9f8aa24cc4e948bea50275d858, type: 2}
   rect:
     serializedVersion: 2
-    x: 428
-    y: 233
+    x: 274
+    y: 261
     width: 200
     height: 200
   onEnterActions: []
@@ -72,8 +71,8 @@ MonoBehaviour:
   dialogueSpriteSO: {fileID: 11400000, guid: 323e8d9f8aa24cc4e948bea50275d858, type: 2}
   rect:
     serializedVersion: 2
-    x: 760
-    y: 10
+    x: 950
+    y: 33
     width: 200
     height: 200
   onEnterActions: []
@@ -97,6 +96,7 @@ MonoBehaviour:
   - {fileID: -2940578372598425520}
   - {fileID: 1176229939105965546}
   - {fileID: -3721702081839799966}
+  - {fileID: 8719657174067432600}
   newNodeOffset: {x: 250, y: 0}
 --- !u!114 &1176229939105965546
 MonoBehaviour:
@@ -118,8 +118,8 @@ MonoBehaviour:
   dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
   rect:
     serializedVersion: 2
-    x: 721
-    y: 232
+    x: 741
+    y: 271
     width: 200
     height: 200
   onEnterActions: []
@@ -143,8 +143,8 @@ MonoBehaviour:
   dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
   rect:
     serializedVersion: 2
-    x: 510
-    y: 10
+    x: 719
+    y: 18
     width: 200
     height: 200
   onEnterActions: []
@@ -162,7 +162,8 @@ MonoBehaviour:
   m_Name: 055c54a2-6f2e-4c88-ade7-6636bba3c40e
   m_EditorClassIdentifier: 
   speaker: Chamomile
-  text: Here, I wrote down the ingredients for the next potion.
+  text: Here, I wrote down the ingredients for the next potion. Make sure to follow
+    the exact order, okay?
   child: 97422b1c-4829-4d1b-a7d6-fa85e42c98a1
   spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
   dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
@@ -174,4 +175,30 @@ MonoBehaviour:
     height: 200
   onEnterActions:
   - PausePlayerInput
+  onExitActions: []
+--- !u!114 &8719657174067432600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 4cef2122-dd15-49b2-b3ec-06b56201239b
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: Also if Pieris runs off, you'll have to go pick up his sorry bum and bring
+    him back to the fireplace.
+  child: 1503bf3c-f348-48c8-bae8-85430ee5d749
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 510
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
   onExitActions: []

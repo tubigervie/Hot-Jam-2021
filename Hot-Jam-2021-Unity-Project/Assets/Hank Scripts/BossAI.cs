@@ -47,6 +47,8 @@ public class BossAI : MonoBehaviour
 
     public Action onDie;
 
+    bool increaseDetectionRangeFlag = false;
+
     // State Transitions: NEUTRAL -> (Player nearby) -> CHASING -> (finish 1 hop) -> RESTING -> NEUTRAL
     //      NEUTRAL / CHASING / RESTING -> (hp <= 0) -> DYING
     public enum BossState
@@ -104,6 +106,11 @@ public class BossAI : MonoBehaviour
 
         if (currentState == BossState.NEUTRAL && distToPlayer.magnitude <= detectionRange)
         {
+            if (!increaseDetectionRangeFlag)
+            {
+                increaseDetectionRangeFlag = true;
+                detectionRange = 30;
+            }
             lastRoutine = StartCoroutine(Jump(jumpDuration, jumpCooldown));
         }
         else if (currentState == BossState.JUMPING)

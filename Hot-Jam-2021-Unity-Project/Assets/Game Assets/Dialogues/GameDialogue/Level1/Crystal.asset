@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: Crystal
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 819160645426638912}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &819160645426638912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 20b77704-87b6-4629-9bd0-9bafe83fd644
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: I hear a soft tinkling. The crystal should be somewhere around here. . .
+  child: 
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions:
+  - PausePlayerInput
+  onExitActions:
+  - ResumePlayerInput

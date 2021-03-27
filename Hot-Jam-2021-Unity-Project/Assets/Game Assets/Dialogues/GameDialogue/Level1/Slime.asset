@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8789502460073142062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 70bb1c03-cc9f-4c97-b024-3ee87ab6c206
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: You'll have to use (SPACE) with those turrets to shoot a fire blast at the
+    slime!
+  child: 
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 510
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions:
+  - ResumePlayerInput
+--- !u!114 &-7028511340826939936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: 00954601-5039-430b-9c1f-f246ae7c9c2b
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: Look, it's a slippery slime!
+  child: dd1016e7-5697-4444-888c-4f93452b3a95
+  spriteTexture: {fileID: 2800000, guid: 708a93e71066d724a90c32dea3e0a147, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 9
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions:
+  - PausePlayerInput
+  onExitActions: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e0f563337aacc4580fa9539de7aa03, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -7028511340826939936}
+  - {fileID: 592895293297739346}
+  - {fileID: -8789502460073142062}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &592895293297739346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71f658075f02fd4bbf3387896cb1426, type: 3}
+  m_Name: dd1016e7-5697-4444-888c-4f93452b3a95
+  m_EditorClassIdentifier: 
+  speaker: Chamomile
+  text: They are notoriously possessive. . . you'll have to defeat it before you
+    can access the phoenix egg.
+  child: 70bb1c03-cc9f-4c97-b024-3ee87ab6c206
+  spriteTexture: {fileID: 2800000, guid: c64908a8e47359542a4cacdcd0b67f9f, type: 3}
+  dialogueSpriteSO: {fileID: 11400000, guid: 9f90bec7a01f1b54c902e97f68569625, type: 2}
+  rect:
+    serializedVersion: 2
+    x: 260
+    y: 10
+    width: 200
+    height: 200
+  onEnterActions: []
+  onExitActions: []

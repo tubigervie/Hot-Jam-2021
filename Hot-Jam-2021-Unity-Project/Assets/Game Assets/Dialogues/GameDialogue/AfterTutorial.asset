@@ -140,8 +140,8 @@ MonoBehaviour:
   dialogueSpriteSO: {fileID: 11400000, guid: b9e264018f043384a92af38e3a652dfa, type: 2}
   rect:
     serializedVersion: 2
-    x: 749
-    y: 248
+    x: 853
+    y: 249
     width: 200
     height: 200
   onEnterActions: []
