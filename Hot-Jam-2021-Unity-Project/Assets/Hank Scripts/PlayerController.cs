@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     PlayerState currentState = PlayerState.NORMAL;
 
     CharacterController characterController;
-
+    Animator anim;
     float verticalMove;
     float horizontalMove;
     float gravity;
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -81,6 +82,11 @@ public class PlayerController : MonoBehaviour
         return !disableMoveStates.Contains(currentState) && isGrounded;
     }
 
+    public bool IsSlowed()
+    {
+        return currentState == PlayerState.SLOWED;
+    }
+
     private void FixedUpdate()
     {
         Vector3 camForward = Vector3.zero;
@@ -106,7 +112,7 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleGravity();
-
+        anim.SetBool("isWalking", playerMovement != Vector3.zero);
         if (canMoveFlag)
         {
             characterController.Move(playerMovement * Time.deltaTime);

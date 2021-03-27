@@ -222,7 +222,7 @@ public class CauldronAI : MonoBehaviour
     private void HandleBoilState()
     {
         float boilInterval = GetBoilRatio();
-        if(_boilTimer <= 0)
+        if(_boilTimer <= 0 && _currentState != CauldronState.Overflow)
         {
             _currentState = CauldronState.Overflow;
             FindObjectOfType<GameManager>().LoadLose();

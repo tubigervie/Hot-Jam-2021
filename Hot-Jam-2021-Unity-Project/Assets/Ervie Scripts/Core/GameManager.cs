@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator RestartCoroutine()
     {
         AudioManager audioManager = FindObjectOfType<AudioManager>();
-        audioManager.StartFade(.5f, 0);
+        audioManager.StartFade(.25f, 0);
         yield return new WaitForSecondsRealtime(.25f);
-        LoadScene(currentSceneName, .5f, .5f, .5f);
+        LoadScene(currentSceneName, .15f, .15f, .15f);
     }
 
     public void LoadScene(string nextScene, float fadeWaitTime = 1f, float fadeOutTime = 1f, float fadeInTime = 1f)

@@ -23,6 +23,9 @@ public class InteractionController : MonoBehaviour
 
     AudioSource audioSource;
 
+    [SerializeField] AudioClip footstepNormal;
+    [SerializeField] AudioClip footstepSlow;
+
     private CharacterController charController;
     private PlayerController playerController;
 
@@ -39,6 +42,14 @@ public class InteractionController : MonoBehaviour
         helpText = FindObjectOfType<HelpText>();
         debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanelController>();
         debugPanel.TogglePanel();
+    }
+
+    public void PlayFootstep()
+    {
+        if (playerController.IsSlowed())
+            audioSource.PlayOneShot(footstepSlow, .5f);
+        else
+            audioSource.PlayOneShot(footstepNormal, .5f);
     }
 
 
