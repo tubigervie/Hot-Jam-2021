@@ -5,6 +5,7 @@ using UnityEngine;
 public class IngredientMenu : MonoBehaviour
 {
     [SerializeField] GameObject recipeControlsText;
+    [SerializeField] List<IngredientCheck> ingredientCheck = new List<IngredientCheck>();
     CanvasGroup ingredientMenuCanvas;
     PlayerController playerController;
     LevelManager currentLevel;
@@ -35,6 +36,18 @@ public class IngredientMenu : MonoBehaviour
             else
             {
                 StartCoroutine(FadeInMenu(.25f));
+            }
+        }
+    }
+
+    public void CheckOffIngredient(Ingredient ingredient)
+    {
+        foreach(IngredientCheck check in ingredientCheck)
+        {
+            if(check.ingredient == ingredient)
+            {
+                check.EnableCheck();
+                return;
             }
         }
     }

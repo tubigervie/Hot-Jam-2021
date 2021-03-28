@@ -14,8 +14,9 @@ public class BossAI : MonoBehaviour
     [SerializeField] float jumpDuration = .5f;
     [SerializeField] float jumpCooldown = 1.5f;
     [SerializeField] float jumpHeight = 5f;
-
+    [SerializeField] GameObject disableWhenDie;
     [SerializeField] float stunDuration = 1f;
+    [SerializeField] AudioSource audioSource;
 
     Vector3 spawnPos;
 
@@ -61,11 +62,17 @@ public class BossAI : MonoBehaviour
 
     BossState currentState = BossState.NEUTRAL;
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         spawnPos = transform.position;
-
+        audioSource = GetComponent<AudioSource>();
         meshRender = GetComponent<MeshRenderer>();
         regularColor = meshRender.material.color;
         deathColor = Color.white;
@@ -131,7 +138,7 @@ public class BossAI : MonoBehaviour
             // Ensure boss stays on the ground despite scale change (assumes scale only descreases)
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, -Vector3.up, out hit, 10f, layerMask))
+            if (Physics.SphereCast(transform.position, .15f,-Vector3.up, out hit, 10f, layerMask))
             {
                 Debug.Log(hit.collider.gameObject.name);
                 transform.position -= Vector3.up * (hit.distance - transform.localScale.x / 2) - yOffset * Vector3.up;
@@ -218,7 +225,13 @@ public class BossAI : MonoBehaviour
     {
         if (currentState != BossState.DYING)
         {
+            if (!increaseDetectionRangeFlag)
+            {
+                increaseDetectionRangeFlag = true;
+                detectionRange = 30;
+            }
             currentHP -= amount;
+            audioSource.Play();
             if (currentHP <= 0)
             {
                 if (lastRoutine != null)
@@ -236,6 +249,7 @@ public class BossAI : MonoBehaviour
         timer = 0f;
         currentState = BossState.DYING;
         onDie.Invoke();
+        disableWhenDie.SetActive(false);
         FindObjectOfType<HelpText>().SpawnDeathIcon(true, this.gameObject);
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);

@@ -7,8 +7,14 @@ public class Turret : MonoBehaviour, IInteractable
     [SerializeField] GameObject turretBullet;
     [SerializeField] int bulletDmg = 1; // only for Boss
     [SerializeField] float cooldown = 1f;
+    AudioSource audioSource;
 
     bool isReady = true;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void Interact(GameObject player)
     {
@@ -20,6 +26,7 @@ public class Turret : MonoBehaviour, IInteractable
     void Fire()
     {
         TurretProjectile bullet = Instantiate(turretBullet, transform.position, Quaternion.identity).GetComponent<TurretProjectile>();
+        audioSource.Play();
         bullet.SetMoveDir(transform.forward);
         bullet.SetDmg(bulletDmg);
         StartCoroutine(StartCooldown(cooldown));

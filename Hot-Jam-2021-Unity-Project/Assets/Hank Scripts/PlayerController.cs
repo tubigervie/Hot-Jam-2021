@@ -161,6 +161,8 @@ public class PlayerController : MonoBehaviour
             {
                 StopCoroutine(lastRoutine);
             }
+            if(currentState == PlayerState.STUNNED)
+                PlayHitSFX();
             lastRoutine = StartCoroutine(EffectDuration(duration));
         }
     }

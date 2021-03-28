@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1732216537493112753}
   - component: {fileID: 3433372762081232916}
   - component: {fileID: 594823833224641758}
+  - component: {fileID: 469190188}
+  - component: {fileID: 13455695357206657}
   m_Layer: 0
   m_Name: Crystal_Unexploded_LP
   m_TagString: Untagged
@@ -25,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387602846012529931}
-  m_LocalRotation: {x: 0.0000000637265, y: -0.28957465, z: 0.000000019279604, w: 0.95715547}
+  m_LocalRotation: {x: 0, y: -0.28957483, z: 0, w: 0.9571554}
   m_LocalPosition: {x: -37.26, y: 2.65, z: 22.24}
-  m_LocalScale: {x: 0.02443051, y: 0.02443051, z: 0.02443051}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +81,37 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &469190188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387602846012529931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303072c0a51228844ac3f6b85d4838f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReal: 0
+  explodeDelay: 3
+  stunRange: 4.72
+  stunDuration: 5
+  explosionFX: {fileID: 2087468998011578943, guid: ada02a2f65f4a344a997c1c330b10d0a,
+    type: 3}
+  crystalPickup: {fileID: 54651542872752102, guid: 4b4749a40e6583843b835813fb973852,
+    type: 3}
+  shakeMagnitude: 0.025
+--- !u!65 &13455695357206657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387602846012529931}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 209.96913, y: 201.09505, z: 151.67674}
+  m_Center: {x: 0.000003814698, y: -0.0000076293945, z: -0.000007629396}

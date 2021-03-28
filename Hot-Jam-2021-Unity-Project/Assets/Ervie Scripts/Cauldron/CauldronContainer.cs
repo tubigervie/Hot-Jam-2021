@@ -64,6 +64,7 @@ public class CauldronContainer : MonoBehaviour, IInteractable
         }
         else
         {
+            FindObjectOfType<IngredientMenu>().CheckOffIngredient(ingredient);
             storedIngredients.Add(ingredient);
             index++;
             if (cauldronRecipe.CheckForCompletion(storedIngredients))

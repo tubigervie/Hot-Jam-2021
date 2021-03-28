@@ -21,11 +21,12 @@ public class FirePit : MonoBehaviour, IInteractable
             if(interactionController.cauldronContainer != null)
             {
                 fireCollider.enabled = false;
+                Transform cauldronTransform = interactionController.cauldronContainer.transform;
                 interactionController.cauldronContainer.GetComponent<CauldronAI>().Drop(player.transform);
                 interactionController.cauldronContainer.GetComponent<CauldronAI>().SetOnFirePit();
-                interactionController.cauldronContainer.transform.parent = cauldronSlot;
-                interactionController.cauldronContainer.transform.localPosition = Vector3.zero;
-                interactionController.cauldronContainer.transform.localEulerAngles = Vector3.zero;
+                cauldronTransform.parent = cauldronSlot;
+                cauldronTransform.localPosition = Vector3.zero;
+                cauldronTransform.localEulerAngles = Vector3.zero;
                 interactionController.SetCauldronSlot(null);
             }
         }

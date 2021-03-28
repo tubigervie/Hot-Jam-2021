@@ -43,7 +43,6 @@ public class MushroomProjectile : MonoBehaviour
             if(playerControl != null && playerControl.GetState() != PlayerController.PlayerState.STUNNED)
             {
                 playerControl.ApplyEffect(PlayerController.PlayerState.STUNNED, stunDuration);
-                playerControl.PlayHitSFX();
                 Debug.Log("Hit Player!");
             }
             Destroy(this.gameObject);

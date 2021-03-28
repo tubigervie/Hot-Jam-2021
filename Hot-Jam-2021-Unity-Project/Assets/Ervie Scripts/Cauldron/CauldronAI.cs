@@ -67,6 +67,8 @@ public class CauldronAI : MonoBehaviour
         HandleBoilState();
         if (_wanderTimer > wanderIntervalTime && _currentState != CauldronState.Carried && _currentState != CauldronState.Wandering)
         {
+            FindObjectOfType<FirePit>().EnableCollider();
+            transform.parent = null;
             _currentState = CauldronState.Wandering;
             waypoints = waypointsList[UnityEngine.Random.Range(0, waypointsList.Count)];
             anim.SetBool("isWandering", true);
@@ -160,11 +162,6 @@ public class CauldronAI : MonoBehaviour
             case CauldronState.Carried:
                 break;
             case CauldronState.Wandering:
-                if (transform.parent != null) 
-                {
-                    transform.parent.parent.GetComponent<FirePit>().EnableCollider(); //don't judge me....
-                    transform.parent = null;
-                }
                 if(waypoints == null)
                 {
                     Debug.Log("cauldron requires a waypoint path!");
