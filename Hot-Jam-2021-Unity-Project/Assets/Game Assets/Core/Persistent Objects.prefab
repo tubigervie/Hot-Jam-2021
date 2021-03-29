@@ -465,6 +465,7 @@ MonoBehaviour:
   levelThemeLoop: {fileID: 8300000, guid: 90c086c755366c44c88b2740109853ad, type: 3}
   rushStartTheme: {fileID: 8300000, guid: d426c4e700b65d244badac6e621c9d83, type: 3}
   rushThemeLoop: {fileID: 8300000, guid: 20a878db41fab494497bbf85c1556950, type: 3}
+  startMenuTheme: {fileID: 8300000, guid: de6cc322f38241e489e628433d119efc, type: 3}
   ostVolume: 0.4
 --- !u!1001 &7473259306448802012
 PrefabInstance:

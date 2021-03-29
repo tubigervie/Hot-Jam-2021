@@ -11,10 +11,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip rushStartTheme;
     [SerializeField] AudioClip rushThemeLoop;
 
+    [SerializeField] AudioClip startMenuTheme;
+
     [SerializeField] float ostVolume = .6f;
 
     Coroutine startLevelCoroutine;
     Coroutine rushCoroutine;
+    Coroutine startMenuCoroutine;
 
     private void Awake()
     {
@@ -74,6 +77,12 @@ public class AudioManager : MonoBehaviour
         rushCoroutine = StartCoroutine(RushThemeCoroutine());
     }
 
+    public void StartStartMenuTheme()
+    {
+        if (startMenuCoroutine != null) StopCoroutine(startMenuCoroutine);
+        startMenuCoroutine = StartCoroutine(StartMenuThemeCoroutine());
+    }
+
     public void PlayOneShot(AudioClip clip, float volume)
     {
         audioSource.PlayOneShot(clip, volume);
@@ -103,6 +112,14 @@ public class AudioManager : MonoBehaviour
         yield return StartFadeCoroutine(2f, ostVolume);
         yield return new WaitForSecondsRealtime(audioSource.clip.length - 3f);
         audioSource.clip = levelThemeLoop;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private IEnumerator StartMenuThemeCoroutine()
+    {
+        yield return StartFadeCoroutine(2f, ostVolume * .75f);
+        audioSource.clip = startMenuTheme;
         audioSource.loop = true;
         audioSource.Play();
     }
