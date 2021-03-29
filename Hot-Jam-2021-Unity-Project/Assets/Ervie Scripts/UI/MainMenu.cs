@@ -6,6 +6,13 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] string sceneToLoad;
+
+    private void Start()
+    {
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        audioManager.StartStartMenuTheme();
+    }
+
     public void PlayGame()
     {
         SceneManagement sceneManager = FindObjectOfType<SceneManagement>();
