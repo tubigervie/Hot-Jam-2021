@@ -52,7 +52,23 @@ public class CauldronContainer : MonoBehaviour, IInteractable
             Debug.Log("Cauldron full!");
             return;
         }
-        if (cauldronRecipe.requireInOrder && !cauldronRecipe.CheckForRightIngredientAtIndex(ingredient, index))
+        if (ingredient.name == "Wildcard")
+        {
+            Debug.Log("Wildcard received!");
+            storedIngredients.Add(ingredient);
+            index++;
+            if (cauldronRecipe.CheckForCompletion(storedIngredients))
+            {
+                onCorrectIngredientReceived.Invoke();
+                isComplete = true;
+                onRecipeComplete();
+            }
+            else
+            {
+                onCorrectIngredientReceived.Invoke();
+            }
+        }
+        else if (cauldronRecipe.requireInOrder && !cauldronRecipe.CheckForRightIngredientAtIndex(ingredient, index))
         {
             Debug.Log("Here!");
             onWrongIngredientReceived.Invoke();

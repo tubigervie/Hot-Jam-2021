@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ebeeb2efd3f05f345b0509a75eeb9281, type: 2}
   - {fileID: 11400000, guid: fcb1fcb580c4a8d4083522d09a9e9ba6, type: 2}
   _requireInOrder: 1
+  wildcardIngredient: {fileID: 11400000, guid: e75ef6e0a088190478a3d287667f554c, type: 2}

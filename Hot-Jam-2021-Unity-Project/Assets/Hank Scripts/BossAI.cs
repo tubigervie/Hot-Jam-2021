@@ -18,6 +18,8 @@ public class BossAI : MonoBehaviour
     [SerializeField] float stunDuration = 1f;
     [SerializeField] AudioSource audioSource;
 
+    [SerializeField] GameObject wildcardPickup;
+
     Vector3 spawnPos;
 
     bool landedHit = false; // used to change moveDir during BossState.CHASING
@@ -251,6 +253,7 @@ public class BossAI : MonoBehaviour
         onDie.Invoke();
         disableWhenDie.SetActive(false);
         FindObjectOfType<HelpText>().SpawnDeathIcon(true, this.gameObject);
+        Instantiate(wildcardPickup, spawnPos, Quaternion.identity);
         yield return new WaitForSeconds(1f);
         Destroy(this.gameObject);
     }

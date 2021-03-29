@@ -11,6 +11,7 @@ public class Recipe : ScriptableObject
     public bool requireInOrder { get { return _requireInOrder; } } 
 
     [SerializeField] bool _requireInOrder = true;
+    [SerializeField] Ingredient wildcardIngredient;
 
     public bool CheckForCompletion(List<Ingredient> currentIngredients)
     {
@@ -19,7 +20,7 @@ public class Recipe : ScriptableObject
         {
             for (int i = 0; i < ingredients.Count; i++)
             {
-                if (currentIngredients[i] != ingredients[i])
+                if (currentIngredients[i] != ingredients[i] && currentIngredients[i] != wildcardIngredient)
                     return false;
             }
             return true;
@@ -32,7 +33,7 @@ public class Recipe : ScriptableObject
 
     public bool CheckForRightIngredientAtIndex(Ingredient currentIngredient, int index)
     {
-        return (ingredients[index] == currentIngredient);
+        return (ingredients[index] == currentIngredient || ingredients[index] == wildcardIngredient);
     }
 
     public bool CheckAndRemoveIfContains(ref List<Ingredient> remainingIngredients, Ingredient currentIngredient)
@@ -43,8 +44,9 @@ public class Recipe : ScriptableObject
         return true;
     }
 
-    private static bool SequenceEqualsIgnoreOrder<T>(IEnumerable<T> list1, IEnumerable<T> list2, IEqualityComparer<T> comparer = null)
+    private static bool SequenceEqualsIgnoreOrder<T>(IEnumerable<T> list1, IEnumerable<T> list2, IEqualityComparer<T> comparer = null, Ingredient wildcardIngredient = null)
     {
+        int wildcardCount = 0;
         if (list1 is ICollection<T> ilist1 && list2 is ICollection<T> ilist2 && ilist1.Count != ilist2.Count)
             return false;
 
@@ -68,6 +70,25 @@ public class Recipe : ScriptableObject
             if (itemCounts.ContainsKey(s))
             {
                 itemCounts[s]--;
+            }
+            else if (wildcardIngredient != null && s.GetType().Equals(typeof(Ingredient)))
+            {
+                if (s as Ingredient == wildcardIngredient)
+                {
+                    wildcardCount++;    // count the number of wildcards
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        foreach (T s in list1)  // remove all extraneous items until wildcards run out
+        {
+            if (itemCounts[s] > 0 && wildcardCount > 0 && itemCounts[s] <= wildcardCount)
+            {
+                wildcardCount -= itemCounts[s];
+                itemCounts[s] = 0;
             }
             else
             {
